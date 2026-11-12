@@ -1,699 +1,566 @@
-/* =========================================
-   ENERGIA FOTOVOLTAICA
-   Interatividade, simuladores e quiz
-========================================= */
-
 "use strict";
 
 /* =========================================
-   ACESSIBILIDADE
-========================================= */
+   VLIBRAS OFICIAL
+   ========================================= */
+window.addEventListener("load", () => {
+  if (window.VLibras && window.VLibras.Widget) {
+    new window.VLibras.Widget("https://vlibras.gov.br/app");
+  }
+});
 
-const html = document.documentElement;
+/* =========================================
+   ACESSIBILIDADE
+   ========================================= */
+const root = document.documentElement;
 
 function savePreference(key, value) {
   try {
     localStorage.setItem(key, value);
   } catch (error) {
-    console.warn("Não foi possível salvar a preferência.", error);
+    // O site continua funcionando mesmo sem armazenamento.
   }
 }
 
-function loadPreference(key, fallback) {
+function toggleTheme(theme) {
+  if (!["light", "dark", "high-contrast"].includes(theme)) return;
+  root.setAttribute("data-theme", theme);
+  savePreference("theme", theme);
+}
+
+function toggleFont(font) {
+  if (!["normal", "dyslexia"].includes(font)) return;
+  root.setAttribute("data-font", font);
+  savePreference("font", font);
+}
+
+function changeSize(direction) {
+  const sizes = ["small", "medium", "large", "xlarge"];
+  const current = root.getAttribute("data-size") || "medium";
+  let index = sizes.indexOf(current);
+
+  if (index < 0) index = 1;
+
+  index = Math.max(0, Math.min(sizes.length - 1, index + direction));
+
+  root.setAttribute("data-size", sizes[index]);
+  savePreference("size", sizes[index]);
+}
+
+function loadPreferences() {
   try {
-    return localStorage.getItem(key) || fallback;
+    const theme = localStorage.getItem("theme");
+    const font = localStorage.getItem("font");
+    const size = localStorage.getItem("size");
+
+    if (["light", "dark", "high-contrast"].includes(theme)) {
+      root.setAttribute("data-theme", theme);
+    }
+
+    if (["normal", "dyslexia"].includes(font)) {
+      root.setAttribute("data-font", font);
+    }
+
+    if (["small", "medium", "large", "xlarge"].includes(size)) {
+      root.setAttribute("data-size", size);
+    }
   } catch (error) {
-    return fallback;
+    // Preferências padrão.
   }
 }
-
-function setTheme(theme) {
-  html.dataset.theme = theme;
-  savePreference("site-theme", theme);
-
-  document.querySelectorAll("[data-theme-choice]").forEach(button => {
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.themeChoice === theme)
-    );
-  });
-}
-
-function setFont(font) {
-  html.dataset.font = font;
-  savePreference("site-font", font);
-
-  document.querySelectorAll("[data-font-choice]").forEach(button => {
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.fontChoice === font)
-    );
-  });
-}
-
-function setFontSize(size) {
-  html.dataset.size = size;
-  savePreference("site-font-size", size);
-}
-
-setTheme(loadPreference("site-theme", "light"));
-setFont(loadPreference("site-font", "normal"));
-setFontSize(loadPreference("site-font-size", "medium"));
-
-document.querySelectorAll("[data-theme-choice]").forEach(button => {
-  button.addEventListener("click", () => {
-    setTheme(button.dataset.themeChoice);
-  });
-});
-
-document.querySelectorAll("[data-font-choice]").forEach(button => {
-  button.addEventListener("click", () => {
-    setFont(button.dataset.fontChoice);
-  });
-});
-
-const fontSizes = ["small", "medium", "large"];
-
-document.getElementById("font-minus").addEventListener("click", () => {
-  let current = html.dataset.size;
-  let index = fontSizes.indexOf(current);
-
-  if (index > 0) {
-    setFontSize(fontSizes[index - 1]);
-  }
-});
-
-document.getElementById("font-plus").addEventListener("click", () => {
-  let current = html.dataset.size;
-  let index = fontSizes.indexOf(current);
-
-  if (index < fontSizes.length - 1) {
-    setFontSize(fontSizes[index + 1]);
-  }
-});
 
 /* =========================================
-   MENU PARA CELULAR
-========================================= */
+   MENU RESPONSIVO
+   ========================================= */
+function setupMenu() {
+  const menuButton = document.querySelector(".menu-toggle");
+  const nav = document.getElementById("main-nav");
 
-const menuToggle = document.querySelector(".menu-toggle");
-const mainNav = document.getElementById("main-nav");
+  if (!menuButton || !nav) return;
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("open");
+  menuButton.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("active");
 
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.querySelector("span").textContent =
-    isOpen ? "Fechar" : "Menu";
-});
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
+    );
 
-mainNav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    mainNav.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.querySelector("span").textContent = "Menu";
+    menuButton.textContent = isOpen ? "✕ Fechar" : "☰ Menu";
   });
-});
+
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Abrir menu de navegação");
+      menuButton.textContent = "☰ Menu";
+    });
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && nav.classList.contains("active")) {
+      nav.classList.remove("active");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.focus();
+    }
+  });
+}
 
 /* =========================================
-   ANIMAÇÃO DOS FÓTONS
-========================================= */
+   SIMULADOR 1 — RADIAÇÃO E POTÊNCIA
+   =========================================
+   Modelo simplificado:
+   P = potência nominal x irradiância / 1000.
+   O resultado é uma estimativa, não uma medição.
+*/
+function setupSimulator1() {
+  const slider = document.getElementById("sim1-intensidade");
+  if (!slider) return;
 
-const canvas = document.getElementById("photon-canvas");
-const ctx = canvas.getContext("2d");
+  const value = document.getElementById("val-sim1");
+  const powerOutput = document.getElementById("res-sim1-pot");
+  const efficiencyOutput = document.getElementById("res-sim1-ef");
 
-let animationPaused = false;
-let animationFrame = null;
-let particles = [];
-let lastFrame = 0;
+  function update() {
+    const irradiance = Number(slider.value);
+    const nominalPower = 400;
 
-const reducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
+    const power = nominalPower * irradiance / 1000;
 
-const photonButton = document.getElementById("pause-animation");
+    value.textContent = irradiance;
+    powerOutput.textContent = `${Math.round(power)} W`;
 
-function createParticles() {
-  particles = [];
+    // Eficiência nominal ilustrativa do painel.
+    efficiencyOutput.textContent = "20%";
+    slider.setAttribute("aria-valuenow", String(irradiance));
+  }
 
-  for (let i = 0; i < 18; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * 115,
-      speed: 1.1 + Math.random() * 1.5,
-      size: 2 + Math.random() * 2,
-      color: "#ffd76a"
+  slider.addEventListener("input", update);
+  update();
+}
+
+/* =========================================
+   SIMULADOR 2 — HORÁRIO DO DIA
+   ========================================= */
+function setTime(time, button) {
+  const data = {
+    manha: {
+      angle: "45° (inclinação ilustrativa)",
+      generation: "60%"
+    },
+    meio_dia: {
+      angle: "90° (incidência ideal ilustrativa)",
+      generation: "100%"
+    },
+    tarde: {
+      angle: "45° (inclinação ilustrativa)",
+      generation: "60%"
+    },
+    noite: {
+      angle: "0°",
+      generation: "0%"
+    }
+  };
+
+  const result = data[time];
+  if (!result) return;
+
+  document.getElementById("res-sim2-ang").textContent = result.angle;
+  document.getElementById("res-sim2-ger").textContent = result.generation;
+
+  const controls = button?.parentElement;
+  if (controls) {
+    controls.querySelectorAll("button").forEach(item => {
+      item.setAttribute("aria-pressed", String(item === button));
     });
   }
 }
 
-function drawPhotonScene() {
-  const width = canvas.width;
-  const height = canvas.height;
-
-  ctx.clearRect(0, 0, width, height);
-
-  // Fundo
-  ctx.fillStyle = "#071e32";
-  ctx.fillRect(0, 0, width, height);
-
-  // Camadas do semicondutor
-  ctx.fillStyle = "#3184b4";
-  ctx.fillRect(0, 220, width, 55);
-
-  ctx.fillStyle = "#c16b96";
-  ctx.fillRect(0, 275, width, 55);
-
-  // Junção
-  ctx.fillStyle = "#f5cf71";
-  ctx.fillRect(0, 212, width, 8);
-
-  // Legendas
-  ctx.font = "bold 14px Arial";
-  ctx.fillStyle = "#d9ecf7";
-  ctx.fillText("Fótons incidentes", 20, 24);
-  ctx.fillText("Região semicondutora", 20, 205);
-
-  // Partículas de luz
-  particles.forEach(particle => {
-    ctx.beginPath();
-    ctx.arc(
-      particle.x,
-      particle.y,
-      particle.size,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fillStyle = particle.color;
-    ctx.fill();
-
-    if (!animationPaused) {
-      particle.y += particle.speed;
-
-      if (particle.y > 205) {
-        particle.y = 0;
-        particle.x = Math.random() * width;
-      }
-    }
-  });
-
-  // Elétrons
-  ctx.fillStyle = "#6ed5ff";
-
-  for (let i = 0; i < 6; i++) {
-    const x = 90 + i * 85;
-    const y = 245 + Math.sin(Date.now() / 500 + i) * 8;
-
-    ctx.beginPath();
-    ctx.arc(x, y, 6, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Lacunas
-  ctx.fillStyle = "#ff9dc6";
-
-  for (let i = 0; i < 5; i++) {
-    const x = 125 + i * 90;
-    const y = 300 + Math.cos(Date.now() / 500 + i) * 5;
-
-    ctx.beginPath();
-    ctx.arc(x, y, 6, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Separação das cargas
-  ctx.font = "12px Arial";
-  ctx.fillStyle = "#ffffff";
-  ctx.fillText("Elétrons (−)", 20, 240);
-  ctx.fillText("Lacunas (+)", 20, 320);
-}
-
-function animatePhotons(timestamp) {
-  if (animationPaused) {
-    return;
-  }
-
-  if (timestamp - lastFrame > 30) {
-    drawPhotonScene();
-    lastFrame = timestamp;
-  }
-
-  animationFrame = requestAnimationFrame(animatePhotons);
-}
-
-function startPhotonAnimation() {
-  if (animationFrame) {
-    cancelAnimationFrame(animationFrame);
-  }
-
-  animationPaused = false;
-  photonButton.textContent = "Pausar animação";
-
-  if (reducedMotion) {
-    drawPhotonScene();
-    return;
-  }
-
-  animationFrame = requestAnimationFrame(animatePhotons);
-}
-
-function stopPhotonAnimation() {
-  animationPaused = true;
-
-  if (animationFrame) {
-    cancelAnimationFrame(animationFrame);
-  }
-
-  drawPhotonScene();
-  photonButton.textContent = "Continuar animação";
-}
-
-photonButton.addEventListener("click", () => {
-  if (animationPaused) {
-    startPhotonAnimation();
-  } else {
-    stopPhotonAnimation();
-  }
-});
-
-createParticles();
-startPhotonAnimation();
-
 /* =========================================
-   SIMULADOR 1 — IRRADIÂNCIA
-========================================= */
+   SIMULADOR 3 — CONDIÇÕES CLIMÁTICAS
+   ========================================= */
+function setWeather(weather, button) {
+  const data = {
+    sol: { transmission: 100, label: "Sol forte" },
+    parcial: { transmission: 60, label: "Parcialmente nublado" },
+    nublado: { transmission: 20, label: "Nublado" }
+  };
 
-const irradianceInput = document.getElementById("irradiance");
+  const condition = data[weather];
+  if (!condition) return;
 
-function updateIrradiance() {
-  const irradiance = Number(irradianceInput.value);
-
-  // Módulo de referência: 400 W a 1000 W/m².
-  const referencePower = 400;
-  const power = referencePower * irradiance / 1000;
-
-  // Cinco horas equivalentes de sol pleno.
-  const energy = power * 5 / 1000;
-
-  document.getElementById("irradiance-value").textContent =
-    irradiance.toLocaleString("pt-BR");
-
-  document.getElementById("power-result").textContent =
-    `${power.toFixed(0)} W`;
-
-  document.getElementById("energy-result").textContent =
-    `${energy.toFixed(2).replace(".", ",")} kWh`;
-
-  document.getElementById("efficiency-result").textContent = "20%";
-
-  let explanation;
-
-  if (irradiance === 0) {
-    explanation = "Sem irradiância incidente, o modelo considera geração nula.";
-  } else if (irradiance < 300) {
-    explanation = "A irradiância está baixa. A geração estimada também é reduzida.";
-  } else if (irradiance < 800) {
-    explanation = "A irradiância é intermediária. O painel gera parte da potência de referência.";
-  } else if (irradiance <= 1000) {
-    explanation = "A irradiância está próxima da condição de referência do módulo.";
-  } else {
-    explanation = "A irradiância está acima da referência. O resultado é uma estimativa proporcional simplificada.";
-  }
-
-  document.getElementById("irradiance-explanation").textContent =
-    explanation;
-}
-
-irradianceInput.addEventListener("input", updateIrradiance);
-
-/* =========================================
-   SIMULADOR 2 — HORÁRIO DO DIA
-========================================= */
-
-const timeData = {
-  morning: {
-    value: 65,
-    text: "Pela manhã, a geração pode estar aumentando conforme o Sol sobe no horizonte."
-  },
-
-  noon: {
-    value: 100,
-    text: "Próximo ao meio-dia solar, a incidência pode ser mais favorável, dependendo da instalação."
-  },
-
-  afternoon: {
-    value: 60,
-    text: "À tarde, a geração pode diminuir conforme a posição do Sol muda."
-  },
-
-  night: {
-    value: 0,
-    text: "À noite, sem radiação solar incidente, o painel não produz energia solar."
-  }
-};
-
-function updateTime(choice) {
-  const data = timeData[choice];
-
-  document.getElementById("time-result").textContent =
-    `${data.value}%`;
-
-  document.getElementById("time-explanation").textContent =
-    data.text;
-
-  document.querySelectorAll("[data-time]").forEach(button => {
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.time === choice)
-    );
-  });
-}
-
-document.querySelectorAll("[data-time]").forEach(button => {
-  button.addEventListener("click", () => {
-    updateTime(button.dataset.time);
-  });
-});
-
-/* =========================================
-   SIMULADOR 3 — CONDIÇÕES DO CÉU
-========================================= */
-
-const weatherData = {
-  sun: {
-    factor: 1,
-    text: "Céu aberto: condição de referência simplificada."
-  },
-
-  partial: {
-    factor: 0.65,
-    text: "Sol entre nuvens: a geração pode variar conforme a cobertura e as sombras."
-  },
-
-  cloud: {
-    factor: 0.25,
-    text: "Céu nublado: a luz difusa ainda pode gerar eletricidade, mas a potência tende a diminuir."
-  }
-};
-
-function updateWeather(choice) {
-  const irradiance = Number(irradianceInput.value);
-  const basePower = 400 * irradiance / 1000;
-  const power = basePower * weatherData[choice].factor;
-
-  document.getElementById("weather-result").textContent =
-    `${power.toFixed(0)} W`;
-
-  document.getElementById("weather-explanation").textContent =
-    weatherData[choice].text;
-
-  document.querySelectorAll("[data-weather]").forEach(button => {
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.weather === choice)
-    );
-  });
-}
-
-document.querySelectorAll("[data-weather]").forEach(button => {
-  button.addEventListener("click", () => {
-    updateWeather(button.dataset.weather);
-  });
-});
-
-irradianceInput.addEventListener("input", () => {
-  const selectedWeather = document.querySelector(
-    "[data-weather][aria-pressed='true']"
+  const irradiance = Number(
+    document.getElementById("sim1-intensidade")?.value || 1000
   );
 
-  if (selectedWeather) {
-    updateWeather(selectedWeather.dataset.weather);
+  const estimatedPower =
+    400 * (irradiance / 1000) * (condition.transmission / 100);
+
+  document.getElementById("res-sim3-trans").textContent =
+    `${condition.transmission}%`;
+
+  document.getElementById("res-sim3-prod").textContent =
+    `${Math.round(estimatedPower)} W`;
+
+  const controls = button?.parentElement;
+  if (controls) {
+    controls.querySelectorAll("button").forEach(item => {
+      item.setAttribute("aria-pressed", String(item === button));
+    });
   }
-});
+}
 
 /* =========================================
    SIMULADOR 4 — AQUECIMENTO DA PISCINA
-========================================= */
+   =========================================
+   Estimativa para uma piscina de 10.000 litros.
+   Energia térmica = massa x calor específico x variação de temperatura.
+   Aproximação: 1,163 kWh por m³ por °C.
+   COP ilustrativo = 4.
+*/
+function setupSimulator4() {
+  const currentSlider = document.getElementById("sim4-temp-atual");
+  const targetSlider = document.getElementById("sim4-temp-desejada");
 
-const currentWater = document.getElementById("water-current");
-const targetWater = document.getElementById("water-target");
-const poolVolume = document.getElementById("pool-volume");
+  if (!currentSlider || !targetSlider) return;
 
-function updatePool() {
-  const current = Number(currentWater.value);
-  const target = Number(targetWater.value);
-  const volume = Number(poolVolume.value);
+  const currentValue = document.getElementById("val-sim4-atual");
+  const targetValue = document.getElementById("val-sim4-desejada");
+  const status = document.getElementById("res-sim4-status");
+  const consumption = document.getElementById("res-sim4-consumo");
+  const heat = document.getElementById("res-sim4-calor");
 
-  document.getElementById("water-current-value").textContent = current;
-  document.getElementById("water-target-value").textContent = target;
-  document.getElementById("pool-volume-value").textContent = volume;
+  const poolVolumeM3 = 10;
+  const cop = 4;
 
-  const temperatureDifference = Math.max(0, target - current);
+  function update() {
+    const current = Number(currentSlider.value);
+    const target = Number(targetSlider.value);
 
-  /*
-    Aproximação:
-    1 m³ de água = aproximadamente 1000 kg
-    Calor específico da água = 4,186 kJ/(kg·°C)
-    1 kWh = 3600 kJ
+    currentValue.textContent = current;
+    targetValue.textContent = target;
 
-    Resultado em kWh térmicos:
-    volume × 1000 × 4,186 × ΔT / 3600
-  */
+    if (current >= target) {
+      status.textContent = "DESLIGADA — temperatura atingida";
+      status.className = "status-off";
+      consumption.textContent = "0 kWh";
+      heat.textContent = "0 kWh";
+      return;
+    }
 
-  const thermalEnergy =
-    volume * 1000 * 4.186 * temperatureDifference / 3600;
+    const difference = target - current;
+    const thermalEnergy = 1.163 * poolVolumeM3 * difference;
+    const electricalEnergy = thermalEnergy / cop;
 
-  // COP ilustrativo de 4.
-  const electricEnergy = thermalEnergy / 4;
+    status.textContent = "LIGADA — aquecimento necessário";
+    status.className = "status-on";
 
-  document.getElementById("pool-heat").textContent =
-    `${thermalEnergy.toFixed(1).replace(".", ",")} kWh`;
+    consumption.textContent =
+      `${electricalEnergy.toFixed(1)} kWh (estimativa)`;
 
-  document.getElementById("pool-electric").textContent =
-    `${electricEnergy.toFixed(1).replace(".", ",")} kWh`;
-
-  const message = document.getElementById("pool-message");
-
-  if (temperatureDifference === 0) {
-    message.textContent =
-      "A água já está na temperatura desejada ou acima dela.";
-  } else {
-    message.textContent =
-      `Para elevar ${volume} m³ de água em ${temperatureDifference} °C, ` +
-      `o modelo estima ${thermalEnergy.toFixed(1).replace(".", ",")} kWh ` +
-      `de energia térmica. A estimativa elétrica considera COP 4.`;
+    heat.textContent =
+      `${thermalEnergy.toFixed(1)} kWh (estimativa)`;
   }
-}
 
-[currentWater, targetWater, poolVolume].forEach(input => {
-  input.addEventListener("input", updatePool);
-});
+  currentSlider.addEventListener("input", update);
+  targetSlider.addEventListener("input", update);
+  update();
+}
 
 /* =========================================
    SIMULADOR 5 — AUTOMAÇÃO
-========================================= */
+   ========================================= */
+function setupSimulator5() {
+  const tempSlider = document.getElementById("sim5-temp-sensor");
+  const lightSlider = document.getElementById("sim5-luz-sensor");
 
-const sensorTemp = document.getElementById("sensor-temp");
-const sensorLight = document.getElementById("sensor-light");
+  if (!tempSlider || !lightSlider) return;
 
-function updateAutomation() {
-  const temperature = Number(sensorTemp.value);
-  const light = Number(sensorLight.value);
+  const tempValue = document.getElementById("val-sim5-temp");
+  const lightValue = document.getElementById("val-sim5-luz");
+  const action = document.getElementById("res-sim5-acao");
 
-  document.getElementById("sensor-temp-value").textContent =
-    temperature;
+  function update() {
+    const temperature = Number(tempSlider.value);
+    const light = Number(lightSlider.value);
 
-  document.getElementById("sensor-light-value").textContent =
-    light;
+    tempValue.textContent = temperature;
+    lightValue.textContent = light;
 
-  const action = document.getElementById("controller-action");
-  const reason = document.getElementById("controller-reason");
-  const led = document.getElementById("controller-led");
-
-  const targetTemperature = 28;
-  const minimumLight = 200;
-
-  if (temperature >= targetTemperature) {
-    action.textContent = "Aquecimento não solicitado";
-    reason.textContent =
-      "A água já atingiu a temperatura definida no exemplo.";
-    led.classList.remove("active");
-  } else if (light < minimumLight) {
-    action.textContent = "Aguardar condição favorável";
-    reason.textContent =
-      "A água está abaixo da meta, mas a luminosidade está abaixo do limite configurado.";
-    led.classList.remove("active");
-  } else {
-    action.textContent = "Solicitar aquecimento";
-    reason.textContent =
-      "A água está abaixo da meta e a luminosidade está acima do limite do exemplo.";
-    led.classList.add("active");
+    if (temperature < 28 && light > 200) {
+      action.textContent = "LIGAR BOMBA";
+      action.className = "status-on";
+    } else if (temperature >= 28) {
+      action.textContent = "DESLIGAR — temperatura atingida";
+      action.className = "status-off";
+    } else {
+      action.textContent = "DESLIGAR — luminosidade baixa";
+      action.className = "status-off";
+    }
   }
+
+  tempSlider.addEventListener("input", update);
+  lightSlider.addEventListener("input", update);
+  update();
 }
 
-[sensorTemp, sensorLight].forEach(input => {
-  input.addEventListener("input", updateAutomation);
-});
-
 /* =========================================
-   RESTAURAR SIMULADORES
-========================================= */
+   ANIMAÇÃO DO EFEITO FOTOVOLTAICO
+   ========================================= */
+function setupCanvas() {
+  const canvas = document.getElementById("canvas-fotoeletrico");
+  if (!canvas) return;
 
-document.getElementById("reset-simulators").addEventListener("click", () => {
-  irradianceInput.value = 1000;
-  currentWater.value = 24;
-  targetWater.value = 28;
-  poolVolume.value = 30;
-  sensorTemp.value = 25;
-  sensorLight.value = 800;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
 
-  updateIrradiance();
-  updateTime("noon");
-  updateWeather("sun");
-  updatePool();
-  updateAutomation();
-});
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-updateIrradiance();
-updateTime("noon");
-updateWeather("sun");
-updatePool();
-updateAutomation();
+  let photons = [];
+  let electrons = [];
+  let animationId = null;
+  let lastSpawn = 0;
+
+  function draw(timestamp = 0) {
+    const width = canvas.width;
+    const height = canvas.height;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Fundo
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, "#071b2d");
+    gradient.addColorStop(1, "#123c5b");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    // Raios de luz
+    ctx.strokeStyle = "rgba(255, 209, 102, .35)";
+    ctx.lineWidth = 2;
+
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.moveTo(35 + i * 75, 0);
+      ctx.lineTo(35 + i * 75, 175);
+      ctx.stroke();
+    }
+
+    // Camadas do semicondutor
+    ctx.fillStyle = "#2385bb";
+    ctx.fillRect(0, 190, width, 42);
+
+    ctx.fillStyle = "#f1c75b";
+    ctx.fillRect(0, 232, width, 7);
+
+    ctx.fillStyle = "#a95c85";
+    ctx.fillRect(0, 239, width, 61);
+
+    // Rótulos
+    ctx.font = "bold 13px Arial";
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText("Camada N", 12, 215);
+    ctx.fillText("Junção P-N", 12, 252);
+    ctx.fillText("Camada P", 12, 278);
+
+    // Criar fótons
+    if (timestamp - lastSpawn > 550 && photons.length < 15) {
+      photons.push({
+        x: 25 + Math.random() * (width - 50),
+        y: 12,
+        speed: 2.2 + Math.random() * 1.3
+      });
+
+      lastSpawn = timestamp;
+    }
+
+    // Movimento dos fótons
+    photons = photons.filter(photon => {
+      photon.y += photon.speed;
+
+      ctx.beginPath();
+      ctx.arc(photon.x, photon.y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffd166";
+      ctx.shadowColor = "#ffd166";
+      ctx.shadowBlur = 12;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      if (photon.y >= 190) {
+        // Representação simplificada da geração de cargas.
+        electrons.push({
+          x: photon.x,
+          y: 190,
+          speed: 1.5 + Math.random() * 1.5
+        });
+        return false;
+      }
+
+      return true;
+    });
+
+    // Movimento dos elétrons
+    electrons = electrons.filter(electron => {
+      electron.y -= electron.speed;
+      electron.x += Math.sin(electron.y / 15) * .5;
+
+      ctx.beginPath();
+      ctx.arc(electron.x, electron.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = "#66dcff";
+      ctx.shadowColor = "#66dcff";
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      return electron.y > 0;
+    });
+
+    // Legenda
+    ctx.font = "12px Arial";
+    ctx.fillStyle = "#ffd166";
+    ctx.fillText("● Fótons", 12, 22);
+    ctx.fillStyle = "#66dcff";
+    ctx.fillText("● Cargas geradas", 100, 22);
+
+    if (!reducedMotion) {
+      animationId = requestAnimationFrame(draw);
+    }
+  }
+
+  draw();
+
+  // Pausar quando a página estiver em segundo plano.
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    } else if (!document.hidden && !reducedMotion && !animationId) {
+      animationId = requestAnimationFrame(draw);
+    }
+  });
+}
 
 /* =========================================
    QUIZ
-========================================= */
-
-const questions = [
+   ========================================= */
+const quizData = [
   {
-    question: "Qual é a principal função de uma placa fotovoltaica?",
+    q: "O que é um fóton?",
     options: [
-      "Aquecer a água diretamente",
-      "Transformar luz solar em eletricidade",
-      "Armazenar água da chuva",
-      "Produzir vento"
+      "Uma onda sonora",
+      "Uma partícula de luz que transporta energia",
+      "Um tipo de elétron",
+      "Um componente do silício"
     ],
-    answer: 1,
+    correct: 1,
     explanation:
-      "A placa fotovoltaica transforma a energia da radiação solar em energia elétrica."
+      "Fótons são partículas de luz que transportam quantidades de energia."
   },
-
   {
-    question: "Qual material é muito utilizado nas células fotovoltaicas?",
-    options: [
-      "Madeira",
-      "Plástico",
-      "Silício",
-      "Borracha"
-    ],
-    answer: 2,
+    q: "Qual material é muito utilizado nas células fotovoltaicas?",
+    options: ["Cobre", "Ferro", "Silício", "Plástico"],
+    correct: 2,
     explanation:
-      "O silício é um semicondutor bastante utilizado na fabricação de células solares."
+      "O silício é um semicondutor utilizado na fabricação de células solares."
   },
-
   {
-    question: "O que são fótons?",
+    q: "Qual é a função da junção P-N?",
     options: [
-      "Partículas associadas à luz",
-      "Tipos de sensores",
-      "Fios elétricos",
-      "Partes de uma bateria"
+      "Criar um campo elétrico interno que ajuda a separar cargas",
+      "Derreter o silício",
+      "Refletir toda a luz",
+      "Produzir apenas calor"
     ],
-    answer: 0,
+    correct: 0,
     explanation:
-      "Fótons são os quanta da radiação eletromagnética e transportam energia."
+      "O campo elétrico interno ajuda a separar elétrons e lacunas gerados pela luz."
   },
-
   {
-    question: "Qual fórmula representa a energia de um fóton?",
+    q: "Qual é a diferença entre o efeito fotoelétrico externo e o fotovoltaico?",
     options: [
-      "P = V × I",
-      "E = h × f",
-      "v = d / t",
-      "F = m × a"
+      "Não existe diferença",
+      "O externo emite elétrons para fora do material; o fotovoltaico gera cargas no semicondutor",
+      "O fotovoltaico só funciona à noite",
+      "O externo utiliza apenas silício"
     ],
-    answer: 1,
+    correct: 1,
     explanation:
-      "A energia de um fóton é calculada por E = h × f."
+      "No efeito fotovoltaico, as cargas são geradas e separadas dentro do semicondutor."
   },
-
   {
-    question: "Qual é o papel da junção P-N?",
+    q: "Por que a capa térmica é importante para uma piscina?",
     options: [
-      "Armazenar água",
-      "Aumentar a temperatura do painel",
-      "Ajudar a separar cargas elétricas",
-      "Impedir a entrada de luz"
+      "Para colorir a água",
+      "Para reduzir a evaporação e a perda de calor",
+      "Para aumentar o volume",
+      "Para gerar eletricidade"
     ],
-    answer: 2,
+    correct: 1,
     explanation:
-      "O campo elétrico interno da junção ajuda a separar elétrons e lacunas."
+      "A capa reduz principalmente a perda de calor causada pela evaporação."
   },
-
   {
-    question: "Qual é a função de um inversor em um sistema fotovoltaico?",
+    q: "O que um sensor LDR mede?",
     options: [
-      "Transformar corrente contínua em alternada",
-      "Produzir radiação solar",
-      "Resfriar os painéis",
-      "Medir a temperatura da água"
+      "Temperatura da água",
+      "Nível da água",
+      "Luminosidade",
+      "Velocidade do vento"
     ],
-    answer: 0,
+    correct: 2,
     explanation:
-      "O inversor converte a corrente contínua dos módulos em corrente alternada."
+      "O LDR altera sua resistência elétrica conforme a luz recebida."
   },
-
   {
-    question: "O que pode reduzir a geração de um painel solar?",
+    q: "Como temperaturas muito altas podem afetar os painéis?",
     options: [
-      "Sombras",
-      "Orientação inadequada",
-      "Baixa irradiância",
-      "Todas as alternativas"
+      "Sempre aumentam a eficiência",
+      "Não causam efeito algum",
+      "Podem reduzir a eficiência elétrica",
+      "Fazem o painel produzir apenas à noite"
     ],
-    answer: 3,
+    correct: 2,
     explanation:
-      "Sombras, baixa irradiância e instalação inadequada podem diminuir a geração."
+      "O aumento da temperatura geralmente reduz a tensão e a eficiência do módulo."
   },
-
   {
-    question: "Como a energia fotovoltaica pode ajudar a aquecer uma piscina?",
+    q: "Qual é a função da bomba de calor na piscina?",
     options: [
-      "Transformando a água em eletricidade",
-      "Alimentando eletricamente uma bomba de calor",
-      "Aumentando a luz da piscina",
-      "Substituindo todos os sensores"
+      "Gerar luz",
+      "Transferir calor do ambiente para a água",
+      "Filtrar a sujeira",
+      "Produzir radiação solar"
     ],
-    answer: 1,
+    correct: 1,
     explanation:
-      "A eletricidade solar pode alimentar uma bomba de calor que transfere calor do ar para a água."
+      "A bomba de calor utiliza energia elétrica para transferir energia térmica."
   },
-
   {
-    question: "Qual é uma função da capa térmica da piscina?",
+    q: "O que representa a equação E = h · f?",
     options: [
-      "Aumentar a evaporação",
-      "Produzir eletricidade",
-      "Reduzir principalmente a perda de calor por evaporação",
-      "Substituir a bomba de calor"
+      "Massa e velocidade",
+      "Energia do fóton e frequência da radiação",
+      "Tensão e corrente",
+      "Temperatura e volume"
     ],
-    answer: 2,
+    correct: 1,
     explanation:
-      "A cobertura reduz a evaporação, que é uma das principais formas de perda de calor da piscina."
+      "A equação relaciona a energia de um fóton à frequência da radiação."
   },
-
   {
-    question: "Qual sensor pode medir a temperatura da água?",
+    q: "O que significa um painel com eficiência de 20%?",
     options: [
-      "LDR",
-      "DS18B20",
-      "Painel fotovoltaico",
-      "Inversor"
+      "Funciona apenas 20% do dia",
+      "Converte 20% da potência solar incidente em potência elétrica",
+      "Ocupa 20% do telhado",
+      "Produz energia somente em dias quentes"
     ],
-    answer: 1,
+    correct: 1,
     explanation:
-      "O DS18B20 é um sensor digital que pode ser utilizado para medir temperatura."
+      "A eficiência compara a potência elétrica produzida com a potência solar recebida."
   }
 ];
 
@@ -701,157 +568,172 @@ let currentQuestion = 0;
 let score = 0;
 let answered = false;
 
-const questionTitle = document.getElementById("quiz-question");
-const optionsContainer = document.getElementById("quiz-options");
-const feedback = document.getElementById("quiz-feedback");
-const nextButton = document.getElementById("quiz-next");
-const quizCard = document.getElementById("quiz-card");
-const quizFinal = document.getElementById("quiz-final");
-
 function loadQuestion() {
+  const questionText = document.getElementById("quiz-question-text");
+  const progress = document.getElementById("quiz-progress");
+  const optionsContainer = document.getElementById("quiz-options");
+  const nextButton = document.getElementById("quiz-next-btn");
+
+  if (!questionText || !progress || !optionsContainer || !nextButton) {
+    return;
+  }
+
   answered = false;
-
-  const question = questions[currentQuestion];
-
-  questionTitle.textContent = question.question;
-
-  document.getElementById("quiz-progress").textContent =
-    `PERGUNTA ${currentQuestion + 1} DE ${questions.length}`;
-
-  document.getElementById("quiz-live-score").textContent = score;
-
-  document.getElementById("quiz-progress-bar").style.width =
-    `${((currentQuestion + 1) / questions.length) * 100}%`;
-
-  optionsContainer.innerHTML = "";
-  feedback.hidden = true;
-  feedback.textContent = "";
-
   nextButton.disabled = true;
+  nextButton.textContent = "Próxima pergunta";
+
+  const question = quizData[currentQuestion];
+
+  progress.textContent =
+    `Pergunta ${currentQuestion + 1} de ${quizData.length}`;
+
+  questionText.textContent = question.q;
+  optionsContainer.replaceChildren();
 
   question.options.forEach((option, index) => {
     const button = document.createElement("button");
 
     button.type = "button";
     button.className = "quiz-option";
-
-    const letter = document.createElement("span");
-    letter.className = "option-letter";
-    letter.textContent = String.fromCharCode(65 + index);
-
-    const text = document.createElement("span");
-    text.textContent = option;
-
-    button.append(letter, text);
+    button.textContent = option;
+    button.setAttribute("role", "radio");
+    button.setAttribute("aria-checked", "false");
 
     button.addEventListener("click", () => {
-      selectAnswer(index);
+      checkAnswer(index);
     });
 
     optionsContainer.appendChild(button);
   });
 }
 
-function selectAnswer(selectedIndex) {
+function checkAnswer(selectedIndex) {
   if (answered) return;
 
   answered = true;
 
-  const question = questions[currentQuestion];
-  const buttons = optionsContainer.querySelectorAll("button");
+  const question = quizData[currentQuestion];
+  const options = document.querySelectorAll(".quiz-option");
 
-  buttons.forEach((button, index) => {
+  options.forEach((button, index) => {
     button.disabled = true;
 
-    if (index === question.answer) {
+    if (index === question.correct) {
       button.classList.add("correct");
+      button.setAttribute("aria-checked", "true");
+    } else {
+      button.setAttribute("aria-checked", "false");
     }
 
-    if (index === selectedIndex && selectedIndex !== question.answer) {
+    if (index === selectedIndex && index !== question.correct) {
       button.classList.add("incorrect");
+      button.setAttribute("aria-checked", "true");
     }
   });
 
-  if (selectedIndex === question.answer) {
+  if (selectedIndex === question.correct) {
     score++;
-    feedback.textContent = `Correto! ${question.explanation}`;
-  } else {
-    feedback.textContent =
-      `Resposta incorreta. ${question.explanation}`;
   }
 
-  feedback.hidden = false;
+  const feedback = document.createElement("p");
+  feedback.className = "quiz-feedback";
+  feedback.setAttribute("role", "status");
+  feedback.textContent = `Explicação: ${question.explanation}`;
 
-  document.getElementById("quiz-live-score").textContent = score;
+  document.getElementById("quiz-options").appendChild(feedback);
 
+  const nextButton = document.getElementById("quiz-next-btn");
   nextButton.disabled = false;
 
-  nextButton.textContent =
-    currentQuestion === questions.length - 1
-      ? "Ver resultado"
-      : "Próxima pergunta →";
+  if (currentQuestion === quizData.length - 1) {
+    nextButton.textContent = "Ver resultado";
+  }
 }
 
-function showFinalResult() {
-  quizCard.hidden = true;
-  quizFinal.hidden = false;
+function nextQuestion() {
+  if (!answered) return;
 
-  document.getElementById("final-score").textContent =
-    `${score} de ${questions.length}`;
+  currentQuestion++;
+
+  if (currentQuestion < quizData.length) {
+    loadQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  const questionBox = document.getElementById("quiz-question-box");
+  const resultBox = document.getElementById("quiz-result-box");
+  const scoreText = document.getElementById("quiz-score");
+  const feedback = document.getElementById("quiz-feedback");
+
+  questionBox.classList.add("hidden");
+  resultBox.classList.remove("hidden");
+
+  const percentage = Math.round((score / quizData.length) * 100);
+
+  scoreText.textContent =
+    `Você acertou ${score} de ${quizData.length} perguntas (${percentage}%).`;
 
   let message;
 
-  if (score === 10) {
+  if (percentage === 100) {
     message = "Excelente! Você acertou todas as perguntas.";
-  } else if (score >= 7) {
-    message = "Muito bom! Você demonstrou um ótimo entendimento.";
-  } else if (score >= 5) {
-    message = "Bom trabalho! Revise alguns conteúdos e tente novamente.";
+  } else if (percentage >= 70) {
+    message = "Muito bom! Você entendeu bem o conteúdo.";
+  } else if (percentage >= 50) {
+    message = "Bom trabalho! Revise alguns conceitos e tente novamente.";
   } else {
-    message = "Continue estudando! Volte às seções e tente novamente.";
+    message = "Continue estudando. Você pode refazer o quiz para praticar.";
   }
 
-  document.getElementById("final-message").textContent = message;
+  feedback.textContent = message;
 }
 
-nextButton.addEventListener("click", () => {
-  if (!answered) return;
-
-  if (currentQuestion < questions.length - 1) {
-    currentQuestion++;
-    loadQuestion();
-  } else {
-    showFinalResult();
-  }
-});
-
-document.getElementById("quiz-restart").addEventListener("click", () => {
+function restartQuiz() {
   currentQuestion = 0;
   score = 0;
   answered = false;
 
-  quizCard.hidden = false;
-  quizFinal.hidden = true;
+  document.getElementById("quiz-question-box").classList.remove("hidden");
+  document.getElementById("quiz-result-box").classList.add("hidden");
 
   loadQuestion();
-});
-
-loadQuestion();
+}
 
 /* =========================================
-   VLibras OFICIAL
-   PRESERVAR ESTA INTEGRAÇÃO
-========================================= */
+   INICIALIZAÇÃO
+   ========================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  loadPreferences();
+  setupMenu();
+  setupSimulator1();
+  setupSimulator4();
+  setupSimulator5();
+  setupCanvas();
+  loadQuestion();
 
-window.addEventListener("load", () => {
-  if (
-    window.VLibras &&
-    typeof window.VLibras.Widget === "function"
-  ) {
-    try {
-      new window.VLibras.Widget("https://vlibras.gov.br/app");
-    } catch (error) {
-      console.error("Não foi possível inicializar o VLibras:", error);
-    }
+  // Atualiza a estimativa do clima quando a intensidade muda.
+  const intensity = document.getElementById("sim1-intensidade");
+
+  if (intensity) {
+    intensity.addEventListener("input", () => {
+      const selectedWeather = document.querySelector(
+        '#simuladores .sim-controls:nth-of-type(2) button[aria-pressed="true"]'
+      );
+
+      if (selectedWeather) {
+        const weather = selectedWeather.getAttribute("onclick") || "";
+
+        if (weather.includes("parcial")) {
+          setWeather("parcial");
+        } else if (weather.includes("nublado")) {
+          setWeather("nublado");
+        } else {
+          setWeather("sol");
+        }
+      }
+    });
   }
 });
