@@ -1,383 +1,1865 @@
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Solar Aqua: aprenda como a energia solar transforma luz em eletricidade e contribui para o aquecimento de piscinas.">
-  <title>Solar Aqua | Energia que transforma</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+:root {
+  --navy: #071b2b;
+  --navy-2: #0c293d;
+  --blue: #087e9b;
+  --cyan: #42d4d9;
+  --aqua: #b7f1e9;
+  --yellow: #f4c95d;
+  --white: #ffffff;
+  --paper: #f5f8f8;
+  --ink: #142b3a;
+  --muted: #647782;
+  --line: #dce6e8;
+  --radius: 18px;
+  --font-scale: 1;
+}
 
-  <header class="header">
-    <div class="container nav">
-      <a class="logo" href="#inicio" aria-label="Solar Aqua - início">
-        <span class="logo-icon">☀</span>
-        <span>solar<span class="logo-accent">aqua</span></span>
-      </a>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  font-size: calc(16px * var(--font-scale));
+}
 
-      <nav class="navigation" id="navigation" aria-label="Menu principal">
-        <a href="#conceito">Conceito</a>
-        <a href="#ciencia">A ciência</a>
-        <a href="#simulador">Simulador</a>
-        <a href="#projeto">Projeto</a>
-        <a href="#sensores">Sensores</a>
-      </nav>
+body {
+  font-family: "DM Sans", sans-serif;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
 
-      <div class="access-tools">
-        <button id="contrastBtn" class="tool-btn" type="button" aria-pressed="false" title="Ativar alto contraste">◐</button>
-        <button id="fontBtn" class="tool-btn" type="button" title="Aumentar fonte">A+</button>
-      </div>
-    </div>
-  </header>
+button, input, select {
+  font: inherit;
+}
 
-  <main id="conteudo">
-    <section class="hero" id="inicio">
-      <div class="hero-glow"></div>
-      <div class="container hero-content">
-        <div class="hero-text">
-          <span class="eyebrow"><span class="eyebrow-dot"></span> TECNOLOGIA • CIÊNCIA • SUSTENTABILIDADE</span>
-          <h1>A energia do sol<br>transforma o <span>futuro.</span></h1>
-          <p>Descubra como a luz solar pode gerar eletricidade e contribuir para um sistema de aquecimento de piscinas mais eficiente e sustentável.</p>
-          <div class="hero-actions">
-            <a href="#conceito" class="btn btn-primary">Explorar o projeto <span>→</span></a>
-            <a href="#simulador" class="btn btn-outline">Testar simulador</a>
-          </div>
-          <div class="hero-stats">
-            <div><strong>100%</strong><span>Energia renovável</span></div>
-            <div><strong>3 áreas</strong><span>Integradas no projeto</span></div>
-            <div><strong>∞</strong><span>Possibilidades</span></div>
-          </div>
-        </div>
+button, a, input, select {
+  -webkit-tap-highlight-color: transparent;
+}
 
-        <div class="hero-visual" aria-label="Ilustração de painéis solares recebendo luz do sol">
-          <div class="sun-orb"><span>☀</span></div>
-          <div class="sun-ray ray-one"></div>
-          <div class="sun-ray ray-two"></div>
-          <div class="solar-scene">
-            <div class="solar-panel">
-              <div class="panel-grid"></div>
-            </div>
-            <div class="panel-base"></div>
-            <div class="energy-line"></div>
-            <div class="energy-dot"></div>
-          </div>
-          <div class="floating-card">
-            <span class="floating-icon">⚡</span>
-            <div><strong>Energia limpa</strong><small>Do sol para o seu dia</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-bottom"></div>
-    </section>
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    <section class="section intro-section" id="conceito">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">01 / O CONCEITO</span>
-          <h2>Como a luz do sol vira <span>energia?</span></h2>
-          <p>A energia solar pode ser aproveitada de duas formas principais no nosso projeto: para produzir eletricidade e para gerar calor.</p>
-        </div>
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
+}
 
-        <div class="process-grid">
-          <article class="process-card">
-            <div class="process-icon">☀️</div>
-            <span class="step-number">ETAPA 01</span>
-            <h3>Radiação solar</h3>
-            <p>O Sol emite energia por meio de ondas eletromagnéticas, que chegam até a superfície da Terra.</p>
-          </article>
-          <div class="process-arrow" aria-hidden="true">→</div>
-          <article class="process-card">
-            <div class="process-icon">▦</div>
-            <span class="step-number">ETAPA 02</span>
-            <h3>Captação</h3>
-            <p>Os painéis fotovoltaicos captam a luz e a convertem em energia elétrica.</p>
-          </article>
-          <div class="process-arrow" aria-hidden="true">→</div>
-          <article class="process-card">
-            <div class="process-icon">⚡</div>
-            <span class="step-number">ETAPA 03</span>
-            <h3>Utilização</h3>
-            <p>A eletricidade pode alimentar equipamentos, como uma bomba de circulação ou uma bomba de calor.</p>
-          </article>
-        </div>
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 9999;
+  padding: 12px 18px;
+  color: white;
+  background: var(--navy);
+  border-radius: 8px;
+}
 
-        <div class="info-banner">
-          <span class="banner-icon">💡</span>
-          <p><strong>Importante:</strong> painéis fotovoltaicos geram eletricidade. Já os coletores solares térmicos aproveitam a radiação para aquecer diretamente a água.</p>
-        </div>
-      </div>
-    </section>
+.skip-link:focus {
+  top: 12px;
+}
 
-    <section class="section science-section" id="ciencia">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">02 / TECNOCIÊNCIA</span>
-          <h2>A ciência por trás da <span>energia solar</span></h2>
-          <p>Três conceitos da Física ajudam a explicar o funcionamento das tecnologias utilizadas no projeto.</p>
-        </div>
+.header {
+  height: 78px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #eaf0f1;
+}
 
-        <div class="science-grid">
-          <article class="science-card">
-            <div class="science-visual wave-visual"><span>〰</span><span>〰</span><span>〰</span></div>
-            <div class="science-content">
-              <span class="card-label">FÍSICA</span>
-              <h3>Ondas eletromagnéticas</h3>
-              <p>São ondas que transportam energia e não precisam de um meio material para se propagar. A luz solar é um exemplo.</p>
-              <a href="#espectro" class="text-link">Explorar o espectro <span>→</span></a>
-            </div>
-          </article>
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Manrope, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--navy);
+}
 
-          <article class="science-card">
-            <div class="science-visual heat-visual"><span>♨</span></div>
-            <div class="science-content">
-              <span class="card-label">TERMOLOGIA</span>
-              <h3>Radiação do corpo negro</h3>
-              <p>Todo corpo com temperatura acima do zero absoluto emite radiação térmica. A distribuição dessa radiação depende da temperatura.</p>
-              <a href="#projeto" class="text-link">Ver aplicação no projeto <span>→</span></a>
-            </div>
-          </article>
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: var(--cyan);
+  border-radius: 10px;
+  font-size: 21px;
+}
 
-          <article class="science-card">
-            <div class="science-visual photo-visual"><span>⚡</span></div>
-            <div class="science-content">
-              <span class="card-label">FÍSICA MODERNA</span>
-              <h3>Efeito fotoelétrico</h3>
-              <p>Explica como a luz pode transferir energia aos elétrons. Esse conceito ajuda a compreender a interação entre luz e materiais.</p>
-              <a href="#efeito" class="text-link">Entender o efeito <span>→</span></a>
-            </div>
-          </article>
-        </div>
+.brand-light {
+  color: var(--blue);
+}
 
-        <div class="spectrum-box" id="espectro">
-          <div class="spectrum-copy">
-            <span class="section-tag">INTERAÇÃO</span>
-            <h3>Explore as ondas eletromagnéticas</h3>
-            <p>Selecione uma faixa do espectro para conhecer suas características.</p>
-            <div class="spectrum-buttons" role="group" aria-label="Selecionar faixa do espectro">
-              <button class="spectrum-btn active" data-wave="visivel" type="button">Visível</button>
-              <button class="spectrum-btn" data-wave="infravermelho" type="button">Infravermelho</button>
-              <button class="spectrum-btn" data-wave="ultravioleta" type="button">Ultravioleta</button>
-              <button class="spectrum-btn" data-wave="raiosx" type="button">Raios X</button>
-            </div>
-            <div class="wave-result" aria-live="polite">
-              <strong id="waveTitle">Luz visível</strong>
-              <p id="waveDescription">É a faixa que nossos olhos conseguem enxergar. Faz parte da radiação emitida pelo Sol e pode ser aproveitada pelos painéis fotovoltaicos.</p>
-            </div>
-          </div>
-          <div class="spectrum-art" aria-hidden="true">
-            <div class="spectrum-bar"></div>
-            <div class="spectrum-labels"><span>Menor frequência</span><span>Maior frequência</span></div>
-            <div class="spectrum-sun">☀</div>
-          </div>
-        </div>
+.nav {
+  display: flex;
+  gap: 31px;
+  align-items: center;
+}
 
-        <div class="photoelectric-box" id="efeito">
-          <div>
-            <span class="section-tag">FÍSICA MODERNA</span>
-            <h3>O que acontece quando a luz atinge um material?</h3>
-            <p>Os fótons transportam energia. Quando essa energia é absorvida por elétrons, pode ocorrer a emissão de elétrons em determinados materiais, fenômeno conhecido como efeito fotoelétrico.</p>
-            <p>Nas células solares, o efeito fotovoltaico ocorre em semicondutores e permite gerar tensão e corrente elétrica a partir da luz.</p>
-          </div>
-          <div class="atom-art" aria-label="Representação ilustrativa da luz incidindo em um material">
-            <div class="photon photon-one"></div>
-            <div class="photon photon-two"></div>
-            <div class="material-block"><span>Material</span></div>
-            <div class="electron">−</div>
-          </div>
-        </div>
-      </div>
-    </section>
+.nav a {
+  font-size: 13px;
+  font-weight: 700;
+  color: #526572;
+  transition: color .2s;
+}
 
-    <section class="section simulator-section" id="simulador">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">03 / LABORATÓRIO INTERATIVO</span>
-          <h2>Experimente a energia <span>solar</span></h2>
-          <p>Altere as condições e observe como elas influenciam a estimativa de geração de energia.</p>
-        </div>
+.nav a:hover {
+  color: var(--blue);
+}
 
-        <div class="simulator">
-          <div class="sim-controls">
-            <div class="sim-heading">
-              <span class="sim-icon">☀</span>
-              <div><h3>Simulador fotovoltaico</h3><p>Configure seu sistema solar</p></div>
-            </div>
+.header-cta {
+  background: var(--navy);
+  color: white;
+  padding: 11px 17px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
 
-            <div class="control-group">
-              <div class="control-label"><label for="panelPower">Potência do painel</label><output id="powerValue">450 W</output></div>
-              <input id="panelPower" type="range" min="100" max="800" step="50" value="450">
-              <div class="range-ends"><span>100 W</span><span>800 W</span></div>
-            </div>
+.header-cta span {
+  color: var(--cyan);
+  margin-left: 8px;
+}
 
-            <div class="control-group">
-              <div class="control-label"><label for="sunHours">Horas de sol equivalente por dia</label><output id="hoursValue">5 h</output></div>
-              <input id="sunHours" type="range" min="1" max="10" step="0.5" value="5">
-              <div class="range-ends"><span>1 hora</span><span>10 horas</span></div>
-            </div>
+.menu-toggle {
+  display: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
 
-            <div class="control-group">
-              <div class="control-label"><label for="systemLoss">Perdas estimadas</label><output id="lossValue">20%</output></div>
-              <input id="systemLoss" type="range" min="0" max="40" step="5" value="20">
-              <div class="range-ends"><span>0%</span><span>40%</span></div>
-            </div>
+.hero {
+  background: var(--paper);
+  padding: 75px 7% 0;
+  overflow: hidden;
+}
 
-            <button class="reset-btn" id="resetSimulator" type="button">↺ Restaurar valores</button>
-          </div>
+.hero-grid {
+  min-height: 530px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+}
 
-          <div class="sim-results">
-            <span class="result-label">GERAÇÃO ESTIMADA</span>
-            <div class="result-number"><strong id="dailyEnergy">1,80</strong><span>kWh/dia</span></div>
-            <div class="result-divider"></div>
-            <div class="result-detail"><span>Por dia</span><strong id="dailyResult">1,80 kWh</strong></div>
-            <div class="result-detail"><span>Por mês (30 dias)</span><strong id="monthlyResult">54,00 kWh</strong></div>
-            <div class="result-detail"><span>Por ano (365 dias)</span><strong id="yearlyResult">657,00 kWh</strong></div>
-            <div class="result-note">Estimativa simplificada. A geração real depende da localização, orientação, inclinação, clima, sombreamento e eficiência do sistema.</div>
-          </div>
-        </div>
-      </div>
-    </section>
+.eyebrow, .section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: var(--blue);
+}
 
-    <section class="section project-section" id="projeto">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">04 / APLICAÇÃO PRÁTICA</span>
-          <h2>O projeto <span>Solar Aqua</span></h2>
-          <p>Uma proposta que une energia solar, tecnologia e controle inteligente para melhorar o uso de uma piscina.</p>
-        </div>
+.eyebrow-dot, .live-dot, .config-dot {
+  width: 7px;
+  height: 7px;
+  background: #25bcae;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 4px #25bcae22;
+}
 
-        <div class="project-layout">
-          <div class="project-main-card">
-            <div class="pool-illustration">
-              <div class="pool-sun">☀</div>
-              <div class="pool-panel"></div>
-              <div class="pool-water"><span></span><span></span><span></span></div>
-              <div class="pool-pipe"></div>
-            </div>
-            <div class="project-main-copy">
-              <span class="card-label">SOLUÇÃO INTEGRADA</span>
-              <h3>Uma piscina mais eficiente</h3>
-              <p>O sistema combina captação de energia solar, circulação da água e sensores para acompanhar as condições da piscina.</p>
-            </div>
-          </div>
+.hero h1, .section-heading h2, .project-heading h2, .closing h2 {
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  letter-spacing: -2.5px;
+  line-height: 1.12;
+}
 
-          <div class="project-features">
-            <article class="feature-item">
-              <span class="feature-icon">▦</span>
-              <div><h3>Painéis fotovoltaicos</h3><p>Transformam a luz solar em eletricidade, que pode alimentar equipamentos do sistema.</p></div>
-            </article>
-            <article class="feature-item">
-              <span class="feature-icon">♨</span>
-              <div><h3>Coletor solar térmico</h3><p>Aproveita a radiação solar para transferir calor diretamente para a água da piscina.</p></div>
-            </article>
-            <article class="feature-item">
-              <span class="feature-icon">≈</span>
-              <div><h3>Capa térmica</h3><p>Ajuda a reduzir a perda de calor da água, principalmente durante a noite.</p></div>
-            </article>
-          </div>
-        </div>
+.hero h1 {
+  max-width: 600px;
+  font-size: clamp(42px, 5.2vw, 69px);
+  color: var(--navy);
+  margin: 23px 0;
+}
 
-        <div class="info-banner">
-          <span class="banner-icon">🌱</span>
-          <p>O objetivo é aproveitar melhor os recursos naturais, reduzir desperdícios e utilizar a tecnologia para acompanhar o funcionamento da piscina.</p>
-        </div>
-      </div>
-    </section>
+.hero h1 span, .section-heading h2 span, .project-heading h2 span, .closing h2 span {
+  color: var(--blue);
+}
 
-    <section class="section sensors-section" id="sensores">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">05 / ROBÓTICA</span>
-          <h2>Sensores: o controle <span>inteligente</span></h2>
-          <p>Os sensores coletam informações do ambiente e ajudam o sistema a tomar decisões.</p>
-        </div>
+.hero-description {
+  max-width: 510px;
+  color: #637783;
+  font-size: 15px;
+  line-height: 1.9;
+}
 
-        <div class="sensor-grid">
-          <article class="sensor-card">
-            <span class="sensor-symbol">🌡</span>
-            <h3>Temperatura</h3>
-            <p>Mede a temperatura da água e ajuda a identificar quando é necessário aquecê-la.</p>
-          </article>
-          <article class="sensor-card">
-            <span class="sensor-symbol">☀</span>
-            <h3>Luminosidade</h3>
-            <p>Detecta a intensidade da luz no ambiente e auxilia no acompanhamento da captação solar.</p>
-          </article>
-          <article class="sensor-card">
-            <span class="sensor-symbol">〰</span>
-            <h3>Nível da água</h3>
-            <p>Monitora a altura da água e pode identificar níveis abaixo do recomendado.</p>
-          </article>
-        </div>
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
 
-        <div class="sensor-lab">
-          <div class="sensor-lab-heading">
-            <div><span class="section-tag">TESTE PRÁTICO</span><h3>Central de monitoramento</h3><p>Altere os valores e veja a resposta do sistema.</p></div>
-            <span class="live-indicator"><i></i> SIMULAÇÃO ATIVA</span>
-          </div>
+.button {
+  min-height: 48px;
+  padding: 13px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  transition: transform .2s, background .2s;
+}
 
-          <div class="sensor-controls">
-            <div class="sensor-input">
-              <label for="waterTemp">Temperatura da água</label>
-              <output id="tempValue">26 °C</output>
-              <input id="waterTemp" type="range" min="10" max="40" value="26">
-            </div>
-            <div class="sensor-input">
-              <label for="lightLevel">Luminosidade</label>
-              <output id="lightValue">70%</output>
-              <input id="lightLevel" type="range" min="0" max="100" value="70">
-            </div>
-            <div class="sensor-input">
-              <label for="waterLevel">Nível da água</label>
-              <output id="levelValue">80%</output>
-              <input id="waterLevel" type="range" min="0" max="100" value="80">
-            </div>
-          </div>
+.button:hover {
+  transform: translateY(-2px);
+}
 
-          <div class="system-status" aria-live="polite">
-            <span class="status-icon" id="statusIcon">✓</span>
-            <div><strong id="statusTitle">Sistema em condições normais</strong><p id="statusText">As condições simuladas estão dentro dos parâmetros definidos.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
+.button-primary {
+  background: var(--navy);
+  color: white;
+}
 
-    <section class="closing-section">
-      <div class="container closing-content">
-        <span class="closing-sun">☀</span>
-        <span class="section-tag">SOLAR AQUA</span>
-        <h2>Ciência que ilumina.<br><span>Tecnologia que transforma.</span></h2>
-        <p>Integrando Física, Programação e Robótica para imaginar soluções mais sustentáveis.</p>
-        <a href="#inicio" class="btn btn-primary">Voltar ao início ↑</a>
-      </div>
-    </section>
-  </main>
+.button-primary:hover {
+  background: var(--blue);
+}
 
-  <footer class="footer">
-    <div class="container footer-content">
-      <a class="logo footer-logo" href="#inicio"><span class="logo-icon">☀</span><span>solar<span class="logo-accent">aqua</span></span></a>
-      <p>Projeto educacional • Energia solar e sustentabilidade</p>
-      <span>© 2026 Solar Aqua</span>
-    </div>
-  </footer>
+.button-quiet {
+  border-color: #cbd8dc;
+  color: var(--navy);
+  background: transparent;
+}
 
-  <script src="script.js"></script>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
-  </div>
-  <script>
-    if (window.VLibras) new window.VLibras.Widget("https://vlibras.gov.br/app");
-  </script>
-</body>
-</html>
+.button-full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 37px;
+  margin-top: 52px;
+  border-top: 1px solid #dce5e7;
+  padding-top: 23px;
+}
+
+.hero-stats div {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stats strong {
+  font-family: Manrope, sans-serif;
+  font-size: 19px;
+  color: var(--blue);
+}
+
+.hero-stats span {
+  font-size: 10px;
+  color: #72828a;
+}
+
+.hero-visual {
+  height: 440px;
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #b7e7e6 0%, #e7f4ed 54%, #b9dedb 100%);
+}
+
+.sun-glow {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  background: #fff5c7;
+  filter: blur(50px);
+  opacity: .7;
+  right: 50px;
+  top: 8px;
+}
+
+.sun {
+  position: absolute;
+  top: 54px;
+  right: 105px;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: #ffdc7a;
+  box-shadow: 0 0 50px #ffe8a6;
+}
+
+.sun-ray {
+  position: absolute;
+  height: 180px;
+  width: 2px;
+  background: #fff2bd;
+  opacity: .7;
+  transform: rotate(34deg);
+  top: 145px;
+  right: 215px;
+}
+
+.ray-two {
+  right: 270px;
+  top: 125px;
+  height: 190px;
+  transform: rotate(49deg);
+}
+
+.solar-scene {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 235px;
+  background: linear-gradient(170deg, transparent 0 12%, #719f91 12% 100%);
+}
+
+.scene-ground {
+  position: absolute;
+  bottom: 0;
+  height: 55px;
+  width: 100%;
+  background: #427e77;
+}
+
+.panel {
+  position: absolute;
+  width: 190px;
+  height: 100px;
+  background: repeating-linear-gradient(90deg, #173d58 0 2px, transparent 2px 46px), repeating-linear-gradient(0deg, #173d58 0 2px, transparent 2px 32px), linear-gradient(135deg, #3b8caa, #153d5c);
+  border: 5px solid #d7e4e2;
+  transform: skewY(-16deg) rotate(-3deg);
+  box-shadow: 0 15px 20px #163e4a55;
+}
+
+.panel-back {
+  top: 27px;
+  left: 65px;
+  transform: scale(.85) skewY(-16deg) rotate(-3deg);
+}
+
+.panel-front {
+  top: 72px;
+  left: 190px;
+}
+
+.panel-lines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 32%, #b1e4eb55 33%, transparent 34%, transparent 66%, #b1e4eb55 67%, transparent 68%);
+}
+
+.pool {
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+  width: 225px;
+  height: 88px;
+  background: #e8f5ef;
+  transform: skewY(-8deg);
+  padding: 7px;
+  box-shadow: 0 10px 20px #16494b33;
+}
+
+.pool-water {
+  height: 100%;
+  background: repeating-linear-gradient(0deg, #39b9c9 0 5px, #75d6d9 6px 8px);
+}
+
+.pool-edge {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 12px;
+  height: 110%;
+  background: #fff;
+}
+
+.visual-label {
+  position: absolute;
+  left: 23px;
+  top: 22px;
+  padding: 9px 12px;
+  background: #ffffffd9;
+  border-radius: 6px;
+  color: var(--navy);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.visual-label .live-dot {
+  margin-right: 7px;
+}
+
+.visual-number {
+  position: absolute;
+  right: 20px;
+  bottom: 125px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  text-shadow: 0 1px 8px #17454b;
+}
+
+.visual-number strong {
+  font-family: Manrope, sans-serif;
+  font-size: 30px;
+}
+
+.visual-number span {
+  font-size: 10px;
+}
+
+.hero-bottom {
+  max-width: 1400px;
+  margin: 30px auto 0;
+  height: 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #dce5e7;
+  color: #71828a;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.section-pad {
+  padding: 100px 7%;
+}
+
+.section-heading {
+  max-width: 670px;
+  margin-bottom: 48px;
+}
+
+.section-heading h2, .project-heading h2 {
+  color: var(--navy);
+  font-size: clamp(34px, 4vw, 49px);
+  margin: 15px 0;
+}
+
+.section-heading > p, .project-heading > p {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 590px;
+  line-height: 1.9;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.pillar {
+  padding: 30px 28px 32px 0;
+  border-right: 1px solid var(--line);
+}
+
+.pillar + .pillar {
+  padding-left: 28px;
+}
+
+.pillar:last-child {
+  border-right: 0;
+}
+
+.pillar-index {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  color: #81939b;
+}
+
+.pillar-symbol {
+  margin: 24px 0 14px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-size: 27px;
+  border-radius: 13px;
+  background: #e5f5f3;
+  color: var(--blue);
+}
+
+.symbol-energy {
+  background: #fff5df;
+  color: #b17d18;
+}
+
+.symbol-sensor {
+  background: #e8effa;
+  color: #416b9b;
+}
+
+.pillar h3 {
+  font-family: Manrope, sans-serif;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.pillar p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+  min-height: 68px;
+}
+
+.pillar a {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--blue);
+}
+
+.pillar a span {
+  margin-left: 8px;
+}
+
+.dark-section {
+  background: var(--navy);
+  color: white;
+}
+
+.heading-light h2 {
+  color: white;
+}
+
+.heading-light h2 span {
+  color: var(--cyan);
+}
+
+.heading-light > p {
+  color: #a5b9c3;
+}
+
+.heading-light .section-kicker {
+  color: var(--cyan);
+}
+
+.wave-layout {
+  display: grid;
+  grid-template-columns: 1.35fr .8fr;
+  gap: 45px;
+  align-items: stretch;
+}
+
+.wave-visual {
+  padding: 24px;
+  background: #0d2a3e;
+  border: 1px solid #244355;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 310px;
+}
+
+.wave-topline, .wave-caption {
+  display: flex;
+  justify-content: space-between;
+  color: #8caab6;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  font-weight: 800;
+}
+
+.wave-topline span:last-child {
+  color: var(--cyan);
+}
+
+.wave-svg {
+  width: 100%;
+  margin: 28px 0;
+  overflow: visible;
+}
+
+.wave-caption {
+  color: #718d9b;
+}
+
+.wave-controls {
+  padding: 10px 0;
+}
+
+.wave-controls > label, .experiment-controls label, .blackbody-copy label, .monitor-controls label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #bdd0d6;
+  margin-bottom: 9px;
+}
+
+.wave-controls select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #345568;
+  border-radius: 8px;
+  background: #102f44;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.wave-info {
+  padding-top: 12px;
+}
+
+.info-label {
+  font-size: 9px;
+  color: var(--cyan);
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.wave-info h3 {
+  font-family: Manrope, sans-serif;
+  font-size: 22px;
+  margin: 8px 0;
+}
+
+.wave-info p {
+  color: #a6bac3;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.wave-fact {
+  display: flex;
+  gap: 10px;
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid #294455;
+}
+
+.wave-fact span {
+  color: var(--cyan);
+}
+
+.blackbody {
+  margin-top: 70px;
+  padding: 35px;
+  border: 1px solid #2c4a5d;
+  background: #0c2538;
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.blackbody-copy .section-kicker {
+  color: var(--cyan);
+}
+
+.blackbody-copy h3 {
+  font-family: Manrope, sans-serif;
+  font-size: 25px;
+  line-height: 1.3;
+  margin: 13px 0;
+}
+
+.blackbody-copy > p {
+  color: #a5bac4;
+  font-size: 12px;
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+
+.blackbody-copy label strong {
+  color: var(--cyan);
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #91aab5;
+  font-size: 10px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--cyan);
+  cursor: pointer;
+}
+
+.temperature-result {
+  color: var(--cyan) !important;
+  margin-top: 15px;
+  margin-bottom: 0 !important;
+  font-weight: 700;
+}
+
+.blackbody-visual {
+  min-height: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: radial-gradient(circle, #1a3d4d, #0b2032 70%);
+  border-radius: 15px;
+}
+
+.thermal-orb {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff4bd, #ffb75d 50%, #df6037 80%);
+  box-shadow: 0 0 45px #f18b4d77;
+  transition: background .3s, box-shadow .3s;
+}
+
+.blackbody-visual > span {
+  font-size: 9px;
+  color: #91aab5;
+  letter-spacing: 1.4px;
+}
+
+.blackbody-visual strong {
+  font-size: 13px;
+  color: #dcecf0;
+}
+
+.photoelectric {
+  background: white;
+}
+
+.photo-layout {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 55px;
+  align-items: center;
+}
+
+.photo-experiment {
+  background: var(--navy);
+  color: white;
+  padding: 25px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.experiment-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #9bb3bf;
+}
+
+.experiment-status {
+  color: var(--cyan);
+}
+
+.experiment-scene {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 100%, #19445b, #0b2032 65%);
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.light-beam {
+  position: absolute;
+  left: 14%;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background: linear-gradient(transparent, #ffe38a, #ffe38a);
+  opacity: .3;
+  transform: rotate(20deg);
+  transform-origin: top;
+  transition: opacity .3s, width .3s;
+}
+
+.metal-plate {
+  position: absolute;
+  bottom: 35px;
+  left: 38%;
+  width: 125px;
+  height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(#d7e5e9, #597b8b);
+  box-shadow: 0 0 25px #55d5d966;
+}
+
+.metal-plate span {
+  position: absolute;
+  bottom: -22px;
+  width: 100%;
+  text-align: center;
+  color: #8eaab5;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.electron {
+  position: absolute;
+  bottom: 65px;
+  left: 48%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #73e9ef;
+  box-shadow: 0 0 12px #73e9ef;
+  opacity: 0;
+}
+
+.experiment-scene.emitting .electron {
+  animation: electronMove 1.1s ease-out forwards;
+}
+
+.experiment-scene.emitting .e-two {
+  animation-delay: .2s;
+}
+
+.experiment-scene.emitting .e-three {
+  animation-delay: .4s;
+}
+
+@keyframes electronMove {
+  0% { opacity: 0; transform: translate(0, 0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translate(90px, -115px); }
+}
+
+.experiment-controls label {
+  color: #d3e1e6;
+  margin-top: 13px;
+}
+
+.experiment-controls .range-labels {
+  margin-bottom: 12px;
+}
+
+.photo-result {
+  margin-top: 14px;
+  min-height: 40px;
+  color: #b9d0d8;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.photo-explanation .explanation-number {
+  color: var(--blue);
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.photo-explanation h3 {
+  font-family: Manrope, sans-serif;
+  font-size: 21px;
+  color: var(--navy);
+  margin-bottom: 7px;
+}
+
+.photo-explanation p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.formula {
+  padding: 18px;
+  background: var(--paper);
+  border-left: 3px solid var(--cyan);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formula span, .formula small {
+  font-size: 9px;
+  color: #73858d;
+}
+
+.formula strong {
+  font-family: Manrope, sans-serif;
+  font-size: 28px;
+  color: var(--navy);
+}
+
+.photo-explanation .note {
+  margin-top: 17px;
+  font-size: 11px;
+}
+
+.photovoltaic-section {
+  background: #eaf5f3;
+}
+
+.photovoltaic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.photovoltaic-grid h2 {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(35px, 4vw, 48px);
+  line-height: 1.15;
+  color: var(--navy);
+  letter-spacing: -2px;
+  margin: 15px 0;
+}
+
+.photovoltaic-grid h2 span {
+  color: var(--blue);
+}
+
+.photovoltaic-grid > div > p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 500px;
+}
+
+.conversion-steps {
+  margin-top: 28px;
+  display: grid;
+  gap: 17px;
+}
+
+.conversion-steps > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.conversion-steps > div > span {
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 12px;
+  padding-top: 2px;
+}
+
+.conversion-steps p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.conversion-steps strong {
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.conversion-visual {
+  min-height: 360px;
+  position: relative;
+  border-radius: 18px;
+  background: linear-gradient(150deg, #d5eee8, #a6d8d3);
+  overflow: hidden;
+}
+
+.conversion-sun {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d69a2e;
+  font-size: 70px;
+  line-height: 1;
+  text-shadow: 0 0 35px #f8d777;
+}
+
+.conversion-rays {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  width: 150px;
+  height: 120px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(105deg, transparent 0 17px, #fff6b9aa 18px 20px);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.conversion-panel {
+  position: absolute;
+  width: 240px;
+  height: 115px;
+  left: 50%;
+  top: 190px;
+  transform: translateX(-50%) skewY(-10deg);
+  background: #174968;
+  border: 6px solid #edf7f2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  box-shadow: 0 16px 30px #17445b55;
+}
+
+.conversion-panel div {
+  border: 1px solid #74b9d1;
+  background: linear-gradient(135deg, #286f94, #103b5d);
+}
+
+.energy-arrow {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #1a5b69;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.energy-arrow span {
+  font-size: 18px;
+  margin-left: 8px;
+}
+
+.energy-chip {
+  position: absolute;
+  bottom: 12px;
+  right: 25px;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 10px;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.simulator-section {
+  background: white;
+}
+
+.simulator {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 15px 45px #0a33400b;
+}
+
+.simulator-inputs {
+  padding: 32px;
+  background: #f7faf9;
+}
+
+.simulator-title {
+  display: flex;
+  justify-content: space-between;
+  color: #607681;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  margin-bottom: 26px;
+}
+
+.simulator-inputs label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #405765;
+  margin: 16px 0 7px;
+}
+
+.input-with-unit {
+  height: 43px;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #d8e3e5;
+  border-radius: 7px;
+  padding: 0 12px;
+}
+
+.input-with-unit input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: none;
+  color: var(--navy);
+  background: transparent;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.input-with-unit span {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.input-hint {
+  color: #809098;
+  font-size: 9px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.simulator-results {
+  background: var(--navy);
+  color: white;
+  padding: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.result-label {
+  color: var(--cyan);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.result-main {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 8px 0 25px;
+}
+
+.result-main strong {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(40px, 5vw, 60px);
+  letter-spacing: -2px;
+}
+
+.result-main span {
+  color: #a4bac4;
+  font-size: 12px;
+}
+
+.result-divider {
+  height: 1px;
+  background: #2b485a;
+}
+
+.result-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  padding: 24px 0;
+}
+
+.result-secondary div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-secondary span {
+  color: #96acb7;
+  font-size: 10px;
+}
+
+.result-secondary strong {
+  color: white;
+  font-size: 14px;
+}
+
+.result-bar-label {
+  display: flex;
+  justify-content: space-between;
+  color: #9db2bd;
+  font-size: 9px;
+  font-weight: 800;
+  margin-bottom: 9px;
+}
+
+.result-bar-label strong {
+  color: var(--cyan);
+}
+
+.result-bar {
+  height: 7px;
+  background: #29485a;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.result-bar span {
+  display: block;
+  height: 100%;
+  width: 80%;
+  background: var(--cyan);
+  border-radius: inherit;
+  transition: width .3s;
+}
+
+.result-disclaimer {
+  font-size: 9px;
+  line-height: 1.7;
+  color: #91aab6;
+  margin-top: 22px;
+}
+
+.robotics-section .section-heading {
+  max-width: 720px;
+}
+
+.robotics-layout {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.sensor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sensor-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border: 1px solid #29495c;
+  border-radius: 11px;
+  background: #0c2639;
+  transition: border .2s, background .2s;
+}
+
+.sensor-item.active {
+  border-color: #43c9ce;
+  background: #103246;
+}
+
+.sensor-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: #1b4255;
+  color: var(--cyan);
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.sensor-item h3 {
+  font-size: 12px;
+  color: white;
+}
+
+.sensor-item p {
+  font-size: 10px;
+  color: #96aeb9;
+  margin-top: 3px;
+}
+
+.sensor-state {
+  margin-left: auto;
+  color: #69d9c5;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.monitor {
+  border: 1px solid #2a4b5d;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #0c2538;
+}
+
+.monitor-header, .monitor-footer {
+  padding: 15px 19px;
+  display: flex;
+  justify-content: space-between;
+  color: #a2bac5;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #294455;
+}
+
+.monitor-header .live-dot {
+  margin-right: 8px;
+}
+
+.monitor-main {
+  padding: 27px 22px 20px;
+}
+
+.monitor-caption {
+  color: #8caab6;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  font-weight: 800;
+}
+
+.monitor-reading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.monitor-reading strong {
+  font-family: Manrope, sans-serif;
+  font-size: 55px;
+  color: white;
+  letter-spacing: -2px;
+}
+
+.monitor-reading span {
+  color: var(--cyan);
+  font-size: 18px;
+}
+
+.monitor-main > p {
+  color: #a0b5be;
+  font-size: 11px;
+  margin-bottom: 18px;
+}
+
+.monitor-meter {
+  height: 6px;
+  background: #29495b;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.monitor-meter span {
+  display: block;
+  width: 56%;
+  height: 100%;
+  background: var(--cyan);
+  border-radius: inherit;
+  transition: width .2s;
+}
+
+.monitor-controls {
+  padding: 15px 22px;
+  background: #102e42;
+}
+
+.monitor-controls label {
+  color: #c3d4da;
+}
+
+.monitor-footer {
+  border-top: 1px solid #294455;
+  border-bottom: 0;
+  font-size: 8px;
+}
+
+.monitor-footer span:last-child {
+  color: #6fe0c7;
+}
+
+.robotics-note {
+  color: #8ca8b4;
+  font-size: 10px;
+  margin-top: 18px;
+}
+
+.project-section {
+  background: #f5f8f8;
+}
+
+.project-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 55px;
+}
+
+.project-heading h2 {
+  max-width: 610px;
+  margin-bottom: 0;
+}
+
+.project-heading > p {
+  max-width: 380px;
+  padding-bottom: 5px;
+}
+
+.project-flow {
+  display: grid;
+  grid-template-columns: 1fr 25px 1fr 25px 1fr 25px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.flow-step {
+  min-height: 220px;
+  padding: 23px 18px;
+  background: white;
+  border: 1px solid #e1e9e9;
+  border-radius: 12px;
+}
+
+.flow-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: #e4f5f1;
+  border-radius: 10px;
+  color: var(--blue);
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+
+.flow-number {
+  color: #82949b;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.flow-step h3 {
+  font-family: Manrope, sans-serif;
+  font-size: 17px;
+  color: var(--navy);
+  margin: 5px 0;
+}
+
+.flow-step p {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.flow-connector {
+  color: var(--blue);
+  font-size: 19px;
+  text-align: center;
+}
+
+.project-note {
+  background: #e7f2f0;
+  border: 1px solid #d4e9e5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 25px;
+}
+
+.project-note > div {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+}
+
+.note-mark {
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.project-note strong {
+  color: var(--navy);
+  font-size: 11px;
+}
+
+.project-note p {
+  color: #58717a;
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 4px;
+}
+
+.closing {
+  min-height: 360px;
+  padding: 75px 7%;
+  background: linear-gradient(115deg, #071b2b, #10445a);
+  position: relative;
+  overflow: hidden;
+}
+
+.closing-content {
+  position: relative;
+  z-index: 2;
+  max-width: 690px;
+}
+
+.closing .section-kicker {
+  color: var(--cyan);
+}
+
+.closing h2 {
+  color: white;
+  font-size: clamp(35px, 4.4vw, 53px);
+  margin: 17px 0;
+}
+
+.closing h2 span {
+  color: var(--cyan);
+}
+
+.closing p {
+  color: #b1c5cd;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.closing-decoration {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  right: 3%;
+  top: -45px;
+  border: 1px solid #70d5d522;
+  border-radius: 50%;
+}
+
+.closing-decoration::before, .closing-decoration::after {
+  content: "";
+  position: absolute;
+  inset: 45px;
+  border: 1px solid #70d5d522;
+  border-radius: 50%;
+}
+
+.closing-decoration::after {
+  inset: 95px;
+}
+
+.footer {
+  min-height: 85px;
+  padding: 20px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #051522;
+  color: #8ea5b0;
+}
+
+.footer .brand {
+  color: white;
+}
+
+.footer .brand-icon {
+  background: #12374a;
+}
+
+.footer .brand-light {
+  color: var(--cyan);
+}
+
+.footer p, .footer > span {
+  font-size: 10px;
+}
+
+.accessibility-tools {
+  position: fixed;
+  right: 15px;
+  bottom: 18px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.accessibility-tools button {
+  width: 39px;
+  height: 39px;
+  background: var(--navy);
+  color: white;
+  border: 1px solid #ffffff44;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #001a2b30;
+}
+
+.accessibility-tools button:hover {
+  background: var(--blue);
+}
+
+body.high-contrast {
+  --paper: #fff;
+  --ink: #000;
+  --muted: #222;
+  --line: #000;
+  filter: contrast(1.15);
+}
+
+body.high-contrast .section-heading p,
+body.high-contrast .hero-description,
+body.high-contrast .pillar p {
+  color: #17232b;
+}
+
+@media (max-width: 1000px) {
+  .header {
+    padding: 0 4%;
+  }
+
+  .hero, .section-pad {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .nav {
+    gap: 17px;
+  }
+
+  .hero-grid {
+    gap: 25px;
+  }
+
+  .project-flow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .flow-connector {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    height: 68px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .menu-toggle span {
+    width: 23px;
+    height: 2px;
+    background: var(--navy);
+    display: block;
+  }
+
+  .nav {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 15px 5% 22px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 12px 0;
+    border-bottom: 1px solid #edf1f1;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 55px;
+  }
+
+  .hero-grid, .wave-layout, .blackbody, .photo-layout, .photovoltaic-grid, .simulator, .robotics-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-grid {
+    gap: 35px;
+  }
+
+  .hero h1 {
+    font-size: 47px;
+  }
+
+  .hero-visual {
+    height: 350px;
+  }
+
+  .hero-stats {
+    gap: 20px;
+  }
+
+  .section-pad {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .pillar, .pillar + .pillar {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 25px 0;
+  }
+
+  .pillar:last-child {
+    border-bottom: 0;
+  }
+
+  .pillar p {
+    min-height: auto;
+  }
+
+  .blackbody {
+    padding: 24px;
+    gap: 25px;
+  }
+
+  .photo-layout {
+    gap: 35px;
+  }
+
+  .project-heading {
+    display: block;
+  }
+
+  .project-heading > p {
+    margin-top: 18px;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 39px;
+  }
+
+  .hero-visual {
+    height: 290px;
+  }
+
+  .panel {
+    width: 150px;
+    height: 80px;
+  }
+
+  .panel-front {
+    left: 130px;
+  }
+
+  .panel-back {
+    left: 25px;
+  }
+
+  .pool {
+    width: 170px;
+    height: 68px;
+  }
+
+  .hero-bottom span:nth-child(2) {
+    display: none;
+  }
+
+  .hero-stats {
+    justify-content: space-between;
+  }
+
+  .hero-stats span {
+    font-size: 9px;
+  }
+
+  .section-heading h2, .project-heading h2 {
+    font-size: 35px;
+  }
+
+  .wave-visual {
+    padding: 16px;
+    min-height: 240px;
+  }
+
+  .blackbody {
+    padding: 19px;
+  }
+
+  .photo-experiment {
+    padding: 17px;
+  }
+
+  .simulator-inputs, .simulator-results {
+    padding: 23px;
+  }
+
+  .result-secondary {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .sensor-item {
+    padding: 13px;
+    gap: 10px;
+  }
+
+  .sensor-item h3 {
+    font-size: 11px;
+  }
+
+  .sensor-state {
+    font-size: 7px;
+  }
+
+  .project-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-step {
+    min-height: auto;
+  }
+
+  .closing {
+    padding: 65px 6%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
