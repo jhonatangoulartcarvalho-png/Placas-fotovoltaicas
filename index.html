@@ -3,175 +3,182 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sol + Água: luz, calor e energia na piscina</title>
+<title>Sol + Água · Placas fotovoltaicas</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#conteudo">Pular para o conteúdo principal</a>
-
-<div class="tools" role="region" aria-label="Ferramentas de acessibilidade">
-<strong>Acessibilidade:</strong>
-<button id="bContraste" aria-pressed="false">Alto contraste</button>
-<button id="bDisl" aria-pressed="false">Fonte para dislexia</button>
-<button id="bMais" aria-label="Aumentar fonte">A+</button>
-<button id="bMenos" aria-label="Diminuir fonte">A−</button>
-<button id="bMov" aria-pressed="false">Reduzir animações</button>
-<button id="bTema" aria-pressed="false">Tema escuro</button>
-</div>
-
+<a class="skip" href="#conteudo" id="skip">Ir para o conteúdo</a>
 <header class="top">
-<div class="brand"><span aria-hidden="true">☀️🌊</span> Sol + Água <small>Ciência e robótica para aquecer uma piscina</small></div>
-<nav aria-label="Menu principal"><ul id="menu"></ul></nav>
+<div class="bar">
+<a class="logo" href="#inicio"><i aria-hidden="true"></i>Sol + Água</a>
+<button class="burger" id="bg" aria-expanded="false" aria-controls="menu">Menu</button>
+<nav id="menu" aria-label="Principal"><ul>
+<li><a href="#inicio">Início</a></li><li><a href="#ciencia">Ciência</a></li><li><a href="#simuladores">Simuladores</a></li><li><a href="#automacao">Automação</a></li><li><a href="#quiz">Quiz</a></li><li><a href="#acessibilidade">Acessibilidade</a></li><li><a href="#mapa">Mapa do site</a></li>
+</ul></nav>
+</div>
+<div class="tools" role="group" aria-label="Ajustes de leitura e acessibilidade"><div class="in">
+<b>Leitura:</b>
+<button id="fm" aria-label="Diminuir fonte">A−</button><button id="fp" aria-label="Aumentar fonte">A+</button>
+<button id="tc" aria-pressed="false">Alto contraste</button>
+<button id="td" aria-pressed="false">Fonte para dislexia</button>
+<button id="tt" aria-pressed="false">Tema escuro</button>
+<button id="tm" aria-pressed="false">Sem animações</button>
+</div></div>
 </header>
 
 <main id="conteudo" tabindex="-1">
 
-<section id="inicio">
-<div class="hero"><div><h1>Do Sol à água: a física que aquece a piscina</h1><p>Explore, simule e automatize. Ciência de verdade para uma piscina mais sustentável e para todas as pessoas.</p></div>
-<svg viewBox="0 0 300 200" role="img" aria-label="Ilustração animada: sol com raios girando sobre ondas de água"><g class="rays" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"><path d="M150 20v-14M150 160v14M60 90H46M254 90h-14M86 26l-10-10M224 154l10 10M214 26l10-10M76 164l-10 10"/></g><circle cx="150" cy="90" r="50" fill="#fbbf24"/><path class="w1" d="M-40 140q40-24 80 0t80 0 80 0 80 0 80 0V200H-40z" fill="#38bdf8" opacity=".85"/><path class="w2" d="M-40 162q40-22 80 0t80 0 80 0 80 0 80 0V200H-40z" fill="#0369a1"/></svg></div>
-<p>Este site conecta <strong>programação</strong>, <strong>tecnociência</strong> e <strong>robótica</strong> no Projeto da Piscina: um sistema solar térmico automatizado, com capa térmica e geração fotovoltaica.</p>
+<section class="pg" data-p="inicio" aria-labelledby="h-inicio">
+<div class="hero">
+<h1 id="h-inicio" tabindex="-1">O sol vira eletricidade.<br>A água fica onde é necessária.</h1>
+<p>Uma placa fotovoltaica transforma luz em energia elétrica sem queimar combustível e sem consumir água no processo de geração. Aqui você entende a física, simula o seu sistema e vê como automação aumenta a economia.</p>
+<p><a class="btn pri" href="#simuladores">Simular meu sistema</a> <a class="btn" href="#ciencia">Entender a ciência</a></p>
+<svg viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 Q50 5 100 30 T200 30 T300 30 T400 30 V60 H0Z" fill="var(--pr)" opacity=".35"/><path d="M0 42 Q50 20 100 42 T200 42 T300 42 T400 42 V60 H0Z" fill="var(--pr)"/></svg>
+</div>
+<h2>Por que Sol + Água?</h2>
 <div class="grid">
-<div class="card"><h2>1. Ondas eletromagnéticas</h2><p>A luz do Sol viaja como onda. Explore comprimento de onda, frequência e energia.</p><a href="#ondas">Abrir simulador</a></div>
-<div class="card"><h2>2. Corpo negro</h2><p>O coletor solar e a piscina emitem e absorvem radiação conforme a temperatura.</p><a href="#corpo-negro">Abrir simulador</a></div>
-<div class="card"><h2>3. Efeito fotoelétrico</h2><p>Fótons soltam elétrons: a base dos painéis fotovoltaicos.</p><a href="#fotoeletrico">Abrir simulador</a></div>
-<div class="card"><h2>4. Projeto da Piscina</h2><p>Calcule ganhos e perdas de energia, com e sem capa térmica.</p><a href="#piscina">Abrir calculadora</a></div>
-<div class="card"><h2>5. Sensores e automação</h2><p>Simule sensores de luz e temperatura que ligam a bomba e fecham a capa.</p><a href="#sensores">Abrir simulador</a></div>
+<div class="card sun"><h3>Sol</h3><p>A energia chega de graça: em média 4 a 6 kWh por metro quadrado por dia no Brasil, conforme a região.</p></div>
+<div class="card water"><h3>Água</h3><p>Usinas térmicas consomem água para resfriamento. A geração fotovoltaica usa muito pouca, só para limpeza eventual dos módulos. Em períodos de seca, isso alivia os reservatórios das hidrelétricas.</p></div>
+<div class="card sun"><h3>Inclusão</h3><p>Todo o site funciona por teclado, tem alto contraste, fonte para dislexia e espaço para vídeos em Libras.</p></div>
 </div>
-<div class="card"><h2>Impacto social e sustentabilidade</h2>
-<p>Aquecer com o Sol reduz o consumo de eletricidade e gás. Todo o projeto é pensado para inclusão digital: funciona em celulares simples, tem navegação por teclado, VLibras, alto contraste e fonte para dislexia. O código é aberto para escolas replicarem o sistema com sensores de baixo custo.</p></div>
+<h2>Impacto social</h2>
+<ul><li>Redução da conta de luz de famílias, escolas e pequenos comércios.</li><li>Menos emissões associadas à geração de eletricidade.</li><li>Energia em locais isolados, sem rede, para bombeamento de água e iluminação.</li><li>Informação clara e acessível para qualquer pessoa entender e decidir.</li></ul>
 </section>
 
-<section id="ondas" hidden>
-<h1>Ondas eletromagnéticas</h1>
-<p>Toda onda eletromagnética viaja no vácuo a <span class="f">c = 3×10⁸ m/s</span>. As relações são <span class="f">c = λ·f</span> e <span class="f">E = h·f</span>. Quanto menor o comprimento de onda, maior a energia do fóton.</p>
-<div class="card">
-<label class="lab" for="lam">Comprimento de onda (escala logarítmica): <span id="lamv"></span></label>
-<input id="lam" type="range" min="-12" max="3" step="0.01" value="-6.26">
-<canvas id="cOnda" width="700" height="200" role="img" aria-label="Animação de uma onda cuja densidade de ciclos muda com o comprimento de onda escolhido"></canvas>
-<div class="out" aria-live="polite" id="oOnda"></div>
-<div class="scroll"><table><caption>Relação com o projeto</caption><tr><th>Faixa</th><th>Papel na piscina</th></tr>
-<tr><td>Ultravioleta</td><td>Degrada a cloração e a capa; pode ativar painéis fotovoltaicos.</td></tr>
-<tr><td>Visível</td><td>Atravessa a água e aquece o fundo; excita células fotovoltaicas.</td></tr>
-<tr><td>Infravermelho</td><td>Aquece o coletor; a água também o emite à noite.</td></tr></table></div>
+<section class="pg" data-p="ciencia" aria-labelledby="h-ciencia">
+<h1 id="h-ciencia" tabindex="-1">A ciência da célula solar</h1>
+<h2>Como funciona, passo a passo</h2>
+<div class="tabs" role="group" aria-label="Etapas">
+<button data-s="0" aria-pressed="true">1 · Fótons</button><button data-s="1" aria-pressed="false">2 · Pares elétron-lacuna</button><button data-s="2" aria-pressed="false">3 · Junção p-n</button><button data-s="3" aria-pressed="false">4 · Corrente</button>
 </div>
-</section>
+<div class="card water" id="step" aria-live="polite"></div>
 
-<section id="corpo-negro" hidden>
-<h1>Radiação do corpo negro</h1>
-<p>Todo corpo com temperatura acima do zero absoluto emite radiação. A lei de Wien dá o pico: <span class="f">λmax = 2898 µm·K / T</span>. A potência total por área segue Stefan-Boltzmann: <span class="f">P/A = σT⁴</span>, com σ = 5,67×10⁻⁸ W/m²K⁴. Planck descreve a curva completa.</p>
-<div class="card">
-<div role="group" aria-label="Atalhos de temperatura">
-<button data-t="5772">Sol (5772 K)</button> <button data-t="350">Coletor quente (350 K)</button> <button data-t="301">Piscina (301 K)</button> <button data-t="275">Céu noturno (275 K)</button></div>
-<label class="lab" for="tk">Temperatura: <span id="tkv"></span></label>
-<input id="tk" type="range" min="200" max="7000" step="1" value="5772">
-<canvas id="cBB" width="700" height="300" role="img" aria-label="Gráfico da curva de Planck normalizada para a temperatura escolhida"></canvas>
-<div class="out" aria-live="polite" id="oBB"></div>
-<p><strong>Conexão:</strong> o Sol (pico no visível) aquece o coletor escuro, que absorve bem essa luz. A piscina, a ~28 °C, emite no infravermelho distante (pico perto de 10 µm), por isso perde calor para o céu limpo à noite. A capa térmica bloqueia essa troca.</p>
-</div>
-</section>
-
-<section id="fotoeletrico" hidden>
-<h1>Efeito fotoelétrico</h1>
-<p>Um fóton só arranca um elétron se <span class="f">h·f ≥ φ</span> (função trabalho). A energia cinética máxima é <span class="f">Ec = h·f − φ</span>. Aumentar a intensidade aumenta o <em>número</em> de elétrons (corrente), não a energia de cada um.</p>
-<div class="card">
-<label class="lab" for="met">Metal</label>
-<select id="met"><option value="2.1">Césio (φ = 2,1 eV)</option><option value="2.3">Sódio (φ = 2,3 eV)</option><option value="4.3" selected>Zinco (φ = 4,3 eV)</option><option value="6.3">Platina (φ = 6,3 eV)</option></select>
-<label class="lab" for="fl">Comprimento de onda da luz: <span id="flv"></span></label>
-<input id="fl" type="range" min="100" max="800" step="1" value="250">
-<label class="lab" for="fi">Intensidade da luz: <span id="fiv"></span></label>
-<input id="fi" type="range" min="0" max="100" step="1" value="60">
-<canvas id="cFE" width="700" height="260" role="img" aria-label="Animação de fótons atingindo uma placa metálica e elétrons sendo ejetados quando a energia é suficiente"></canvas>
-<div class="out" aria-live="polite" id="oFE"></div>
-<p><strong>Conexão:</strong> numa célula fotovoltaica, fótons soltam elétrons no silício (efeito fotoelétrico interno). A eletricidade gerada pode alimentar a bomba de circulação ou uma bomba de calor.</p>
-</div>
-</section>
-
-<section id="piscina" hidden>
-<h1>Projeto da Piscina</h1>
-<div class="card">
+<h2>Fundamentos</h2>
 <div class="grid">
-<div><label class="lab" for="pa">Área da piscina (m²)</label><input id="pa" type="number" value="32" min="1" max="500"></div>
-<div><label class="lab" for="pt">Temperatura da água (°C)</label><input id="pt" type="number" value="28" min="10" max="40"></div>
-<div><label class="lab" for="pc">Temperatura aparente do céu à noite (°C)</label><input id="pc" type="number" value="2" min="-30" max="25"></div>
-<div><label class="lab" for="ac">Área do coletor (m²)</label><input id="ac" type="number" value="12" min="1" max="200"></div>
-<div><label class="lab" for="ap">Área fotovoltaica (m²)</label><input id="ap" type="number" value="8" min="1" max="200"></div>
-<div><label class="lab" for="gi">Irradiância solar (W/m²)</label><input id="gi" type="number" value="800" min="0" max="1100"></div>
+<div class="card"><h3>Efeito fotovoltaico</h3><p>Observado por Edmond Becquerel em 1839. Quando um fóton tem energia maior que o <em>band gap</em> do semicondutor, ele excita um elétron da banda de valência para a de condução. No silício, o band gap é cerca de 1,12 eV, o que corresponde a comprimentos de onda até aproximadamente 1100 nm.</p></div>
+<div class="card"><h3>Junção p-n</h3><p>O silício é dopado com fósforo (tipo n, excesso de elétrons) e boro (tipo p, excesso de lacunas). Na interface forma-se um campo elétrico interno que separa as cargas geradas pela luz e as empurra para contatos opostos.</p></div>
+<div class="card"><h3>Limite teórico</h3><p>O limite de Shockley-Queisser para uma junção simples de silício é cerca de 29%. Células comerciais de silício monocristalino alcançam em torno de 20% a 24% de eficiência em módulos. Células de múltiplas junções passam de 40% em laboratório.</p></div>
 </div>
-<p><button id="bCapa" aria-pressed="false">Capa térmica: desligada</button></p>
-<div class="out" aria-live="polite" id="oPi"></div>
-<div id="barras"></div>
-<p><small>Modelo simplificado e didático: perda radiante P = ε·σ·A·(Tágua⁴ − Tcéu⁴) com ε = 0,96; a capa reduz essa perda em cerca de 85% (valor assumido). Não inclui evaporação, convecção e condução, que também diminuem com a capa. Coletor com eficiência de 60%, painel de 20% e bomba de calor com COP 4, todos assumidos.</small></p>
-</div>
-</section>
 
-<section id="sensores" hidden>
-<h1>Robótica: sensores e automação</h1>
-<p>Um microcontrolador (Arduino, ESP32) lê sensores e decide. Mova os controles para simular o ambiente.</p>
-<div class="card">
-<label class="lab" for="sl">Sensor de luz / piranômetro: <span id="slv"></span> W/m²</label><input id="sl" type="range" min="0" max="1000" value="700">
-<label class="lab" for="sc">Sensor de temperatura do coletor (°C): <span id="scv"></span></label><input id="sc" type="range" min="5" max="90" value="45">
-<label class="lab" for="sp">Sensor de temperatura da piscina (°C): <span id="spv"></span></label><input id="sp" type="range" min="5" max="40" value="27">
-<div class="out" aria-live="polite" id="oSe"></div>
-<h2>Código de exemplo (C++/Arduino)</h2>
-<pre><code>void loop() {
-  float G  = lerLuz();          // W/m²
-  float Tc = lerTempColetor();  // °C
-  float Tp = lerTempPiscina();  // °C
-  bool bomba = (G &gt; 200) &amp;&amp; (Tc &gt; Tp + 5);
-  bool capa  = (G &lt; 50);        // noite: fecha a capa
-  digitalWrite(PINO_BOMBA, bomba);
-  digitalWrite(PINO_CAPA, capa);
-  delay(5000);
-}</code></pre>
-<p><strong>Inovação:</strong> a histerese (5 °C) evita liga-desliga constante, e a capa fecha sozinha ao anoitecer, automatizando a economia de energia.</p>
-</div>
-</section>
+<h2>Equações essenciais</h2>
+<p>Condições padrão de teste (STC): irradiância 1000 W/m², temperatura da célula 25 °C, massa de ar AM 1,5.</p>
+<p class="f">P = A · G · η<br>Potência (W) = área (m²) × irradiância (W/m²) × eficiência</p>
+<p class="f">FF = Pmax / (Voc · Isc)<br>Fator de preenchimento: quão “quadrada” é a curva I-V (típico 0,75 a 0,85)</p>
+<p class="f">P(T) = Pn · (G/1000) · [1 + γ · (Tcél − 25)]<br>γ ≈ −0,35 %/°C para silício cristalino</p>
+<p class="f">Tcél = Tamb + (NOCT − 20)/800 · G<br>NOCT típico ≈ 45 °C</p>
+<p class="f">E (kWh/mês) = Pkwp · HSP · 30 · PR<br>HSP: horas de sol pleno · PR: taxa de desempenho (≈ 0,75 a 0,85)</p>
+<p><strong>Consequência prática:</strong> placas esquentam e perdem potência. Um dia frio e claro rende mais por watt instalado que um dia quente, e ventilação sob os módulos ajuda.</p>
 
-<section id="libras" hidden>
-<h1>Conteúdo em Libras</h1>
-<p>Cada conceito do site terá um vídeo em Língua Brasileira de Sinais, gravado ou revisado por pessoas surdas fluentes. Os espaços abaixo já estão prontos: basta colocar o arquivo no atributo <code>src</code> do vídeo.</p>
-<div class="card"><h2>Como usar o VLibras</h2><p>O botão azul do VLibras aparece no canto da tela. Selecione um texto ou clique nele e o avatar traduz para Libras. Ele funciona quando o site está hospedado com acesso ao serviço gratuito do governo federal.</p></div>
-<div class="grid" id="libGrid"></div>
-<div class="card"><h2>Boas práticas de gravação</h2><ul><li>Fundo liso e contrastante com a roupa, boa iluminação e enquadramento do tronco e das mãos.</li><li>Intérprete ou apresentador surdo, com revisão da comunidade surda.</li><li>Legenda em português e transcrição em texto sob cada vídeo.</li><li>Sinais-termo de física e tecnologia combinados com a comunidade, registrados no glossário.</li></ul></div>
-</section>
+<h2>Tecnologias de célula</h2>
+<div class="scroll"><table>
+<caption class="sr">Comparação entre tecnologias de células fotovoltaicas</caption>
+<thead><tr><th>Tecnologia</th><th>Eficiência do módulo (aprox.)</th><th>Característica</th></tr></thead>
+<tbody>
+<tr><td>Silício monocristalino</td><td>20% a 24%</td><td>Dominante no mercado, boa durabilidade, uso residencial e industrial</td></tr>
+<tr><td>Silício policristalino</td><td>16% a 19%</td><td>Fabricação mais simples, vem perdendo espaço</td></tr>
+<tr><td>Filme fino (CdTe, CIGS)</td><td>12% a 19%</td><td>Leve, melhor com calor e luz difusa</td></tr>
+<tr><td>Perovskita</td><td>em desenvolvimento</td><td>Células de laboratório acima de 25%; desafio é estabilidade ao longo dos anos</td></tr>
+</tbody></table></div>
 
-<section id="quiz" hidden>
-<h1>Quiz: teste o que aprendeu</h1>
-<div class="card" id="qz"></div>
-</section>
-
-<section id="impacto" hidden>
-<h1>Impacto social e sustentabilidade</h1>
-<div class="grid"><div class="card"><h2>Energia limpa</h2><p>O Sol é gratuito e renovável. Coletor e fotovoltaico reduzem a conta de luz e as emissões.</p></div><div class="card"><h2>Água e calor poupados</h2><p>A capa térmica diminui perda de calor e evaporação, e economiza água e energia.</p></div><div class="card"><h2>Inclusão digital</h2><p>Site leve, que roda em celulares simples, com Libras, alto contraste e navegação por teclado.</p></div><div class="card"><h2>Replicável</h2><p>Sensores baratos e código aberto permitem levar o projeto a escolas e clubes comunitários.</p></div></div>
-<div class="card"><h2>Calcule a economia</h2>
-<label class="lab" for="ek">Energia economizada por dia (kWh)</label><input id="ek" type="number" value="15" min="0">
-<label class="lab" for="et">Tarifa (R$/kWh)</label><input id="et" type="number" value="0.9" min="0" step="0.05">
-<div class="out" aria-live="polite" id="oIm"></div><small>Fator de emissão assumido: 0,08 kg CO₂ por kWh (rede elétrica brasileira, valor aproximado).</small></div>
-</section>
-
-<section id="acessibilidade" hidden>
-<h1>Acessibilidade e inclusão</h1>
+<h2>Sistema completo</h2>
 <ul>
-<li>Navegação completa por teclado (Tab, Shift+Tab, Enter, setas nos controles deslizantes) e link “Pular para o conteúdo”.</li>
-<li>Alto contraste, fonte para dislexia, ajuste de tamanho e redução de animações (respeita também a preferência do sistema). Suas escolhas são lembradas neste navegador.</li>
-<li>Resultados dos simuladores são anunciados por leitores de tela.</li>
-<li>Tradutor VLibras no canto da tela (quando o site está hospedado com acesso ao serviço do governo).</li>
+<li><strong>Módulos:</strong> geram corrente contínua (CC).</li>
+<li><strong>Inversor:</strong> converte CC em CA e executa o MPPT, que busca o ponto de máxima potência da curva I-V.</li>
+<li><strong>On-grid:</strong> conectado à rede; o excedente vira créditos de energia (Lei 14.300/2022, geração distribuída).</li>
+<li><strong>Off-grid:</strong> usa baterias, indicado onde não há rede.</li>
+<li><strong>Sombreamento:</strong> uma célula sombreada pode limitar a corrente da série inteira; diodos de bypass reduzem a perda.</li>
+<li><strong>Vida útil:</strong> garantias de desempenho de 25 anos ou mais, com degradação de cerca de 0,4% a 0,7% ao ano.</li>
+<li><strong>Energia embutida:</strong> o módulo recupera em geral em 1 a 3 anos a energia gasta na fabricação.</li>
 </ul>
-<div class="card"><h2>Vídeos em Libras</h2>
-<figure><video controls width="640" style="max-width:100%" preload="none" aria-label="Vídeo em Libras: introdução ao projeto"><!-- <source src="libras-intro.mp4" type="video/mp4"> --><track kind="captions" srclang="pt-BR" label="Português" src=""></video>
-<figcaption>Espaço reservado: vídeo em Libras sobre ondas eletromagnéticas (a gravar). Para ativar, descomente a linha de <code>&lt;source&gt;</code> e informe o arquivo.</figcaption></figure>
-<details><summary>Transcrição em texto</summary><p>Transcrição a ser adicionada junto com o vídeo.</p></details></div>
+<p style="color:var(--mu)">Valores aproximados, para fins educacionais. Consulte a ficha técnica do fabricante e um profissional habilitado para projetos reais.</p>
 </section>
 
-<section id="mapa" hidden>
-<h1>Mapa do site</h1>
-<ul id="mapaLista"></ul>
+<section class="pg" data-p="simuladores" aria-labelledby="h-sim">
+<h1 id="h-sim" tabindex="-1">Simuladores</h1>
+<div class="grid">
+<div class="card sun">
+<h2 style="margin-top:0">Dimensione seu sistema</h2>
+<label for="cons">Consumo mensal (kWh)</label><input id="cons" type="number" min="30" max="5000" value="300">
+<label for="cid">Cidade (horas de sol pleno, valores aproximados)</label>
+<select id="cid"><option value="4.4">Curitiba · 4,4</option><option value="4.6">São Paulo · 4,6</option><option value="5.0">Rio de Janeiro · 5,0</option><option value="5.4">Belo Horizonte · 5,4</option><option value="5.5">Brasília · 5,5</option><option value="5.6">Fortaleza · 5,6</option><option value="5.8">Petrolina · 5,8</option><option value="4.5">Porto Alegre · 4,5</option><option value="4.6">Manaus · 4,6</option></select>
+<label for="tar">Tarifa (R$/kWh)</label><input id="tar" type="number" step="0.05" min="0.1" value="0.9">
+<label for="wp">Potência de cada placa (W)</label><select id="wp"><option>450</option><option selected>550</option><option>600</option></select>
+<label for="cst">Custo estimado (R$ por kWp instalado)</label><input id="cst" type="number" step="100" min="1000" value="4000">
+<div class="out" aria-live="polite" id="o1"></div>
+</div>
+<div class="card water">
+<h2 style="margin-top:0">Sol, calor e potência</h2>
+<label for="g">Irradiância máxima do dia (W/m²): <output id="gv"></output></label><input id="g" type="range" min="100" max="1200" step="50" value="1000">
+<label for="ta">Temperatura ambiente (°C): <output id="tv"></output></label><input id="ta" type="range" min="0" max="45" value="30">
+<div class="out" aria-live="polite" id="o2"></div>
+<p>Rendimento relativo à potência nominal:</p>
+<div class="bar2"><span id="b2"></span></div>
+<svg id="gr" viewBox="0 0 320 140" role="img" aria-label="Curva de potência ao longo do dia" style="width:100%;margin-top:1rem"></svg>
+<p id="grt" style="color:var(--mu);font-size:.9rem"></p>
+</div>
+</div>
+<p style="color:var(--mu)">Modelos simplificados: PR = 0,8, 30 dias por mês, fator de emissão da rede brasileira de cerca de 0,05 kg CO₂/kWh (ordem de grandeza) e área de 2,6 m² por placa de 550 W. O custo de energia mínima cobrada pela distribuidora não está incluído.</p>
 </section>
+
+<section class="pg" data-p="automacao" aria-labelledby="h-aut">
+<h1 id="h-aut" tabindex="-1">Automação: use a energia quando o sol está lá</h1>
+<p>A placa gera mais entre 10h e 15h. Se a casa consome à noite, a energia vai para a rede e volta como crédito. Um programador simples (um timer, uma tomada inteligente ou um microcontrolador como o ESP32) pode deslocar cargas flexíveis para o horário solar e aumentar o autoconsumo.</p>
+<div class="grid">
+<div class="card sun">
+<h2 style="margin-top:0">Escolha o que programar para 10h–15h</h2>
+<div id="ap"></div>
+<div class="out" aria-live="polite" id="o3"></div>
+<div class="bar2" style="margin-top:.8rem"><span id="b3"></span></div>
+</div>
+<div class="card water">
+<h3>Lógica da automação (pseudocódigo)</h3>
+<pre>se potência_solar &gt; carga_base + potência_do_aparelho:
+    liga(aparelho)
+senão se hora &gt; 15 e tarefa_pendente:
+    liga(aparelho)   # prazo final
+senão:
+    espera()</pre>
+<p>Sensores de corrente medem o consumo, o inversor informa a geração e o microcontrolador decide. É uma proposta de baixo custo, replicável em escolas e projetos comunitários.</p>
+<p style="color:var(--mu)">Premissas didáticas: sem programação, cerca de 25% do uso de cada aparelho coincide com a geração; programado, cerca de 85%. A geladeira funciona o dia todo e fica fora da programação (40%).</p>
+</div>
+</div>
+</section>
+
+<section class="pg" data-p="quiz" aria-labelledby="h-quiz">
+<h1 id="h-quiz" tabindex="-1">Quiz rápido</h1>
+<div id="qz"></div>
+</section>
+
+<section class="pg" data-p="acessibilidade" aria-labelledby="h-ac">
+<h1 id="h-ac" tabindex="-1">Acessibilidade e inclusão</h1>
+<div class="grid">
+<div class="card"><h3>Recursos ativos</h3><ul><li>Navegação completa por teclado (Tab, Shift+Tab, Enter, Espaço, Esc fecha o menu).</li><li>Link “Ir para o conteúdo” e foco sempre visível.</li><li>Alto contraste preto, branco e amarelo.</li><li>Fonte para dislexia com mais espaço entre letras e linhas.</li><li>Fonte ajustável, tema escuro e opção sem animações.</li><li>Respeita as preferências do sistema (tema escuro e redução de movimento).</li><li>Suas escolhas são lembradas neste navegador.</li></ul></div>
+<div class="card"><h3>Observação sobre a fonte</h3><p>Se a fonte OpenDyslexic estiver instalada no aparelho, ela é usada. Caso contrário, entra uma alternativa legível (Comic Neue, Comic Sans ou Verdana).</p></div>
+</div>
+<h2>Vídeos em Libras</h2>
+<p>Cada tópico terá um vídeo com intérprete de Libras, legenda e transcrição. A estrutura abaixo já está pronta para receber o arquivo.</p>
+<div class="grid">
+<figure class="card" style="margin:0"><div class="lib" role="img" aria-label="Espaço reservado para vídeo em Libras sobre o efeito fotovoltaico">Vídeo em Libras<br>Efeito fotovoltaico</div><figcaption>Quando o vídeo existir, troque o bloco por: <code>&lt;video controls&gt;&lt;source src="libras-efeito.mp4"&gt;&lt;track kind="captions" src="pt.vtt" srclang="pt"&gt;&lt;/video&gt;</code></figcaption></figure>
+<figure class="card" style="margin:0"><div class="lib" role="img" aria-label="Espaço reservado para vídeo em Libras sobre dimensionamento">Vídeo em Libras<br>Dimensionamento</div><figcaption>Transcrição em texto sempre disponível ao lado de cada vídeo.</figcaption></figure>
+</div>
+<h2>VLibras</h2>
+<p>O VLibras é o tradutor gratuito do governo federal para Libras. Cole este código no final do HTML, antes do script.js:</p>
+<pre>&lt;div vw class="enabled"&gt;
+  &lt;div vw-access-button class="active"&gt;&lt;/div&gt;
+  &lt;div vw-plugin-wrapper&gt;&lt;div class="vw-plugin-top-wrapper"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script src="https://vlibras.gov.br/app/vlibras-plugin.js"&gt;&lt;/script&gt;
+&lt;script&gt;new window.VLibras.Widget('https://vlibras.gov.br/app');&lt;/script&gt;</pre>
+</section>
+
+<section class="pg" data-p="mapa" aria-labelledby="h-mapa">
+<h1 id="h-mapa" tabindex="-1">Mapa do site</h1>
+<ul id="sm"></ul>
+</section>
+
 </main>
-<footer>Projeto educacional Sol + Água · Software livre · Valores físicos aproximados para fins didáticos</footer>
+<footer>Projeto educacional Sol + Água. Estimativas didáticas, não substituem projeto de engenharia.</footer>
 
-<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js" onerror="void 0"></script>
 <script src="script.js"></script>
 </body>
 </html>
