@@ -23,6 +23,7 @@
 <button id="td" aria-pressed="false">Fonte para dislexia</button>
 <button id="tt" aria-pressed="false">Tema escuro</button>
 <button id="tm" aria-pressed="false">Sem animações</button>
+<a class="btn" href="#acessibilidade">Libras</a>
 </div></div>
 </header>
 
@@ -43,6 +44,8 @@
 </div>
 <h2>Impacto social</h2>
 <ul><li>Redução da conta de luz de famílias, escolas e pequenos comércios.</li><li>Menos emissões associadas à geração de eletricidade.</li><li>Energia em locais isolados, sem rede, para bombeamento de água e iluminação.</li><li>Informação clara e acessível para qualquer pessoa entender e decidir.</li></ul>
+<h2>Libras</h2>
+<figure class="libras card" data-src="libras/inicio.mp4" data-vtt="libras/inicio.vtt" data-t="Vídeo em Libras: Início"><figcaption><strong>Vídeo em Libras: Início</strong><details><summary>Transcrição em português</summary><p>Olá! Este site mostra como as placas fotovoltaicas transformam a luz do sol em energia elétrica. Você vai entender a ciência, simular o seu sistema e ver como a automação ajuda a economizar. A geração solar usa muito pouca água e emite poucos gases de efeito estufa.</p></details></figcaption></figure>
 </section>
 
 <section class="pg" data-p="ciencia" aria-labelledby="h-ciencia">
@@ -91,6 +94,8 @@
 <li><strong>Energia embutida:</strong> o módulo recupera em geral em 1 a 3 anos a energia gasta na fabricação.</li>
 </ul>
 <p style="color:var(--mu)">Valores aproximados, para fins educacionais. Consulte a ficha técnica do fabricante e um profissional habilitado para projetos reais.</p>
+<h2>Libras</h2>
+<figure class="libras card" data-src="libras/ciencia.mp4" data-vtt="libras/ciencia.vtt" data-t="Vídeo em Libras: A ciência da célula solar"><figcaption><strong>Vídeo em Libras: A ciência da célula solar</strong><details><summary>Transcrição em português</summary><p>A célula solar é feita de silício. Quando a luz do sol atinge a célula, ela libera elétrons. Um campo elétrico dentro da célula, chamado junção p-n, organiza esses elétrons em uma corrente. O inversor transforma essa corrente contínua em corrente alternada, a que usamos em casa. Quando a placa esquenta, ela produz um pouco menos.</p></details></figcaption></figure>
 </section>
 
 <section class="pg" data-p="simuladores" aria-labelledby="h-sim">
@@ -118,6 +123,8 @@
 </div>
 </div>
 <p style="color:var(--mu)">Modelos simplificados: PR = 0,8, 30 dias por mês, fator de emissão da rede brasileira de cerca de 0,05 kg CO₂/kWh (ordem de grandeza) e área de 2,6 m² por placa de 550 W. O custo de energia mínima cobrada pela distribuidora não está incluído.</p>
+<h2>Libras</h2>
+<figure class="libras card" data-src="libras/simuladores.mp4" data-vtt="libras/simuladores.vtt" data-t="Vídeo em Libras: Simuladores"><figcaption><strong>Vídeo em Libras: Simuladores</strong><details><summary>Transcrição em português</summary><p>Neste simulador, informe o seu consumo mensal, escolha a cidade e a tarifa. O site calcula quantas placas você precisa, quanto vai economizar e em quantos anos o investimento se paga. O segundo simulador mostra como sol e temperatura mudam a potência ao longo do dia.</p></details></figcaption></figure>
 </section>
 
 <section class="pg" data-p="automacao" aria-labelledby="h-aut">
@@ -142,6 +149,8 @@ senão:
 <p style="color:var(--mu)">Premissas didáticas: sem programação, cerca de 25% do uso de cada aparelho coincide com a geração; programado, cerca de 85%. A geladeira funciona o dia todo e fica fora da programação (40%).</p>
 </div>
 </div>
+<h2>Libras</h2>
+<figure class="libras card" data-src="libras/automacao.mp4" data-vtt="libras/automacao.vtt" data-t="Vídeo em Libras: Automação"><figcaption><strong>Vídeo em Libras: Automação</strong><details><summary>Transcrição em português</summary><p>A placa produz mais energia entre dez horas e quinze horas. Se você liga aparelhos nesse horário, usa mais energia direto do sol e aproveita melhor o sistema. Um timer ou uma tomada inteligente pode fazer isso automaticamente.</p></details></figcaption></figure>
 </section>
 
 <section class="pg" data-p="quiz" aria-labelledby="h-quiz">
@@ -155,20 +164,16 @@ senão:
 <div class="card"><h3>Recursos ativos</h3><ul><li>Navegação completa por teclado (Tab, Shift+Tab, Enter, Espaço, Esc fecha o menu).</li><li>Link “Ir para o conteúdo” e foco sempre visível.</li><li>Alto contraste preto, branco e amarelo.</li><li>Fonte para dislexia com mais espaço entre letras e linhas.</li><li>Fonte ajustável, tema escuro e opção sem animações.</li><li>Respeita as preferências do sistema (tema escuro e redução de movimento).</li><li>Suas escolhas são lembradas neste navegador.</li></ul></div>
 <div class="card"><h3>Observação sobre a fonte</h3><p>Se a fonte OpenDyslexic estiver instalada no aparelho, ela é usada. Caso contrário, entra uma alternativa legível (Comic Neue, Comic Sans ou Verdana).</p></div>
 </div>
-<h2>Vídeos em Libras</h2>
-<p>Cada tópico terá um vídeo com intérprete de Libras, legenda e transcrição. A estrutura abaixo já está pronta para receber o arquivo.</p>
-<div class="grid">
-<figure class="card" style="margin:0"><div class="lib" role="img" aria-label="Espaço reservado para vídeo em Libras sobre o efeito fotovoltaico">Vídeo em Libras<br>Efeito fotovoltaico</div><figcaption>Quando o vídeo existir, troque o bloco por: <code>&lt;video controls&gt;&lt;source src="libras-efeito.mp4"&gt;&lt;track kind="captions" src="pt.vtt" srclang="pt"&gt;&lt;/video&gt;</code></figcaption></figure>
-<figure class="card" style="margin:0"><div class="lib" role="img" aria-label="Espaço reservado para vídeo em Libras sobre dimensionamento">Vídeo em Libras<br>Dimensionamento</div><figcaption>Transcrição em texto sempre disponível ao lado de cada vídeo.</figcaption></figure>
-</div>
-<h2>VLibras</h2>
-<p>O VLibras é o tradutor gratuito do governo federal para Libras. Cole este código no final do HTML, antes do script.js:</p>
-<pre>&lt;div vw class="enabled"&gt;
-  &lt;div vw-access-button class="active"&gt;&lt;/div&gt;
-  &lt;div vw-plugin-wrapper&gt;&lt;div class="vw-plugin-top-wrapper"&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;script src="https://vlibras.gov.br/app/vlibras-plugin.js"&gt;&lt;/script&gt;
-&lt;script&gt;new window.VLibras.Widget('https://vlibras.gov.br/app');&lt;/script&gt;</pre>
+<h2>Libras no site</h2>
+<ul>
+<li><strong>Vídeos em Libras:</strong> cada página principal tem um vídeo com intérprete, legenda e transcrição em português.</li>
+<li><strong>VLibras:</strong> tradutor automático do governo federal. Ele aparece como um botão no canto da tela; selecione um texto e o avatar traduz para Libras.</li>
+<li><strong>Linguagem simples:</strong> frases curtas e termos técnicos explicados, o que ajuda na leitura por pessoas surdas, cuja primeira língua é a Libras.</li>
+</ul>
+<p><button id="vl">Ativar VLibras</button></p>
+<p id="vls" role="status">Carregando o VLibras…</p>
+<h3>Como adicionar os vídeos</h3>
+<p>Grave com intérprete e salve na pasta <code>libras/</code> com os nomes <code>inicio.mp4</code>, <code>ciencia.mp4</code>, <code>simuladores.mp4</code> e <code>automacao.mp4</code>. O site detecta os arquivos sozinho. Enquanto o vídeo não existe, aparece um aviso e a transcrição continua disponível. As legendas ficam em <code>libras/*.vtt</code> e a transcrição serve de roteiro para a gravação.</p>
 </section>
 
 <section class="pg" data-p="mapa" aria-labelledby="h-mapa">
