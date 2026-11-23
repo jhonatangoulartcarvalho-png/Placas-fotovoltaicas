@@ -65,3 +65,9 @@ pre{overflow-x:auto;background:var(--wave);padding:.7rem;border-radius:8px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 :root[data-motion="off"] *{animation:none!important;transition:none!important}
 @media(max-width:480px){.hero::before{width:150px;height:150px}}
+
+.libras video{width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;display:block}
+.libras .lib{margin-bottom:.5rem}
+.libras figcaption{margin-top:.6rem}
+.libras summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--pr)}
+a.btn{text-decoration:none;color:var(--tx);display:inline-flex;align-items:center}
