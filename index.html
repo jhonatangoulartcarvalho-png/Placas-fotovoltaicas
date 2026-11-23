@@ -4,378 +4,367 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Solar Aqua: aprenda como a energia solar transforma luz em eletricidade e contribui para o aquecimento de piscinas.">
-  <title>Solar Aqua | Energia que transforma</title>
+  <meta name="description" content="Solar Aqua: aprenda como a energia solar, a física e a robótica trabalham juntas para aquecer piscinas de forma inteligente.">
+  <title>Solar Aqua | Energia inteligente</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="header">
-    <div class="container nav">
-      <a class="logo" href="#inicio" aria-label="Solar Aqua - início">
-        <span class="logo-icon">☀</span>
-        <span>solar<span class="logo-accent">aqua</span></span>
-      </a>
+    <a class="brand" href="#inicio" aria-label="Solar Aqua - início">
+      <span class="brand-icon" aria-hidden="true">S</span>
+      <span>SOLAR<span class="brand-light">AQUA</span></span>
+    </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
 
-      <nav class="navigation" id="navigation" aria-label="Menu principal">
-        <a href="#conceito">Conceito</a>
-        <a href="#ciencia">A ciência</a>
-        <a href="#simulador">Simulador</a>
-        <a href="#projeto">Projeto</a>
-        <a href="#sensores">Sensores</a>
-      </nav>
-
-      <div class="access-tools">
-        <button id="contrastBtn" class="tool-btn" type="button" aria-pressed="false" title="Ativar alto contraste">◐</button>
-        <button id="fontBtn" class="tool-btn" type="button" title="Aumentar fonte">A+</button>
-      </div>
-    </div>
+    <nav class="nav" id="navMenu" aria-label="Navegação principal">
+      <a href="#ciencia">Ciência</a>
+      <a href="#fotovoltaica">Fotovoltaica</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#robotica">Robótica</a>
+      <a href="#projeto">Projeto</a>
+    </nav>
+    <a class="header-cta" href="#simulador">Explorar projeto <span aria-hidden="true">↗</span></a>
   </header>
 
   <main id="conteudo">
     <section class="hero" id="inicio">
-      <div class="hero-glow"></div>
-      <div class="container hero-content">
-        <div class="hero-text">
-          <span class="eyebrow"><span class="eyebrow-dot"></span> TECNOLOGIA • CIÊNCIA • SUSTENTABILIDADE</span>
-          <h1>A energia do sol<br>transforma o <span>futuro.</span></h1>
-          <p>Descubra como a luz solar pode gerar eletricidade e contribuir para um sistema de aquecimento de piscinas mais eficiente e sustentável.</p>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> TECNOLOGIA • CIÊNCIA • SUSTENTABILIDADE</div>
+          <h1>O futuro da energia começa com <span>o Sol.</span></h1>
+          <p class="hero-description">
+            Descubra como a física, a programação e a robótica se unem para transformar a luz solar em energia e tornar o aquecimento de piscinas mais inteligente.
+          </p>
           <div class="hero-actions">
-            <a href="#conceito" class="btn btn-primary">Explorar o projeto <span>→</span></a>
-            <a href="#simulador" class="btn btn-outline">Testar simulador</a>
+            <a class="button button-primary" href="#ciencia">Conhecer a tecnologia <span aria-hidden="true">→</span></a>
+            <a class="button button-quiet" href="#simulador">Testar simulador</a>
           </div>
           <div class="hero-stats">
-            <div><strong>100%</strong><span>Energia renovável</span></div>
-            <div><strong>3 áreas</strong><span>Integradas no projeto</span></div>
-            <div><strong>∞</strong><span>Possibilidades</span></div>
+            <div><strong>01</strong><span>Energia solar</span></div>
+            <div><strong>02</strong><span>Física moderna</span></div>
+            <div><strong>03</strong><span>Automação</span></div>
           </div>
         </div>
 
-        <div class="hero-visual" aria-label="Ilustração de painéis solares recebendo luz do sol">
-          <div class="sun-orb"><span>☀</span></div>
+        <div class="hero-visual" role="img" aria-label="Ilustração de painéis solares recebendo luz do Sol ao lado de uma piscina">
+          <div class="sun-glow"></div>
+          <div class="sun"></div>
           <div class="sun-ray ray-one"></div>
           <div class="sun-ray ray-two"></div>
           <div class="solar-scene">
-            <div class="solar-panel">
-              <div class="panel-grid"></div>
+            <div class="panel panel-back"><div class="panel-lines"></div></div>
+            <div class="panel panel-front"><div class="panel-lines"></div></div>
+            <div class="pool">
+              <div class="pool-water"></div>
+              <div class="pool-edge"></div>
             </div>
-            <div class="panel-base"></div>
-            <div class="energy-line"></div>
-            <div class="energy-dot"></div>
+            <div class="scene-ground"></div>
           </div>
-          <div class="floating-card">
-            <span class="floating-icon">⚡</span>
-            <div><strong>Energia limpa</strong><small>Do sol para o seu dia</small></div>
-          </div>
+          <div class="visual-label"><span class="live-dot"></span> ENERGIA LIMPA E INTELIGENTE</div>
+          <div class="visual-number"><strong>100%</strong><span>Potencial solar</span></div>
         </div>
       </div>
-      <div class="hero-bottom"></div>
+      <div class="hero-bottom"><span>01 / 05</span><span>CONHECIMENTO QUE TRANSFORMA</span><span>↓ ROLE PARA EXPLORAR</span></div>
     </section>
 
-    <section class="section intro-section" id="conceito">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">01 / O CONCEITO</span>
-          <h2>Como a luz do sol vira <span>energia?</span></h2>
-          <p>A energia solar pode ser aproveitada de duas formas principais no nosso projeto: para produzir eletricidade e para gerar calor.</p>
-        </div>
-
-        <div class="process-grid">
-          <article class="process-card">
-            <div class="process-icon">☀️</div>
-            <span class="step-number">ETAPA 01</span>
-            <h3>Radiação solar</h3>
-            <p>O Sol emite energia por meio de ondas eletromagnéticas, que chegam até a superfície da Terra.</p>
-          </article>
-          <div class="process-arrow" aria-hidden="true">→</div>
-          <article class="process-card">
-            <div class="process-icon">▦</div>
-            <span class="step-number">ETAPA 02</span>
-            <h3>Captação</h3>
-            <p>Os painéis fotovoltaicos captam a luz e a convertem em energia elétrica.</p>
-          </article>
-          <div class="process-arrow" aria-hidden="true">→</div>
-          <article class="process-card">
-            <div class="process-icon">⚡</div>
-            <span class="step-number">ETAPA 03</span>
-            <h3>Utilização</h3>
-            <p>A eletricidade pode alimentar equipamentos, como uma bomba de circulação ou uma bomba de calor.</p>
-          </article>
-        </div>
-
-        <div class="info-banner">
-          <span class="banner-icon">💡</span>
-          <p><strong>Importante:</strong> painéis fotovoltaicos geram eletricidade. Já os coletores solares térmicos aproveitam a radiação para aquecer diretamente a água.</p>
-        </div>
+    <section class="intro section-pad" id="ciencia">
+      <div class="section-heading">
+        <span class="section-kicker">01 — A BASE CIENTÍFICA</span>
+        <h2>Três áreas. <span>Uma solução.</span></h2>
+        <p>O Solar Aqua conecta diferentes conhecimentos para aproveitar melhor a energia do Sol.</p>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar-index">01 / FÍSICA</span>
+          <div class="pillar-symbol symbol-sun" aria-hidden="true">☼</div>
+          <h3>Radiação solar</h3>
+          <p>Estuda como a energia é emitida pelo Sol e transportada por ondas eletromagnéticas.</p>
+          <a href="#ondas">Explorar ondas <span>↗</span></a>
+        </article>
+        <article class="pillar">
+          <span class="pillar-index">02 / TECNOLOGIA</span>
+          <div class="pillar-symbol symbol-energy" aria-hidden="true">ϟ</div>
+          <h3>Efeito fotoelétrico</h3>
+          <p>Explica como a luz pode transferir energia aos elétrons de determinados materiais.</p>
+          <a href="#fotoeletrico">Entender o efeito <span>↗</span></a>
+        </article>
+        <article class="pillar">
+          <span class="pillar-index">03 / ROBÓTICA</span>
+          <div class="pillar-symbol symbol-sensor" aria-hidden="true">⌁</div>
+          <h3>Sensores inteligentes</h3>
+          <p>Monitoram condições da piscina e ajudam a automatizar o funcionamento do sistema.</p>
+          <a href="#robotica">Ver sensores <span>↗</span></a>
+        </article>
       </div>
     </section>
 
-    <section class="section science-section" id="ciencia">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">02 / TECNOCIÊNCIA</span>
-          <h2>A ciência por trás da <span>energia solar</span></h2>
-          <p>Três conceitos da Física ajudam a explicar o funcionamento das tecnologias utilizadas no projeto.</p>
+    <section class="dark-section" id="ondas">
+      <div class="section-pad">
+        <div class="section-heading heading-light">
+          <span class="section-kicker">02 — TECNOCIÊNCIA</span>
+          <h2>A energia viaja em <span>ondas.</span></h2>
+          <p>As ondas eletromagnéticas transportam energia pelo espaço, inclusive através do vácuo. A luz solar é uma delas.</p>
         </div>
-
-        <div class="science-grid">
-          <article class="science-card">
-            <div class="science-visual wave-visual"><span>〰</span><span>〰</span><span>〰</span></div>
-            <div class="science-content">
-              <span class="card-label">FÍSICA</span>
-              <h3>Ondas eletromagnéticas</h3>
-              <p>São ondas que transportam energia e não precisam de um meio material para se propagar. A luz solar é um exemplo.</p>
-              <a href="#espectro" class="text-link">Explorar o espectro <span>→</span></a>
-            </div>
-          </article>
-
-          <article class="science-card">
-            <div class="science-visual heat-visual"><span>♨</span></div>
-            <div class="science-content">
-              <span class="card-label">TERMOLOGIA</span>
-              <h3>Radiação do corpo negro</h3>
-              <p>Todo corpo com temperatura acima do zero absoluto emite radiação térmica. A distribuição dessa radiação depende da temperatura.</p>
-              <a href="#projeto" class="text-link">Ver aplicação no projeto <span>→</span></a>
-            </div>
-          </article>
-
-          <article class="science-card">
-            <div class="science-visual photo-visual"><span>⚡</span></div>
-            <div class="science-content">
-              <span class="card-label">FÍSICA MODERNA</span>
-              <h3>Efeito fotoelétrico</h3>
-              <p>Explica como a luz pode transferir energia aos elétrons. Esse conceito ajuda a compreender a interação entre luz e materiais.</p>
-              <a href="#efeito" class="text-link">Entender o efeito <span>→</span></a>
-            </div>
-          </article>
-        </div>
-
-        <div class="spectrum-box" id="espectro">
-          <div class="spectrum-copy">
-            <span class="section-tag">INTERAÇÃO</span>
-            <h3>Explore as ondas eletromagnéticas</h3>
-            <p>Selecione uma faixa do espectro para conhecer suas características.</p>
-            <div class="spectrum-buttons" role="group" aria-label="Selecionar faixa do espectro">
-              <button class="spectrum-btn active" data-wave="visivel" type="button">Visível</button>
-              <button class="spectrum-btn" data-wave="infravermelho" type="button">Infravermelho</button>
-              <button class="spectrum-btn" data-wave="ultravioleta" type="button">Ultravioleta</button>
-              <button class="spectrum-btn" data-wave="raiosx" type="button">Raios X</button>
-            </div>
-            <div class="wave-result" aria-live="polite">
-              <strong id="waveTitle">Luz visível</strong>
-              <p id="waveDescription">É a faixa que nossos olhos conseguem enxergar. Faz parte da radiação emitida pelo Sol e pode ser aproveitada pelos painéis fotovoltaicos.</p>
-            </div>
+        <div class="wave-layout">
+          <div class="wave-visual">
+            <div class="wave-topline"><span>REPRESENTAÇÃO DA ONDA</span><span id="waveTypeLabel">LUZ VISÍVEL</span></div>
+            <svg class="wave-svg" viewBox="0 0 700 220" role="img" aria-label="Representação gráfica de uma onda eletromagnética">
+              <defs>
+                <linearGradient id="waveGradient" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#40d9e7"/>
+                  <stop offset="100%" stop-color="#a4f3df"/>
+                </linearGradient>
+              </defs>
+              <path id="wavePath" d="" fill="none" stroke="url(#waveGradient)" stroke-width="5" stroke-linecap="round"/>
+              <line x1="0" y1="110" x2="700" y2="110" stroke="#ffffff" opacity=".18" stroke-dasharray="5 8"/>
+            </svg>
+            <div class="wave-caption"><span>AMPLITUDE</span><span>PROPAGAÇÃO →</span></div>
           </div>
-          <div class="spectrum-art" aria-hidden="true">
-            <div class="spectrum-bar"></div>
-            <div class="spectrum-labels"><span>Menor frequência</span><span>Maior frequência</span></div>
-            <div class="spectrum-sun">☀</div>
+          <div class="wave-controls">
+            <label for="waveSelect">Escolha uma faixa do espectro</label>
+            <select id="waveSelect">
+              <option value="radio">Ondas de rádio</option>
+              <option value="micro" >Micro-ondas</option>
+              <option value="infra">Infravermelho</option>
+              <option value="visible" selected>Luz visível</option>
+              <option value="uv">Ultravioleta</option>
+              <option value="xray">Raios X</option>
+              <option value="gamma">Raios gama</option>
+            </select>
+            <div class="wave-info" aria-live="polite">
+              <span class="info-label">CARACTERÍSTICA</span>
+              <h3 id="waveTitle">Luz visível</h3>
+              <p id="waveDescription">É a faixa do espectro que nossos olhos conseguem enxergar. A luz visível faz parte da radiação solar.</p>
+              <div class="wave-fact"><span>↗</span><p id="waveApplication">Aplicação: iluminação e aproveitamento da luz solar.</p></div>
+            </div>
           </div>
         </div>
 
-        <div class="photoelectric-box" id="efeito">
-          <div>
-            <span class="section-tag">FÍSICA MODERNA</span>
-            <h3>O que acontece quando a luz atinge um material?</h3>
-            <p>Os fótons transportam energia. Quando essa energia é absorvida por elétrons, pode ocorrer a emissão de elétrons em determinados materiais, fenômeno conhecido como efeito fotoelétrico.</p>
-            <p>Nas células solares, o efeito fotovoltaico ocorre em semicondutores e permite gerar tensão e corrente elétrica a partir da luz.</p>
+        <div class="blackbody">
+          <div class="blackbody-copy">
+            <span class="section-kicker">RADIAÇÃO DO CORPO NEGRO</span>
+            <h3>Todo corpo com temperatura emite radiação.</h3>
+            <p>Um corpo negro ideal absorve toda a radiação que recebe e emite energia de acordo com sua temperatura. Quanto maior a temperatura, maior a energia emitida e menor o comprimento de onda de pico.</p>
+            <label for="temperature">Temperatura de demonstração: <strong id="temperatureValue">3000 K</strong></label>
+            <input id="temperature" type="range" min="1000" max="6000" step="100" value="3000">
+            <div class="range-labels"><span>1.000 K</span><span>6.000 K</span></div>
+            <p class="temperature-result" id="temperatureResult" aria-live="polite">Pico aproximado: 966 nm — infravermelho próximo.</p>
           </div>
-          <div class="atom-art" aria-label="Representação ilustrativa da luz incidindo em um material">
-            <div class="photon photon-one"></div>
-            <div class="photon photon-two"></div>
-            <div class="material-block"><span>Material</span></div>
-            <div class="electron">−</div>
+          <div class="blackbody-visual">
+            <div class="thermal-orb" id="thermalOrb"></div>
+            <span>EMISSÃO TÉRMICA</span>
+            <strong id="thermalDescription">Radiação intensa</strong>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section simulator-section" id="simulador">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">03 / LABORATÓRIO INTERATIVO</span>
-          <h2>Experimente a energia <span>solar</span></h2>
-          <p>Altere as condições e observe como elas influenciam a estimativa de geração de energia.</p>
+    <section class="photoelectric section-pad" id="fotoeletrico">
+      <div class="section-heading">
+        <span class="section-kicker">03 — FÍSICA MODERNA</span>
+        <h2>Quando a luz libera <span>elétrons.</span></h2>
+        <p>O efeito fotoelétrico acontece quando a luz transfere energia aos elétrons de um material, podendo permitir que eles sejam emitidos.</p>
+      </div>
+      <div class="photo-layout">
+        <div class="photo-experiment">
+          <div class="experiment-header"><span>EXPERIMENTO INTERATIVO</span><span class="experiment-status" id="photoStatus">AGUARDANDO LUZ</span></div>
+          <div class="experiment-scene">
+            <div class="light-beam" id="lightBeam"></div>
+            <div class="metal-plate"><span>MATERIAL</span></div>
+            <div class="electron e-one" id="electronOne"></div>
+            <div class="electron e-two" id="electronTwo"></div>
+            <div class="electron e-three" id="electronThree"></div>
+            <div class="experiment-floor"></div>
+          </div>
+          <div class="experiment-controls">
+            <label for="lightFrequency">Frequência da luz</label>
+            <input type="range" id="lightFrequency" min="1" max="10" value="5">
+            <div class="range-labels"><span>Baixa</span><span>Alta</span></div>
+            <label for="lightIntensity">Intensidade da luz</label>
+            <input type="range" id="lightIntensity" min="1" max="10" value="5">
+            <div class="range-labels"><span>Fraca</span><span>Forte</span></div>
+            <button class="button button-primary button-full" id="testPhotoelectric">Incidir luz no material ↗</button>
+            <p id="photoResult" class="photo-result" aria-live="polite">Ajuste os controles e inicie o experimento.</p>
+          </div>
         </div>
-
-        <div class="simulator">
-          <div class="sim-controls">
-            <div class="sim-heading">
-              <span class="sim-icon">☀</span>
-              <div><h3>Simulador fotovoltaico</h3><p>Configure seu sistema solar</p></div>
-            </div>
-
-            <div class="control-group">
-              <div class="control-label"><label for="panelPower">Potência do painel</label><output id="powerValue">450 W</output></div>
-              <input id="panelPower" type="range" min="100" max="800" step="50" value="450">
-              <div class="range-ends"><span>100 W</span><span>800 W</span></div>
-            </div>
-
-            <div class="control-group">
-              <div class="control-label"><label for="sunHours">Horas de sol equivalente por dia</label><output id="hoursValue">5 h</output></div>
-              <input id="sunHours" type="range" min="1" max="10" step="0.5" value="5">
-              <div class="range-ends"><span>1 hora</span><span>10 horas</span></div>
-            </div>
-
-            <div class="control-group">
-              <div class="control-label"><label for="systemLoss">Perdas estimadas</label><output id="lossValue">20%</output></div>
-              <input id="systemLoss" type="range" min="0" max="40" step="5" value="20">
-              <div class="range-ends"><span>0%</span><span>40%</span></div>
-            </div>
-
-            <button class="reset-btn" id="resetSimulator" type="button">↺ Restaurar valores</button>
+        <div class="photo-explanation">
+          <div class="explanation-number">01</div>
+          <h3>Frequência importa.</h3>
+          <p>Para cada material existe uma frequência mínima, chamada frequência de corte. Abaixo dela, não ocorre emissão de elétrons, mesmo aumentando a intensidade da luz.</p>
+          <div class="explanation-number">02</div>
+          <h3>Energia dos fótons.</h3>
+          <p>A energia de cada fóton depende da frequência da luz. Uma frequência maior significa fótons com mais energia.</p>
+          <div class="formula">
+            <span>ENERGIA DO FÓTON</span>
+            <strong>E = h · f</strong>
+            <small>h = constante de Planck · f = frequência</small>
           </div>
-
-          <div class="sim-results">
-            <span class="result-label">GERAÇÃO ESTIMADA</span>
-            <div class="result-number"><strong id="dailyEnergy">1,80</strong><span>kWh/dia</span></div>
-            <div class="result-divider"></div>
-            <div class="result-detail"><span>Por dia</span><strong id="dailyResult">1,80 kWh</strong></div>
-            <div class="result-detail"><span>Por mês (30 dias)</span><strong id="monthlyResult">54,00 kWh</strong></div>
-            <div class="result-detail"><span>Por ano (365 dias)</span><strong id="yearlyResult">657,00 kWh</strong></div>
-            <div class="result-note">Estimativa simplificada. A geração real depende da localização, orientação, inclinação, clima, sombreamento e eficiência do sistema.</div>
-          </div>
+          <p class="note">As células fotovoltaicas utilizam princípios relacionados à interação entre luz e matéria para converter energia luminosa em energia elétrica.</p>
         </div>
       </div>
     </section>
 
-    <section class="section project-section" id="projeto">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">04 / APLICAÇÃO PRÁTICA</span>
-          <h2>O projeto <span>Solar Aqua</span></h2>
-          <p>Uma proposta que une energia solar, tecnologia e controle inteligente para melhorar o uso de uma piscina.</p>
-        </div>
-
-        <div class="project-layout">
-          <div class="project-main-card">
-            <div class="pool-illustration">
-              <div class="pool-sun">☀</div>
-              <div class="pool-panel"></div>
-              <div class="pool-water"><span></span><span></span><span></span></div>
-              <div class="pool-pipe"></div>
-            </div>
-            <div class="project-main-copy">
-              <span class="card-label">SOLUÇÃO INTEGRADA</span>
-              <h3>Uma piscina mais eficiente</h3>
-              <p>O sistema combina captação de energia solar, circulação da água e sensores para acompanhar as condições da piscina.</p>
-            </div>
+    <section class="photovoltaic-section" id="fotovoltaica">
+      <div class="section-pad photovoltaic-grid">
+        <div>
+          <span class="section-kicker">04 — CONVERSÃO DE ENERGIA</span>
+          <h2>Da luz solar para a <span>eletricidade.</span></h2>
+          <p>As células fotovoltaicas são feitas de materiais semicondutores. Quando recebem luz, podem gerar uma corrente elétrica, que é aproveitada pelo sistema.</p>
+          <div class="conversion-steps">
+            <div><span>01</span><p><strong>Captação</strong><br>A luz solar atinge o painel.</p></div>
+            <div><span>02</span><p><strong>Conversão</strong><br>As células geram energia elétrica.</p></div>
+            <div><span>03</span><p><strong>Utilização</strong><br>A energia alimenta equipamentos.</p></div>
           </div>
+        </div>
+        <div class="conversion-visual" role="img" aria-label="Diagrama ilustrativo da luz solar incidindo sobre um painel fotovoltaico">
+          <div class="conversion-sun">☼</div>
+          <div class="conversion-rays"></div>
+          <div class="conversion-panel"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <div class="energy-arrow">ENERGIA ELÉTRICA <span>→</span></div>
+          <div class="energy-chip">ϟ</div>
+        </div>
+      </div>
+    </section>
 
-          <div class="project-features">
-            <article class="feature-item">
-              <span class="feature-icon">▦</span>
-              <div><h3>Painéis fotovoltaicos</h3><p>Transformam a luz solar em eletricidade, que pode alimentar equipamentos do sistema.</p></div>
+    <section class="simulator-section section-pad" id="simulador">
+      <div class="section-heading">
+        <span class="section-kicker">05 — LABORATÓRIO DIGITAL</span>
+        <h2>Simule a geração de <span>energia.</span></h2>
+        <p>Altere os valores e veja uma estimativa de quanta energia um conjunto de painéis pode produzir por dia.</p>
+      </div>
+      <div class="simulator">
+        <div class="simulator-inputs">
+          <div class="simulator-title"><span>CONFIGURAÇÃO DO SISTEMA</span><span class="config-dot"></span></div>
+          <label for="panelPower">Potência de cada painel (W)</label>
+          <div class="input-with-unit"><input id="panelPower" type="number" min="50" max="1000" value="450"><span>W</span></div>
+          <label for="panelCount">Quantidade de painéis</label>
+          <div class="input-with-unit"><input id="panelCount" type="number" min="1" max="100" value="8"><span>un.</span></div>
+          <label for="sunHours">Horas de sol equivalente por dia</label>
+          <div class="input-with-unit"><input id="sunHours" type="number" min="0" max="12" step="0.5" value="5"><span>h</span></div>
+          <label for="systemLoss">Perdas estimadas do sistema</label>
+          <div class="input-with-unit"><input id="systemLoss" type="number" min="0" max="50" value="20"><span>%</span></div>
+          <button class="button button-primary button-full" id="calculateEnergy">Calcular geração ↗</button>
+          <p class="input-hint">Use valores entre os limites indicados para realizar a simulação.</p>
+        </div>
+        <div class="simulator-results" aria-live="polite">
+          <span class="result-label">GERAÇÃO ESTIMADA POR DIA</span>
+          <div class="result-main"><strong id="dailyEnergy">14,40</strong><span>kWh/dia</span></div>
+          <div class="result-divider"></div>
+          <div class="result-secondary">
+            <div><span>Potência instalada</span><strong id="installedPower">3,60 kWp</strong></div>
+            <div><span>Geração mensal estimada</span><strong id="monthlyEnergy">432,00 kWh</strong></div>
+            <div><span>Geração anual estimada</span><strong id="yearlyEnergy">5.256,00 kWh</strong></div>
+          </div>
+          <div class="result-bar-wrap"><div class="result-bar-label"><span>APROVEITAMENTO ESTIMADO</span><strong id="efficiencyLabel">80%</strong></div><div class="result-bar"><span id="efficiencyBar"></span></div></div>
+          <p class="result-disclaimer">Estimativa didática. A geração real depende da localização, clima, orientação, inclinação, sombreamento e características dos equipamentos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="robotics-section dark-section" id="robotica">
+      <div class="section-pad">
+        <div class="section-heading heading-light">
+          <span class="section-kicker">06 — ROBÓTICA E AUTOMAÇÃO</span>
+          <h2>Uma piscina que <span>entende o ambiente.</span></h2>
+          <p>Sensores coletam informações e permitem que um sistema automatizado acompanhe as condições da piscina.</p>
+        </div>
+        <div class="robotics-layout">
+          <div class="sensor-list">
+            <article class="sensor-item active" data-sensor="temperature">
+              <span class="sensor-icon">°C</span>
+              <div><h3>Sensor de temperatura</h3><p>Mede a temperatura da água.</p></div>
+              <span class="sensor-state">ATIVO</span>
             </article>
-            <article class="feature-item">
-              <span class="feature-icon">♨</span>
-              <div><h3>Coletor solar térmico</h3><p>Aproveita a radiação solar para transferir calor diretamente para a água da piscina.</p></div>
+            <article class="sensor-item" data-sensor="level">
+              <span class="sensor-icon">↕</span>
+              <div><h3>Sensor de nível</h3><p>Identifica a altura da água.</p></div>
+              <span class="sensor-state">ATIVO</span>
             </article>
-            <article class="feature-item">
-              <span class="feature-icon">≈</span>
-              <div><h3>Capa térmica</h3><p>Ajuda a reduzir a perda de calor da água, principalmente durante a noite.</p></div>
+            <article class="sensor-item" data-sensor="light">
+              <span class="sensor-icon">☼</span>
+              <div><h3>Sensor de luminosidade</h3><p>Detecta a intensidade da luz.</p></div>
+              <span class="sensor-state">ATIVO</span>
             </article>
           </div>
+          <div class="monitor">
+            <div class="monitor-header"><span><i class="live-dot"></i> PAINEL DE MONITORAMENTO</span><span id="monitorClock">SISTEMA ONLINE</span></div>
+            <div class="monitor-main">
+              <span class="monitor-caption" id="monitorCaption">TEMPERATURA DA ÁGUA</span>
+              <div class="monitor-reading"><strong id="monitorValue">28.0</strong><span id="monitorUnit">°C</span></div>
+              <p id="monitorDescription">Temperatura dentro da faixa de demonstração.</p>
+              <div class="monitor-meter"><span id="monitorMeter"></span></div>
+            </div>
+            <div class="monitor-controls">
+              <label for="sensorAdjust">Simular leitura do sensor</label>
+              <input type="range" id="sensorAdjust" min="0" max="100" value="56">
+              <div class="range-labels"><span id="sensorMin">0 °C</span><span id="sensorMax">50 °C</span></div>
+            </div>
+            <div class="monitor-footer"><span>● LEITURA SIMULADA</span><span id="monitorStatus">NORMAL</span></div>
+          </div>
         </div>
-
-        <div class="info-banner">
-          <span class="banner-icon">🌱</span>
-          <p>O objetivo é aproveitar melhor os recursos naturais, reduzir desperdícios e utilizar a tecnologia para acompanhar o funcionamento da piscina.</p>
-        </div>
+        <p class="robotics-note">Demonstração educativa: os valores são simulados no navegador e não representam medições reais de uma piscina.</p>
       </div>
     </section>
 
-    <section class="section sensors-section" id="sensores">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-tag">05 / ROBÓTICA</span>
-          <h2>Sensores: o controle <span>inteligente</span></h2>
-          <p>Os sensores coletam informações do ambiente e ajudam o sistema a tomar decisões.</p>
+    <section class="project-section section-pad" id="projeto">
+      <div class="project-heading">
+        <div>
+          <span class="section-kicker">07 — APLICAÇÃO PRÁTICA</span>
+          <h2>Solar Aqua: tecnologia a serviço da <span>água.</span></h2>
         </div>
-
-        <div class="sensor-grid">
-          <article class="sensor-card">
-            <span class="sensor-symbol">🌡</span>
-            <h3>Temperatura</h3>
-            <p>Mede a temperatura da água e ajuda a identificar quando é necessário aquecê-la.</p>
-          </article>
-          <article class="sensor-card">
-            <span class="sensor-symbol">☀</span>
-            <h3>Luminosidade</h3>
-            <p>Detecta a intensidade da luz no ambiente e auxilia no acompanhamento da captação solar.</p>
-          </article>
-          <article class="sensor-card">
-            <span class="sensor-symbol">〰</span>
-            <h3>Nível da água</h3>
-            <p>Monitora a altura da água e pode identificar níveis abaixo do recomendado.</p>
-          </article>
-        </div>
-
-        <div class="sensor-lab">
-          <div class="sensor-lab-heading">
-            <div><span class="section-tag">TESTE PRÁTICO</span><h3>Central de monitoramento</h3><p>Altere os valores e veja a resposta do sistema.</p></div>
-            <span class="live-indicator"><i></i> SIMULAÇÃO ATIVA</span>
-          </div>
-
-          <div class="sensor-controls">
-            <div class="sensor-input">
-              <label for="waterTemp">Temperatura da água</label>
-              <output id="tempValue">26 °C</output>
-              <input id="waterTemp" type="range" min="10" max="40" value="26">
-            </div>
-            <div class="sensor-input">
-              <label for="lightLevel">Luminosidade</label>
-              <output id="lightValue">70%</output>
-              <input id="lightLevel" type="range" min="0" max="100" value="70">
-            </div>
-            <div class="sensor-input">
-              <label for="waterLevel">Nível da água</label>
-              <output id="levelValue">80%</output>
-              <input id="waterLevel" type="range" min="0" max="100" value="80">
-            </div>
-          </div>
-
-          <div class="system-status" aria-live="polite">
-            <span class="status-icon" id="statusIcon">✓</span>
-            <div><strong id="statusTitle">Sistema em condições normais</strong><p id="statusText">As condições simuladas estão dentro dos parâmetros definidos.</p></div>
-          </div>
-        </div>
+        <p>O projeto integra conhecimentos de física, programação e robótica para pensar em soluções mais eficientes para o aquecimento de piscinas.</p>
+      </div>
+      <div class="project-flow">
+        <div class="flow-step"><span class="flow-icon">☼</span><span class="flow-number">ETAPA 01</span><h3>Energia</h3><p>A radiação solar é captada por equipamentos apropriados.</p></div>
+        <div class="flow-connector" aria-hidden="true">→</div>
+        <div class="flow-step"><span class="flow-icon">ϟ</span><span class="flow-number">ETAPA 02</span><h3>Conversão</h3><p>A energia é transformada e utilizada pelo sistema.</p></div>
+        <div class="flow-connector" aria-hidden="true">→</div>
+        <div class="flow-step"><span class="flow-icon">⌁</span><span class="flow-number">ETAPA 03</span><h3>Monitoramento</h3><p>Sensores acompanham as condições de funcionamento.</p></div>
+        <div class="flow-connector" aria-hidden="true">→</div>
+        <div class="flow-step"><span class="flow-icon">≈</span><span class="flow-number">ETAPA 04</span><h3>Conforto</h3><p>O controle inteligente auxilia na gestão do aquecimento.</p></div>
+      </div>
+      <div class="project-note">
+        <div><span class="note-mark">i</span><div><strong>Importante: tecnologias diferentes, funções diferentes.</strong><p>Painéis fotovoltaicos geram eletricidade. Coletores solares térmicos absorvem radiação e transferem calor à água. Uma solução para piscinas pode utilizar aquecimento solar térmico, eletricidade fotovoltaica ou a combinação de tecnologias, conforme o projeto.</p></div></div>
       </div>
     </section>
 
-    <section class="closing-section">
-      <div class="container closing-content">
-        <span class="closing-sun">☀</span>
-        <span class="section-tag">SOLAR AQUA</span>
-        <h2>Ciência que ilumina.<br><span>Tecnologia que transforma.</span></h2>
-        <p>Integrando Física, Programação e Robótica para imaginar soluções mais sustentáveis.</p>
-        <a href="#inicio" class="btn btn-primary">Voltar ao início ↑</a>
+    <section class="closing">
+      <div class="closing-content">
+        <span class="section-kicker">SOLAR AQUA • CIÊNCIA EM MOVIMENTO</span>
+        <h2>Inovar é transformar conhecimento em <span>soluções.</span></h2>
+        <p>Física, programação e robótica podem trabalhar juntas para construir um futuro mais sustentável.</p>
+        <a class="button button-primary" href="#inicio">Voltar ao início ↑</a>
       </div>
+      <div class="closing-decoration" aria-hidden="true"></div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer-content">
-      <a class="logo footer-logo" href="#inicio"><span class="logo-icon">☀</span><span>solar<span class="logo-accent">aqua</span></span></a>
-      <p>Projeto educacional • Energia solar e sustentabilidade</p>
-      <span>© 2026 Solar Aqua</span>
-    </div>
+    <a class="brand" href="#inicio"><span class="brand-icon">S</span><span>SOLAR<span class="brand-light">AQUA</span></span></a>
+    <p>Projeto educacional • Energia, tecnologia e sustentabilidade</p>
+    <span>© 2026 Solar Aqua</span>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <div class="accessibility-tools" aria-label="Ferramentas de acessibilidade">
+    <button id="fontDown" type="button" aria-label="Diminuir tamanho do texto">A−</button>
+    <button id="fontUp" type="button" aria-label="Aumentar tamanho do texto">A+</button>
+    <button id="contrastToggle" type="button" aria-label="Ativar ou desativar alto contraste" aria-pressed="false">◐</button>
+  </div>
+
+  <script src="script.js" defer></script>
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
   </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>
     if (window.VLibras) new window.VLibras.Widget("https://vlibras.gov.br/app");
   </script>
