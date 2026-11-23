@@ -1,194 +1,495 @@
 
-// MENU MOBILE
-const menuToggle = document.getElementById("menuToggle");
-const navigation = document.getElementById("navigation");
+"use strict";
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = navigation.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
-});
+/* =========================================
+   SOLAR AQUA — INTERAÇÕES DO SITE
+========================================= */
 
-navigation.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    navigation.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Abrir menu");
+document.addEventListener("DOMContentLoaded", () => {
+
+  const $ = (selector) => document.querySelector(selector);
+
+  /* MENU MOBILE */
+  const menuToggle = $("#menuToggle");
+  const navMenu = $("#navMenu");
+
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Fechar menu" : "Abrir menu"
+      );
+    });
+
+    navMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+      });
+    });
+  }
+
+  /* ACESSIBILIDADE — TAMANHO DO TEXTO */
+  let fontScale = 1;
+
+  function updateFontSize() {
+    document.documentElement.style.setProperty(
+      "--font-scale",
+      String(fontScale)
+    );
+  }
+
+  $("#fontUp")?.addEventListener("click", () => {
+    fontScale = Math.min(1.3, +(fontScale + 0.1).toFixed(1));
+    updateFontSize();
   });
-});
 
-// ACESSIBILIDADE: CONTRASTE
-const contrastBtn = document.getElementById("contrastBtn");
-
-contrastBtn.addEventListener("click", () => {
-  const enabled = document.body.classList.toggle("high-contrast");
-  contrastBtn.setAttribute("aria-pressed", String(enabled));
-  contrastBtn.title = enabled
-    ? "Desativar alto contraste"
-    : "Ativar alto contraste";
-});
-
-// ACESSIBILIDADE: TAMANHO DA FONTE
-const fontBtn = document.getElementById("fontBtn");
-
-fontBtn.addEventListener("click", () => {
-  const enabled = document.body.classList.toggle("large-font");
-  fontBtn.textContent = enabled ? "A−" : "A+";
-  fontBtn.title = enabled ? "Voltar ao tamanho normal" : "Aumentar fonte";
-});
-
-// SIMULADOR FOTOVOLTAICO
-const panelPower = document.getElementById("panelPower");
-const sunHours = document.getElementById("sunHours");
-const systemLoss = document.getElementById("systemLoss");
-
-const powerValue = document.getElementById("powerValue");
-const hoursValue = document.getElementById("hoursValue");
-const lossValue = document.getElementById("lossValue");
-
-const dailyEnergy = document.getElementById("dailyEnergy");
-const dailyResult = document.getElementById("dailyResult");
-const monthlyResult = document.getElementById("monthlyResult");
-const yearlyResult = document.getElementById("yearlyResult");
-
-const resetSimulator = document.getElementById("resetSimulator");
-
-function formatEnergy(value) {
-  return value.toLocaleString("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+  $("#fontDown")?.addEventListener("click", () => {
+    fontScale = Math.max(0.8, +(fontScale - 0.1).toFixed(1));
+    updateFontSize();
   });
-}
 
-function calculateEnergy() {
-  const power = Number(panelPower.value);
-  const hours = Number(sunHours.value);
-  const losses = Number(systemLoss.value);
+  /* ACESSIBILIDADE — ALTO CONTRASTE */
+  const contrastToggle = $("#contrastToggle");
 
-  // Energia diária = potência em kW × horas × aproveitamento
-  const daily = (power / 1000) * hours * (1 - losses / 100);
-  const monthly = daily * 30;
-  const yearly = daily * 365;
+  contrastToggle?.addEventListener("click", () => {
+    const enabled = document.body.classList.toggle("high-contrast");
+    contrastToggle.setAttribute("aria-pressed", String(enabled));
+    contrastToggle.setAttribute(
+      "aria-label",
+      enabled ? "Desativar alto contraste" : "Ativar alto contraste"
+    );
+  });
 
-  powerValue.textContent = `${power} W`;
-  hoursValue.textContent = `${hours} h`;
-  lossValue.textContent = `${losses}%`;
+  /* =========================================
+     ONDAS ELETROMAGNÉTICAS
+  ========================================= */
 
-  dailyEnergy.textContent = formatEnergy(daily);
-  dailyResult.textContent = `${formatEnergy(daily)} kWh`;
-  monthlyResult.textContent = `${formatEnergy(monthly)} kWh`;
-  yearlyResult.textContent = `${formatEnergy(yearly)} kWh`;
-}
+  const waveData = {
+    radio: {
+      name: "Ondas de rádio",
+      description: "Possuem frequências baixas e comprimentos de onda grandes. São utilizadas em sistemas de comunicação.",
+      application: "Aplicação: rádio, televisão e comunicação sem fio.",
+      cycles: 2
+    },
+    micro: {
+      name: "Micro-ondas",
+      description: "São utilizadas em telecomunicações, radares e no aquecimento de alimentos.",
+      application: "Aplicação: forno de micro-ondas e comunicação por satélite.",
+      cycles: 3
+    },
+    infra: {
+      name: "Infravermelho",
+      description: "Está associado à transferência de energia térmica e é emitido por corpos que possuem temperatura.",
+      application: "Aplicação: controles remotos, câmeras térmicas e sensores.",
+      cycles: 5
+    },
+    visible: {
+      name: "Luz visível",
+      description: "É a faixa do espectro que nossos olhos conseguem enxergar. A luz visível faz parte da radiação solar.",
+      application: "Aplicação: iluminação e aproveitamento da luz solar.",
+      cycles: 7
+    },
+    uv: {
+      name: "Ultravioleta",
+      description: "Possui frequência maior que a luz visível. Está presente na radiação solar e pode causar efeitos na pele.",
+      application: "Aplicação: esterilização controlada e análises científicas.",
+      cycles: 9
+    },
+    xray: {
+      name: "Raios X",
+      description: "São ondas de alta frequência capazes de atravessar determinados materiais.",
+      application: "Aplicação: exames de diagnóstico por imagem.",
+      cycles: 12
+    },
+    gamma: {
+      name: "Raios gama",
+      description: "Possuem frequências muito elevadas e são produzidos em processos nucleares e fenômenos astrofísicos.",
+      application: "Aplicação: pesquisas nucleares e tratamentos médicos específicos.",
+      cycles: 16
+    }
+  };
 
-[panelPower, sunHours, systemLoss].forEach(input => {
-  input.addEventListener("input", calculateEnergy);
-});
+  const waveSelect = $("#waveSelect");
+  const wavePath = $("#wavePath");
 
-resetSimulator.addEventListener("click", () => {
-  panelPower.value = 450;
-  sunHours.value = 5;
-  systemLoss.value = 20;
+  function drawWave(cycles) {
+    if (!wavePath) return;
+
+    const width = 700;
+    const center = 110;
+    const amplitude = 65;
+    const points = [];
+
+    for (let x = 0; x <= width; x += 3) {
+      const y = center - Math.sin(
+        (x / width) * cycles * Math.PI * 2
+      ) * amplitude;
+
+      points.push(`${x},${y.toFixed(2)}`);
+    }
+
+    wavePath.setAttribute("d", "M " + points.join(" L "));
+  }
+
+  function updateWave() {
+    if (!waveSelect) return;
+
+    const selected = waveData[waveSelect.value];
+    if (!selected) return;
+
+    $("#waveTypeLabel").textContent = selected.name.toUpperCase();
+    $("#waveTitle").textContent = selected.name;
+    $("#waveDescription").textContent = selected.description;
+    $("#waveApplication").textContent = selected.application;
+
+    drawWave(selected.cycles);
+  }
+
+  waveSelect?.addEventListener("change", updateWave);
+  updateWave();
+
+  /* =========================================
+     RADIAÇÃO DO CORPO NEGRO
+  ========================================= */
+
+  const temperatureInput = $("#temperature");
+
+  function updateTemperature() {
+    if (!temperatureInput) return;
+
+    const temperature = Number(temperatureInput.value);
+
+    $("#temperatureValue").textContent =
+      temperature.toLocaleString("pt-BR") + " K";
+
+    // Lei de Wien: comprimento de onda máximo em metros.
+    const wavelengthMeters = 2.898e-3 / temperature;
+    const wavelengthNm = wavelengthMeters * 1e9;
+
+    let region = "infravermelho";
+
+    if (wavelengthNm < 380) {
+      region = "ultravioleta";
+    } else if (wavelengthNm <= 750) {
+      region = "luz visível";
+    } else if (wavelengthNm <= 1000) {
+      region = "infravermelho próximo";
+    }
+
+    $("#temperatureResult").textContent =
+      `Pico aproximado: ${wavelengthNm.toFixed(0)} nm — ${region}.`;
+
+    const normalized = (temperature - 1000) / 5000;
+    const red = Math.round(220 + normalized * 35);
+    const green = Math.round(80 + normalized * 130);
+    const blue = Math.round(45 + normalized * 45);
+
+    const orb = $("#thermalOrb");
+
+    if (orb) {
+      orb.style.background =
+        `radial-gradient(circle at 35% 35%, #fff4bd, rgb(${red}, ${green}, ${blue}) 60%, #a93b2c)`;
+
+      orb.style.boxShadow =
+        `0 0 ${25 + normalized * 40}px rgba(${red}, ${green}, ${blue}, .55)`;
+    }
+
+    $("#thermalDescription").textContent =
+      temperature >= 5000
+        ? "Temperatura muito elevada"
+        : temperature >= 3000
+          ? "Emissão intensa"
+          : "Emissão térmica";
+  }
+
+  temperatureInput?.addEventListener("input", updateTemperature);
+  updateTemperature();
+
+  /* =========================================
+     EFEITO FOTOELÉTRICO
+  ========================================= */
+
+  const frequencyInput = $("#lightFrequency");
+  const intensityInput = $("#lightIntensity");
+  const testPhotoelectric = $("#testPhotoelectric");
+  const experimentScene = $(".experiment-scene");
+
+  function runPhotoelectricExperiment() {
+    if (!frequencyInput || !intensityInput || !experimentScene) return;
+
+    const frequency = Number(frequencyInput.value);
+    const intensity = Number(intensityInput.value);
+
+    const thresholdFrequency = 6;
+
+    const beam = $("#lightBeam");
+    const result = $("#photoResult");
+    const status = $("#photoStatus");
+
+    beam.style.opacity = String(0.15 + intensity * 0.075);
+    beam.style.width = `${2 + intensity}px`;
+
+    experimentScene.classList.remove("emitting");
+
+    // Reinicia a animação para permitir repetir o experimento.
+    void experimentScene.offsetWidth;
+
+    if (frequency >= thresholdFrequency) {
+      experimentScene.classList.add("emitting");
+
+      const emittedElectrons = Math.max(
+        1,
+        Math.min(3, Math.ceil(intensity / 3))
+      );
+
+      result.textContent =
+        `Emissão de elétrons! A frequência superou o limite do material. ` +
+        `Na demonstração, a intensidade influencia a quantidade de elétrons emitidos. ` +
+        `Elétrons representados: ${emittedElectrons}.`;
+
+      status.textContent = "EMISSÃO DETECTADA";
+    } else {
+      result.textContent =
+        "Não houve emissão de elétrons. A frequência está abaixo da frequência de corte. Aumentar somente a intensidade não resolve essa condição.";
+
+      status.textContent = "SEM EMISSÃO";
+    }
+  }
+
+  testPhotoelectric?.addEventListener(
+    "click",
+    runPhotoelectricExperiment
+  );
+
+  /* =========================================
+     SIMULADOR FOTOVOLTAICO
+  ========================================= */
+
+  const panelPower = $("#panelPower");
+  const panelCount = $("#panelCount");
+  const sunHours = $("#sunHours");
+  const systemLoss = $("#systemLoss");
+
+  function formatNumber(value) {
+    return value.toLocaleString("pt-BR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  function calculateEnergy() {
+    if (!panelPower || !panelCount || !sunHours || !systemLoss) {
+      return;
+    }
+
+    const power = Number(panelPower.value);
+    const count = Number(panelCount.value);
+    const hours = Number(sunHours.value);
+    const losses = Number(systemLoss.value);
+
+    const inputs = [
+      { value: power, min: 50, max: 1000 },
+      { value: count, min: 1, max: 100 },
+      { value: hours, min: 0, max: 12 },
+      { value: losses, min: 0, max: 50 }
+    ];
+
+    const valid = inputs.every(item =>
+      Number.isFinite(item.value) &&
+      item.value >= item.min &&
+      item.value <= item.max
+    );
+
+    if (!valid) {
+      $("#dailyEnergy").textContent = "—";
+      $("#installedPower").textContent = "Valores inválidos";
+      $("#monthlyEnergy").textContent = "—";
+      $("#yearlyEnergy").textContent = "—";
+      $("#efficiencyLabel").textContent = "—";
+      $("#efficiencyBar").style.width = "0%";
+      return;
+    }
+
+    // Potência total em kW.
+    const installedKW = (power * count) / 1000;
+
+    // Energia diária: potência × horas × aproveitamento.
+    const daily = installedKW * hours * (1 - losses / 100);
+    const monthly = daily * 30;
+    const yearly = daily * 365;
+
+    $("#dailyEnergy").textContent = formatNumber(daily);
+    $("#installedPower").textContent =
+      `${formatNumber(installedKW)} kWp`;
+    $("#monthlyEnergy").textContent =
+      `${formatNumber(monthly)} kWh`;
+    $("#yearlyEnergy").textContent =
+      `${formatNumber(yearly)} kWh`;
+
+    const efficiency = 100 - losses;
+
+    $("#efficiencyLabel").textContent = `${efficiency}%`;
+    $("#efficiencyBar").style.width = `${efficiency}%`;
+  }
+
+  $("#calculateEnergy")?.addEventListener("click", calculateEnergy);
+
+  [panelPower, panelCount, sunHours, systemLoss].forEach(input => {
+    input?.addEventListener("input", calculateEnergy);
+  });
+
   calculateEnergy();
-});
 
-calculateEnergy();
+  /* =========================================
+     SENSORES E MONITORAMENTO
+  ========================================= */
 
-// ESPECTRO ELETROMAGNÉTICO
-const waveInformation = {
-  visivel: {
-    title: "Luz visível",
-    description: "É a faixa que nossos olhos conseguem enxergar. Faz parte da radiação emitida pelo Sol e pode ser aproveitada pelos painéis fotovoltaicos."
-  },
-  infravermelho: {
-    title: "Infravermelho",
-    description: "Está relacionado à transferência de energia térmica. É importante para compreender o aquecimento de superfícies e da água."
-  },
-  ultravioleta: {
-    title: "Ultravioleta",
-    description: "Possui frequência maior que a luz visível. Também chega do Sol, mas não é a principal faixa aproveitada pelos painéis solares comuns."
-  },
-  raiosx: {
-    title: "Raios X",
-    description: "São ondas de alta frequência e energia, utilizadas principalmente em exames de imagem. Não são utilizadas na geração solar comum."
+  const sensorData = {
+    temperature: {
+      title: "TEMPERATURA DA ÁGUA",
+      unit: "°C",
+      min: 0,
+      max: 50,
+      initial: 56,
+      description: value => {
+        if (value < 20) return "Água em temperatura baixa.";
+        if (value <= 32) return "Temperatura dentro da faixa de demonstração.";
+        return "Temperatura elevada na simulação.";
+      },
+      status: value => value > 32 ? "ATENÇÃO" : "NORMAL"
+    },
+
+    level: {
+      title: "NÍVEL DA ÁGUA",
+      unit: "%",
+      min: 0,
+      max: 100,
+      initial: 75,
+      description: value => {
+        if (value < 25) return "Nível baixo: verificar a quantidade de água.";
+        if (value > 90) return "Nível elevado na simulação.";
+        return "Nível dentro da faixa de demonstração.";
+      },
+      status: value => value < 25 || value > 90 ? "ATENÇÃO" : "NORMAL"
+    },
+
+    light: {
+      title: "LUMINOSIDADE AMBIENTE",
+      unit: "%",
+      min: 0,
+      max: 100,
+      initial: 70,
+      description: value => {
+        if (value < 30) return "Baixa incidência de luz.";
+        if (value < 70) return "Luminosidade moderada.";
+        return "Alta incidência de luz.";
+      },
+      status: value => value < 30 ? "BAIXA LUZ" : "NORMAL"
+    }
+  };
+
+  let currentSensor = "temperature";
+
+  function updateSensor(value = null) {
+    const sensor = sensorData[currentSensor];
+    const slider = $("#sensorAdjust");
+
+    if (!sensor || !slider) return;
+
+    const reading = value === null
+      ? Number(slider.value)
+      : Math.max(0, Math.min(100, Number(value)));
+
+    slider.value = String(reading);
+
+    const realValue =
+      sensor.min + (reading / 100) * (sensor.max - sensor.min);
+
+    $("#monitorCaption").textContent = sensor.title;
+    $("#monitorValue").textContent = realValue.toFixed(1);
+    $("#monitorUnit").textContent = sensor.unit;
+    $("#monitorDescription").textContent =
+      sensor.description(realValue);
+
+    $("#monitorMeter").style.width = `${reading}%`;
+    $("#monitorStatus").textContent =
+      sensor.status(realValue);
+
+    $("#sensorMin").textContent =
+      `${sensor.min} ${sensor.unit}`;
+
+    $("#sensorMax").textContent =
+      `${sensor.max} ${sensor.unit}`;
+
+    const status = $("#monitorStatus");
+
+    if (status) {
+      status.style.color =
+        sensor.status(realValue) === "NORMAL"
+          ? "#6fe0c7"
+          : "#ffd16c";
+    }
   }
-};
 
-const spectrumButtons = document.querySelectorAll(".spectrum-btn");
-const waveTitle = document.getElementById("waveTitle");
-const waveDescription = document.getElementById("waveDescription");
+  document.querySelectorAll(".sensor-item").forEach(item => {
+    item.addEventListener("click", () => {
+      const sensorName = item.dataset.sensor;
 
-spectrumButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    spectrumButtons.forEach(item => item.classList.remove("active"));
-    button.classList.add("active");
+      if (!sensorData[sensorName]) return;
 
-    const selectedWave = waveInformation[button.dataset.wave];
+      currentSensor = sensorName;
 
-    waveTitle.textContent = selectedWave.title;
-    waveDescription.textContent = selectedWave.description;
+      document.querySelectorAll(".sensor-item").forEach(sensor => {
+        sensor.classList.remove("active");
+      });
+
+      item.classList.add("active");
+
+      const config = sensorData[currentSensor];
+      $("#sensorAdjust").value = String(config.initial);
+
+      updateSensor();
+    });
+
+    item.setAttribute("tabindex", "0");
+    item.setAttribute("role", "button");
+
+    item.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        item.click();
+      }
+    });
   });
-});
 
-// CENTRAL DE SENSORES
-const waterTemp = document.getElementById("waterTemp");
-const lightLevel = document.getElementById("lightLevel");
-const waterLevel = document.getElementById("waterLevel");
+  $("#sensorAdjust")?.addEventListener("input", event => {
+    updateSensor(Number(event.target.value));
+  });
 
-const tempValue = document.getElementById("tempValue");
-const lightValue = document.getElementById("lightValue");
-const levelValue = document.getElementById("levelValue");
+  updateSensor();
 
-const systemStatus = document.querySelector(".system-status");
-const statusIcon = document.getElementById("statusIcon");
-const statusTitle = document.getElementById("statusTitle");
-const statusText = document.getElementById("statusText");
+  /* =========================================
+     RELÓGIO DO PAINEL
+  ========================================= */
 
-function updateSensors() {
-  const temperature = Number(waterTemp.value);
-  const light = Number(lightLevel.value);
-  const level = Number(waterLevel.value);
+  function updateClock() {
+    const clock = $("#monitorClock");
+    if (!clock) return;
 
-  tempValue.textContent = `${temperature} °C`;
-  lightValue.textContent = `${light}%`;
-  levelValue.textContent = `${level}%`;
+    const now = new Date();
 
-  systemStatus.classList.remove("warning", "alert");
-
-  // As faixas abaixo são apenas parâmetros didáticos da simulação.
-  if (level < 30) {
-    systemStatus.classList.add("alert");
-    statusIcon.textContent = "!";
-    statusTitle.textContent = "Nível de água muito baixo";
-    statusText.textContent =
-      "O sensor identificou pouca água. O sistema deve emitir um alerta para verificação.";
-  } else if (temperature < 20) {
-    systemStatus.classList.add("warning");
-    statusIcon.textContent = "!";
-    statusTitle.textContent = "Água abaixo da temperatura de referência";
-    statusText.textContent =
-      "A água está mais fria que o valor de referência da simulação. O aquecimento pode ser avaliado.";
-  } else if (temperature > 32) {
-    systemStatus.classList.add("warning");
-    statusIcon.textContent = "!";
-    statusTitle.textContent = "Temperatura elevada";
-    statusText.textContent =
-      "A temperatura está acima da faixa de referência definida para esta simulação.";
-  } else if (light < 25) {
-    systemStatus.classList.add("warning");
-    statusIcon.textContent = "!";
-    statusTitle.textContent = "Pouca luminosidade";
-    statusText.textContent =
-      "A captação solar pode estar reduzida neste momento. O sistema continua monitorando as condições.";
-  } else {
-    statusIcon.textContent = "✓";
-    statusTitle.textContent = "Sistema em condições normais";
-    statusText.textContent =
-      "Os valores simulados estão dentro dos parâmetros definidos para esta demonstração.";
+    clock.textContent = now.toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    });
   }
-}
 
-[waterTemp, lightLevel, waterLevel].forEach(input => {
-  input.addEventListener("input", updateSensors);
+  updateClock();
+  window.setInterval(updateClock, 1000);
+
 });
-
-updateSensors();
