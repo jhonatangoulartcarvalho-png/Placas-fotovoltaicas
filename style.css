@@ -1,1828 +1,383 @@
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --dark: #092f40;
-  --dark2: #104255;
-  --teal: #12a6a0;
-  --teal-light: #e9f7f4;
-  --orange: #ffbd59;
-  --white: #ffffff;
-  --text: #153344;
-  --muted: #71858d;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-body {
-  font-family: "DM Sans", sans-serif;
-  background: #f7faf9;
-  color: var(--text);
-  line-height: 1.65;
-}
-
-button, input, select {
-  font: inherit;
-}
-
-a {
-  color: inherit;
-}
-
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-:focus-visible {
-  outline: 3px solid var(--orange) !important;
-  outline-offset: 4px !important;
-}
-
-.skip-link {
-  position: fixed;
-  top: 8px;
-  left: 8px;
-  z-index: 9999;
-  background: white;
-  color: var(--dark);
-  padding: 12px 18px;
-  border-radius: 8px;
-  transform: translateY(-150%);
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-/* CABEÇALHO */
-
-.site-header {
-  height: 78px;
-  padding: 0 6.5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 5px 24px #092b3b0a;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: -1px;
-  color: #0c3345;
-}
-
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: #fff0d7;
-  color: #e99a27;
-  font-size: 23px;
-}
-
-.brand-light {
-  color: var(--teal);
-}
-
-.main-nav {
-  display: flex;
-  gap: 23px;
-}
-
-.main-nav a {
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  color: #58717d;
-  transition: .2s;
-}
-
-.main-nav a:hover {
-  color: var(--teal);
-}
-
-.header-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.icon-btn {
-  border: 1px solid #e1e9e8;
-  background: white;
-  border-radius: 10px;
-  padding: 8px 11px;
-  color: #164052;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: 0;
-  padding: 8px;
-  cursor: pointer;
-}
-
-.menu-toggle span {
-  display: block;
-  width: 23px;
-  height: 2px;
-  background: var(--dark);
-  margin: 5px;
-}
-
-/* INÍCIO */
-
-.hero {
-  min-height: 640px;
-  background: radial-gradient(
-    circle at 80% 35%,
-    #155c68 0,
-    #0b3b4b 33%,
-    #082b3b 70%
-  );
-  color: white;
-  padding: 88px 9% 60px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-
-.hero-content {
-  max-width: 550px;
-  position: relative;
-  z-index: 2;
-}
-
-.eyebrow {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--teal);
-  margin-bottom: 18px;
-}
-
-.hero h1 {
-  font-size: clamp(54px, 7vw, 88px);
-  line-height: .99;
-  letter-spacing: -5px;
-  margin-bottom: 25px;
-  font-weight: 800;
-}
-
-.hero h1 em {
-  font-style: normal;
-  color: var(--orange);
-}
-
-.hero-copy {
-  max-width: 460px;
-  color: #c1d6d8;
-  font-size: 15px;
-  line-height: 1.8;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 13px;
-  margin: 30px 0 55px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 13px 20px;
-  border-radius: 9px;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 800;
-  display: inline-flex;
-  gap: 14px;
-  align-items: center;
-  transition: .25s;
-}
-
-.btn-primary {
-  background: var(--orange);
-  color: #173746;
-}
-
-.btn-primary:hover {
-  background: #ffca76;
-  transform: translateY(-3px);
-}
-
-.btn-ghost {
-  border: 1px solid #ffffff50;
-  color: white;
-}
-
-.btn-ghost:hover {
-  background: #ffffff14;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 35px;
-}
-
-.hero-stats div {
-  display: flex;
-  flex-direction: column;
-}
-
-.hero-stats strong {
-  font-size: 20px;
-  color: var(--orange);
-}
-
-.hero-stats span {
-  font-size: 10px;
-  color: #a9c5c9;
-}
-
-/* ILUSTRAÇÃO DO PAINEL */
-
-.hero-art {
-  position: absolute;
-  width: 48%;
-  height: 100%;
-  right: 1%;
-  top: 0;
-}
-
-.sun {
-  position: absolute;
-  top: 100px;
-  right: 24%;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffe29a, #f9a83d);
-  box-shadow: 0 0 70px #ffc05b80;
-}
-
-.sun:after {
-  content: "";
-  position: absolute;
-  inset: -23px;
-  border: 1px solid #ffc15b65;
-  border-radius: 50%;
-}
-
-.sun-ray {
-  position: absolute;
-  height: 1px;
-  width: 300px;
-  background: linear-gradient(90deg, transparent, #ffc15b);
-  top: 210px;
-  right: 32%;
-  transform: rotate(35deg);
-}
-
-.ray-b {
-  top: 240px;
-  right: 27%;
-  transform: rotate(50deg);
-}
-
-.panel-scene {
-  position: absolute;
-  right: 12%;
-  top: 310px;
-  width: 390px;
-  transform: perspective(500px) rotateX(57deg) rotateZ(-25deg);
-}
-
-.panel-top {
-  height: 220px;
-  background: linear-gradient(135deg, #137b8c, #0b3f5b);
-  border: 7px solid #b7d5d1;
-  box-shadow: 0 25px 40px #001d2d80;
-  transform: skewY(-8deg);
-}
-
-.panel-grid {
-  height: 100%;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 47px,
-      #8dc5c4 48px 50px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0 48px,
-      #8dc5c4 49px 51px
-    );
-}
-
-.panel-leg {
-  height: 100px;
-  width: 12px;
-  background: #a4c5c0;
-  margin: auto;
-}
-
-.panel-shadow {
-  height: 20px;
-  width: 450px;
-  background: #001c2a70;
-  filter: blur(12px);
-  border-radius: 50%;
-  margin-left: -25px;
-}
-
-.energy-tag {
-  position: absolute;
-  background: #ffffff16;
-  border: 1px solid #ffffff30;
-  backdrop-filter: blur(10px);
-  padding: 9px 13px;
-  border-radius: 8px;
-  font-size: 11px;
-  color: #e6f5f1;
-}
-
-.tag-one {
-  right: 42%;
-  top: 260px;
-}
-
-.tag-two {
-  right: 8%;
-  top: 520px;
-}
-
-.orbit {
-  position: absolute;
-  border: 1px solid #ffffff13;
-  border-radius: 50%;
-  width: 570px;
-  height: 570px;
-  right: -5%;
-  top: 45px;
-}
-
-.orbit-two {
-  width: 700px;
-  height: 700px;
-  right: -18%;
-  top: -20px;
-}
-
-.hero-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: .25;
-}
-
-.glow-one {
-  background: #11aaa2;
-  width: 300px;
-  height: 300px;
-  right: 20%;
-  top: 50%;
-}
-
-.glow-two {
-  background: #f4a83b;
-  width: 170px;
-  height: 170px;
-  right: 5%;
-  top: 8%;
-}
-
-.scroll-cue {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  color: #8eb4b9;
-  text-decoration: none;
-  font-size: 22px;
-}
-
-/* SEÇÕES GERAIS */
-
-.section {
-  padding: 105px 9%;
-  max-width: 1500px;
-  margin: auto;
-}
-
-.section-heading {
-  max-width: 650px;
-  margin-bottom: 50px;
-}
-
-.section-heading h2,
-.effect-copy h2,
-.robotics-copy h2,
-.impact-inner h2 {
-  font-size: clamp(36px, 4.5vw, 55px);
-  letter-spacing: -2.5px;
-  line-height: 1.08;
-  margin-bottom: 20px;
-  color: #123748;
-}
-
-.section-heading h2 span,
-.effect-copy h2 span,
-.robotics-copy h2 span {
-  color: var(--teal);
-}
-
-.heading-desc {
-  color: var(--muted);
-  max-width: 570px;
-  font-size: 14px;
-}
-
-/* CONCEITO */
-
-.intro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9%;
-  align-items: center;
-}
-
-.intro-text p {
-  font-size: 14px;
-  color: #667d86;
-  line-height: 1.9;
-  margin-bottom: 15px;
-}
-
-.intro-text .lead {
-  font-size: 20px;
-  line-height: 1.55;
-  color: #163b4b;
-  font-weight: 700;
-}
-
-.note {
-  display: flex;
-  gap: 13px;
-  background: var(--teal-light);
-  padding: 15px 18px;
-  border-radius: 10px;
-  margin-top: 25px;
-  color: #1c716e;
-}
-
-.note span {
-  font-size: 21px;
-}
-
-.note p {
-  margin: 0;
-  color: #286d6b;
-  font-size: 12px;
-}
-
-.conversion-card {
-  background: white;
-  padding: 30px 36px;
-  border-radius: 18px;
-  box-shadow: 0 15px 50px #103a4810;
-  border: 1px solid #e8efed;
-}
-
-.conversion-step {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-}
-
-.step-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-}
-
-.sun-icon {
-  background: #fff1d8;
-  color: #eaa02e;
-}
-
-.panel-icon {
-  background: #e0f2f0;
-  color: #0d9f9a;
-}
-
-.bolt-icon {
-  background: #e9effb;
-  color: #537ac4;
-}
-
-.conversion-step b,
-.conversion-step small {
-  display: block;
-}
-
-.conversion-step b {
-  font-size: 14px;
-}
-
-.conversion-step small {
-  color: #84979c;
-  font-size: 11px;
-}
-
-.flow-arrow {
-  text-align: center;
-  color: var(--teal);
-  font-size: 19px;
-  margin: 7px 0 7px 15px;
-}
-
-/* CIÊNCIA */
-
-.science-section,
-.sim-section {
-  background: var(--dark);
-  color: white;
-}
-
-.section-inner {
-  max-width: 1500px;
-}
-
-.light-heading h2 {
-  color: white;
-}
-
-.light-heading h2 span {
-  color: var(--orange);
-}
-
-.light-heading .heading-desc {
-  color: #aac0c5;
-}
-
-.science-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.science-card {
-  background: var(--dark2);
-  border: 1px solid #ffffff12;
-  padding: 30px;
-  border-radius: 15px;
-  position: relative;
-  min-height: 290px;
-  transition: .25s;
-}
-
-.science-card:hover {
-  transform: translateY(-5px);
-  background: #154d61;
-}
-
-.card-number {
-  position: absolute;
-  right: 25px;
-  top: 22px;
-  color: #7298a0;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.science-symbol {
-  font-size: 36px;
-  width: 65px;
-  height: 65px;
-  border-radius: 17px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 23px;
-}
-
-.wave-symbol {
-  background: #1b6471;
-  color: #78d7d1;
-}
-
-.heat-symbol {
-  background: #72502d;
-  color: var(--orange);
-}
-
-.photo-symbol {
-  background: #36577b;
-  color: #a9c7ff;
-}
-
-.science-card h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.science-card p {
-  font-size: 12px;
-  line-height: 1.8;
-  color: #b5cbd0;
-  min-height: 86px;
-}
-
-.science-card a {
-  font-size: 11px;
-  color: var(--orange);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-/* ESPECTRO */
-
-.spectrum-layout {
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: 60px;
-  align-items: center;
-  background: white;
-  border: 1px solid #e9efed;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 15px 50px #103a4808;
-}
-
-.spectrum-bar {
-  height: 36px;
-  border-radius: 30px;
-  background: linear-gradient(
-    90deg,
-    #633c91,
-    #357bd5,
-    #17a6bd,
-    #42b96b,
-    #e6d64b,
-    #ed8d39,
-    #d34b4b
-  );
-  position: relative;
-  overflow: hidden;
-}
-
-.spectrum-active {
-  position: absolute;
-  top: -5px;
-  left: 42%;
-  width: 17%;
-  height: 46px;
-  border: 3px solid #153b4c;
-  border-radius: 30px;
-  transition: .3s;
-}
-
-.spectrum-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: #82959a;
-  margin-top: 9px;
-}
-
-.wave-animation {
-  font-size: 35px;
-  color: var(--teal);
-  letter-spacing: 7px;
-  margin-top: 35px;
-  animation: waveMove 3s linear infinite;
-}
-
-@keyframes waveMove {
-  50% { transform: translateX(15px); }
-}
-
-.spectrum-controls label {
-  font-size: 12px;
-  font-weight: 800;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.spectrum-controls select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #dce7e4;
-  border-radius: 8px;
-  background: #f8fbfa;
-  color: #183b4b;
-}
-
-.spectrum-info {
-  padding-top: 22px;
-}
-
-.info-kicker,
-.sim-kicker {
-  font-size: 9px;
-  letter-spacing: 1.7px;
-  color: var(--teal);
-  font-weight: 800;
-}
-
-.spectrum-info h3 {
-  font-size: 25px;
-  margin: 5px 0;
-}
-
-.spectrum-info > p:not(.info-kicker) {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.data-pair {
-  display: flex;
-  gap: 30px;
-  margin-top: 22px;
-}
-
-.data-pair small,
-.data-pair strong {
-  display: block;
-}
-
-.data-pair small {
-  font-size: 10px;
-  color: #82969a;
-}
-
-.data-pair strong {
-  font-size: 12px;
-  margin-top: 4px;
-}
-
-/* EFEITO FOTOELÉTRICO */
-
-.effect-section {
-  padding: 110px 10%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8%;
-  align-items: center;
-  background: #edf6f3;
-}
-
-.effect-copy p:not(.eyebrow) {
-  font-size: 13px;
-  color: #617982;
-  line-height: 1.9;
-  margin-bottom: 15px;
-}
-
-.atom-visual {
-  height: 350px;
-  position: relative;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle, #d5efea, #eaf5f2 55%, transparent 56%);
-  border-radius: 50%;
-}
-
-.atom-core {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1c9d9b, #0c5165);
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 32px;
-  font-weight: 800;
-  box-shadow: 0 10px 35px #0c879050;
-  z-index: 2;
-}
-
-.electron {
-  position: absolute;
-  background: white;
-  color: var(--teal);
-  border: 2px solid var(--teal);
-  width: 27px;
-  height: 27px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-}
-
-.electron-1 { top: 65px; left: 48%; }
-.electron-2 { bottom: 85px; left: 22%; }
-.electron-3 { bottom: 90px; right: 20%; }
-
-.photon {
-  position: absolute;
-  color: #f4a72f;
-  font-size: 25px;
-  animation: photon 2s infinite;
-}
-
-.photon-1 { top: 50px; left: 20%; }
-.photon-2 { top: 130px; left: 8%; animation-delay: .5s; }
-.photon-3 { top: 90px; right: 15%; animation-delay: 1s; }
-
-@keyframes photon {
-  50% { transform: translate(30px, 30px); opacity: .4; }
-}
-
-.energy-caption {
-  position: absolute;
-  bottom: 20px;
-  color: #43817e;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-/* SIMULADORES */
-
-.sim-section .section {
-  padding-top: 95px;
-  padding-bottom: 100px;
-}
-
-.sim-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 18px;
-  flex-wrap: wrap;
-}
-
-.sim-tab {
-  border: 1px solid #ffffff35;
-  color: #c3d6d9;
-  background: transparent;
-  padding: 12px 19px;
-  border-radius: 9px;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.sim-tab.active {
-  background: var(--orange);
-  color: #183b4a;
-  border-color: var(--orange);
-}
-
-.sim-panel {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 45px;
-  background: var(--dark2);
-  border: 1px solid #ffffff16;
-  border-radius: 17px;
-  padding: 35px;
-}
-
-.sim-panel[hidden] {
-  display: none;
-}
-
-.sim-description h3 {
-  font-size: 24px;
-  margin: 5px 0 8px;
-}
-
-.sim-description > p:not(.sim-kicker) {
-  font-size: 12px;
-  color: #b3c9ce;
-  max-width: 530px;
-}
-
-.sim-controls {
-  margin-top: 28px;
-  display: grid;
-  gap: 22px;
-}
-
-.control-line label {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 11px;
-  color: #e0eeee;
-  font-weight: 700;
-}
-
-.control-line output {
-  color: var(--orange);
-}
-
-.control-line input {
-  width: 100%;
-  accent-color: var(--orange);
-  margin-top: 12px;
-  cursor: pointer;
-}
-
-.result-card {
-  background: #0a3547;
-  border-radius: 14px;
-  padding: 28px;
-  align-self: center;
-}
-
-.result-icon {
-  font-size: 28px;
-  color: var(--orange);
-}
-
-.result-card > p {
-  font-size: 9px;
-  letter-spacing: 1.6px;
-  color: #9cb9c0;
-  font-weight: 800;
-}
-
-.result-card > strong {
-  font-size: 48px;
-  letter-spacing: -2px;
-  color: var(--orange);
-  display: block;
-}
-
-.result-card > strong small {
-  font-size: 14px;
-  letter-spacing: 0;
-  color: #d7e8e7;
-}
-
-.result-divider {
-  height: 1px;
-  background: #ffffff20;
-  margin: 15px 0;
-}
-
-.result-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #bdd0d3;
-  padding: 6px 0;
-}
-
-.result-row b {
-  color: white;
-}
-
-.result-foot {
-  font-size: 9px !important;
-  color: #88aab2 !important;
-  margin-top: 18px;
-}
-
-/* SENSOR DA PISCINA */
-
-.sensor-result {
-  background: #0a3547;
-  border-radius: 14px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-}
-
-.pool-mini {
-  height: 120px;
-  background: linear-gradient(#d7a54f 0 38%, #1d8e9b 38%);
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.pool-sun {
-  position: absolute;
-  right: 25px;
-  top: 10px;
-  color: #fff1ad;
-  font-size: 30px;
-}
-
-.pool-water {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60%;
-  background: #1396a1;
-  transition: height .3s;
-}
-
-.pool-water span {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #8ce1d9;
-}
-
-.pool-ripple {
-  position: absolute;
-  bottom: 18px;
-  left: 20%;
-  width: 60%;
-  height: 12px;
-  border-top: 1px solid #b8f3e8;
-  border-radius: 50%;
-}
-
-.sensor-status h3 {
-  font-size: 19px;
-  margin: 4px 0;
-}
-
-.sensor-status > p:not(.sim-kicker) {
-  font-size: 11px;
-  color: #b5cbd0;
-}
-
-.sensor-chips {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-}
-
-.sensor-chips span {
-  font-size: 9px;
-  background: #ffffff14;
-  border: 1px solid #ffffff20;
-  padding: 6px 8px;
-  border-radius: 20px;
-  color: #e0eeee;
-}
-
-/* PROJETO DA PISCINA */
-
-.pool-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.pool-card {
-  background: white;
-  border: 1px solid #e7efed;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 12px 35px #103a4808;
-}
-
-.pool-card-art {
-  height: 170px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #e6f6ef, #c8e9e0);
-}
-
-.collector {
-  position: absolute;
-  left: 20%;
-  top: 50px;
-  width: 190px;
-  height: 90px;
-  transform: skewY(-12deg);
-  background: #164d65;
-  border: 5px solid #c0ddd4;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
-  padding: 5px;
-}
-
-.collector span {
-  background: #237b8b;
-  border-right: 1px solid #79c3be;
-}
-
-.art-sun {
-  position: absolute;
-  right: 22%;
-  top: 18px;
-  font-size: 42px;
-  color: #e9a23b;
-}
-
-.mini-pool {
-  position: absolute;
-  bottom: 25px;
-  left: 12%;
-  width: 76%;
-  height: 75px;
-  background: #1b9ba6;
-  border: 6px solid white;
-  border-radius: 10px;
-}
-
-.pool-cover {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    #b6d7d2 0 15px,
-    #d7ebe4 15px 18px
-  );
-}
-
-.moon {
-  position: absolute;
-  right: 20%;
-  top: 18px;
-  color: #e7a63d;
-  font-size: 40px;
-}
-
-.mini-panel {
-  position: absolute;
-  left: 18%;
-  top: 45px;
-  width: 175px;
-  height: 95px;
-  background: #144a68;
-  transform: skewY(-15deg);
-  border: 5px solid #b8d7d0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 3px;
-  padding: 4px;
-}
-
-.mini-panel i {
-  background: #237c8b;
-}
-
-.bolt {
-  position: absolute;
-  right: 20%;
-  top: 22px;
-  color: #efa83e;
-  font-size: 42px;
-}
-
-.pool-card-content {
-  padding: 24px;
-}
-
-.pill {
-  font-size: 8px;
-  letter-spacing: 1.2px;
-  font-weight: 800;
-  color: #0b9d98;
-  background: #e8f7f3;
-  padding: 6px 8px;
-  border-radius: 20px;
-}
-
-.pool-card h3 {
-  font-size: 19px;
-  margin: 15px 0 8px;
-}
-
-.pool-card p {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.8;
-  min-height: 95px;
-}
-
-.mini-flow {
-  font-size: 10px;
-  color: #0c7775;
-  background: #edf8f5;
-  padding: 10px;
-  border-radius: 7px;
-  font-weight: 700;
-}
-
-/* ROBÓTICA */
-
-.robotics-section {
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  gap: 9%;
-  align-items: center;
-  background: #edf6f3;
-  padding: 100px 10%;
-}
-
-.robotics-visual {
-  height: 340px;
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.sensor-ring {
-  position: absolute;
-  border: 1px solid #16aaa35c;
-  border-radius: 50%;
-  width: 220px;
-  height: 220px;
-}
-
-.ring-b {
-  width: 300px;
-  height: 300px;
-  border-style: dashed;
-  animation: rotate 22s linear infinite;
-}
-
-@keyframes rotate {
-  to { transform: rotate(360deg); }
-}
-
-.sensor-center {
-  width: 100px;
-  height: 100px;
-  background: #0c6473;
-  color: #b8f1e8;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 48px;
-}
-
-.sensor-point {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #f2ae43;
-}
-
-.point-a { top: 38px; left: 48%; }
-.point-b { bottom: 65px; left: 17%; }
-.point-c { bottom: 75px; right: 17%; }
-
-.robotics-copy p:not(.eyebrow) {
-  font-size: 13px;
-  color: #657e86;
-  line-height: 1.9;
-}
-
-.sensor-list {
-  list-style: none;
-  padding: 0;
-  margin: 25px 0 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.sensor-list li {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-}
-
-.sensor-list li > span {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: white;
-  display: grid;
-  place-items: center;
-}
-
-.sensor-list b,
-.sensor-list small {
-  display: block;
-}
-
-.sensor-list b {
-  font-size: 11px;
-}
-
-.sensor-list small {
-  font-size: 9px;
-  color: #82959a;
-}
-
-/* IMPACTO SOCIAL */
-
-.impact-section {
-  background: var(--orange);
-}
-
-.impact-inner {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 8%;
-  align-items: center;
-  padding-top: 65px;
-  padding-bottom: 65px;
-}
-
-.impact-inner .eyebrow {
-  color: #81571d;
-}
-
-.impact-inner h2 {
-  font-size: 36px;
-}
-
-.impact-inner h2 span {
-  color: white;
-}
-
-.impact-inner > p {
-  font-size: 13px;
-  color: #684b25;
-  line-height: 1.9;
-}
-
-/* ACESSIBILIDADE */
-
-.accessibility-section {
-  padding-top: 100px;
-  padding-bottom: 100px;
-}
-
-.access-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-}
-
-.access-grid article {
-  background: white;
-  border: 1px solid #e8efed;
-  border-radius: 13px;
-  padding: 23px;
-}
-
-.access-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: var(--teal-light);
-  color: #0b9e98;
-  display: grid;
-  place-items: center;
-  font-size: 19px;
-  font-weight: 800;
-}
-
-.access-grid h3 {
-  font-size: 14px;
-  margin: 17px 0 7px;
-}
-
-.access-grid p {
-  font-size: 10px;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-.video-placeholder {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 22px;
-  margin-top: 22px;
-  border: 1px dashed #9bcac2;
-  border-radius: 12px;
-  background: #eff8f5;
-}
-
-.video-icon {
-  width: 45px;
-  height: 45px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--teal);
-  color: white;
-}
-
-.video-placeholder b {
-  font-size: 12px;
-}
-
-.video-placeholder p {
-  font-size: 10px;
-  color: #72878d;
-  margin: 3px 0;
-}
-
-.coming-soon {
-  margin-left: auto;
-  font-size: 8px;
-  letter-spacing: 1px;
-  color: #0b9994;
-  font-weight: 800;
-}
-
-/* RODAPÉ */
-
-.footer {
-  background: #082b3a;
-  color: #a9c1c5;
-  padding: 40px 9% 20px;
-}
-
-.footer-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 28px;
-  border-bottom: 1px solid #ffffff1c;
-}
-
-.footer-brand {
-  color: white;
-}
-
-.footer-top p {
-  font-size: 11px;
-}
-
-.back-top {
-  font-size: 11px;
-  color: var(--orange);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
-  font-size: 9px;
-  color: #7798a0;
-}
-
-/* ACESSIBILIDADE VISUAL */
-
-body.high-contrast {
-  background: black !important;
-  color: white !important;
-}
-
-body.high-contrast .site-header,
-body.high-contrast .section,
-body.high-contrast .access-grid article,
-body.high-contrast .conversion-card,
-body.high-contrast .spectrum-layout,
-body.high-contrast .pool-card {
-  background: black !important;
-  color: white !important;
-  border: 1px solid white;
-}
-
-body.high-contrast p,
-body.high-contrast small,
-body.high-contrast .heading-desc,
-body.high-contrast .intro-text p {
-  color: white !important;
-}
-
-body.high-contrast h2,
-body.high-contrast h3,
-body.high-contrast b {
-  color: #ffeb00 !important;
-}
-
-body.high-contrast .science-section,
-body.high-contrast .sim-section,
-body.high-contrast .hero,
-body.high-contrast .footer {
-  background: black !important;
-}
-
-body.dyslexia-font,
-body.dyslexia-font * {
-  font-family: "Atkinson Hyperlegible", sans-serif !important;
-  letter-spacing: .02em !important;
-}
-
-/* TABLETS */
-
-@media (max-width: 1050px) {
-  .main-nav {
-    gap: 13px;
-  }
-
-  .main-nav a {
-    font-size: 10px;
-  }
-
-  .hero-art {
-    right: -10%;
-    opacity: .8;
-  }
-
-  .section {
-    padding-left: 6%;
-    padding-right: 6%;
-  }
-}
-
-/* CELULARES */
-
-@media (max-width: 780px) {
-  .site-header {
-    height: 68px;
-    padding: 0 5%;
-  }
-
-  .menu-toggle {
-    display: block;
-    order: 3;
-  }
-
-  .header-actions {
-    margin-left: auto;
-    margin-right: 12px;
-  }
-
-  .main-nav {
-    display: none;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 18px 6%;
-    box-shadow: 0 12px 20px #092b3b15;
-    flex-direction: column;
-    gap: 17px;
-  }
-
-  .main-nav.open {
-    display: flex;
-  }
-
-  .main-nav a {
-    font-size: 13px;
-  }
-
-  .hero {
-    min-height: 700px;
-    padding: 70px 7% 55px;
-    align-items: flex-start;
-  }
-
-  .hero-content {
-    max-width: 100%;
-  }
-
-  .hero h1 {
-    font-size: 65px;
-  }
-
-  .hero-art {
-    width: 100%;
-    height: 320px;
-    top: auto;
-    bottom: 0;
-    right: 0;
-    opacity: .65;
-  }
-
-  .sun {
-    top: 5px;
-    right: 20%;
-    width: 75px;
-    height: 75px;
-  }
-
-  .panel-scene {
-    top: 130px;
-    right: 13%;
-    width: 270px;
-  }
-
-  .panel-top {
-    height: 145px;
-  }
-
-  .tag-one {
-    top: 115px;
-    right: 55%;
-  }
-
-  .tag-two {
-    top: 260px;
-    right: 7%;
-  }
-
-  .orbit {
-    width: 400px;
-    height: 400px;
-    top: 0;
-  }
-
-  .orbit-two {
-    display: none;
-  }
-
-  .hero-stats {
-    gap: 18px;
-  }
-
-  .hero-stats strong {
-    font-size: 17px;
-  }
-
-  .hero-stats span {
-    font-size: 8px;
-  }
-
-  .section {
-    padding: 75px 7%;
-  }
-
-  .intro-grid,
-  .spectrum-layout,
-  .effect-section,
-  .sim-panel,
-  .robotics-section,
-  .impact-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .intro-grid {
-    gap: 35px;
-  }
-
-  .science-cards,
-  .pool-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .science-card {
-    min-height: auto;
-  }
-
-  .science-card p {
-    min-height: 0;
-  }
-
-  .spectrum-layout {
-    gap: 30px;
-    padding: 23px;
-  }
-
-  .effect-section {
-    padding: 75px 7%;
-    gap: 25px;
-  }
-
-  .atom-visual {
-    height: 280px;
-  }
-
-  .sim-section .section {
-    padding-top: 75px;
-    padding-bottom: 75px;
-  }
-
-  .sim-panel {
-    gap: 25px;
-    padding: 23px;
-  }
-
-  .pool-card p {
-    min-height: 0;
-  }
-
-  .robotics-section {
-    padding: 75px 7%;
-    gap: 20px;
-  }
-
-  .robotics-visual {
-    height: 270px;
-  }
-
-  .sensor-list {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .impact-inner {
-    gap: 5px;
-  }
-
-  .impact-inner h2 {
-    font-size: 30px;
-  }
-
-  .access-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-top {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .footer-top p {
-    order: 3;
-    width: 100%;
-  }
-}
-
-/* CELULARES PEQUENOS */
-
-@media (max-width: 430px) {
-  .hero h1 {
-    font-size: 55px;
-    letter-spacing: -3px;
-  }
-
-  .hero-copy {
-    font-size: 13px;
-  }
-
-  .hero-stats {
-    gap: 12px;
-  }
-
-  .hero-stats strong {
-    font-size: 15px;
-  }
-
-  .hero-stats span {
-    max-width: 85px;
-  }
-
-  .hero-buttons {
-    margin-bottom: 35px;
-  }
-
-  .section-heading h2,
-  .effect-copy h2,
-  .robotics-copy h2 {
-    font-size: 38px;
-  }
-
-  .conversion-card {
-    padding: 23px;
-  }
-
-  .sensor-list,
-  .access-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .video-placeholder {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .coming-soon {
-    margin-left: 63px;
-  }
-
-  .data-pair {
-    gap: 15px;
-  }
-
-  .footer-bottom {
-    gap: 10px;
-    flex-direction: column;
-  }
-}
-
-/* RESPEITA QUEM PREFERE MENOS ANIMAÇÃO */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Solar Aqua: aprenda como a energia solar transforma luz em eletricidade e contribui para o aquecimento de piscinas.">
+  <title>Solar Aqua | Energia que transforma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="#inicio" aria-label="Solar Aqua - início">
+        <span class="logo-icon">☀</span>
+        <span>solar<span class="logo-accent">aqua</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="navigation" id="navigation" aria-label="Menu principal">
+        <a href="#conceito">Conceito</a>
+        <a href="#ciencia">A ciência</a>
+        <a href="#simulador">Simulador</a>
+        <a href="#projeto">Projeto</a>
+        <a href="#sensores">Sensores</a>
+      </nav>
+
+      <div class="access-tools">
+        <button id="contrastBtn" class="tool-btn" type="button" aria-pressed="false" title="Ativar alto contraste">◐</button>
+        <button id="fontBtn" class="tool-btn" type="button" title="Aumentar fonte">A+</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="hero-glow"></div>
+      <div class="container hero-content">
+        <div class="hero-text">
+          <span class="eyebrow"><span class="eyebrow-dot"></span> TECNOLOGIA • CIÊNCIA • SUSTENTABILIDADE</span>
+          <h1>A energia do sol<br>transforma o <span>futuro.</span></h1>
+          <p>Descubra como a luz solar pode gerar eletricidade e contribuir para um sistema de aquecimento de piscinas mais eficiente e sustentável.</p>
+          <div class="hero-actions">
+            <a href="#conceito" class="btn btn-primary">Explorar o projeto <span>→</span></a>
+            <a href="#simulador" class="btn btn-outline">Testar simulador</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong>100%</strong><span>Energia renovável</span></div>
+            <div><strong>3 áreas</strong><span>Integradas no projeto</span></div>
+            <div><strong>∞</strong><span>Possibilidades</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Ilustração de painéis solares recebendo luz do sol">
+          <div class="sun-orb"><span>☀</span></div>
+          <div class="sun-ray ray-one"></div>
+          <div class="sun-ray ray-two"></div>
+          <div class="solar-scene">
+            <div class="solar-panel">
+              <div class="panel-grid"></div>
+            </div>
+            <div class="panel-base"></div>
+            <div class="energy-line"></div>
+            <div class="energy-dot"></div>
+          </div>
+          <div class="floating-card">
+            <span class="floating-icon">⚡</span>
+            <div><strong>Energia limpa</strong><small>Do sol para o seu dia</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-bottom"></div>
+    </section>
+
+    <section class="section intro-section" id="conceito">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">01 / O CONCEITO</span>
+          <h2>Como a luz do sol vira <span>energia?</span></h2>
+          <p>A energia solar pode ser aproveitada de duas formas principais no nosso projeto: para produzir eletricidade e para gerar calor.</p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <div class="process-icon">☀️</div>
+            <span class="step-number">ETAPA 01</span>
+            <h3>Radiação solar</h3>
+            <p>O Sol emite energia por meio de ondas eletromagnéticas, que chegam até a superfície da Terra.</p>
+          </article>
+          <div class="process-arrow" aria-hidden="true">→</div>
+          <article class="process-card">
+            <div class="process-icon">▦</div>
+            <span class="step-number">ETAPA 02</span>
+            <h3>Captação</h3>
+            <p>Os painéis fotovoltaicos captam a luz e a convertem em energia elétrica.</p>
+          </article>
+          <div class="process-arrow" aria-hidden="true">→</div>
+          <article class="process-card">
+            <div class="process-icon">⚡</div>
+            <span class="step-number">ETAPA 03</span>
+            <h3>Utilização</h3>
+            <p>A eletricidade pode alimentar equipamentos, como uma bomba de circulação ou uma bomba de calor.</p>
+          </article>
+        </div>
+
+        <div class="info-banner">
+          <span class="banner-icon">💡</span>
+          <p><strong>Importante:</strong> painéis fotovoltaicos geram eletricidade. Já os coletores solares térmicos aproveitam a radiação para aquecer diretamente a água.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section science-section" id="ciencia">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">02 / TECNOCIÊNCIA</span>
+          <h2>A ciência por trás da <span>energia solar</span></h2>
+          <p>Três conceitos da Física ajudam a explicar o funcionamento das tecnologias utilizadas no projeto.</p>
+        </div>
+
+        <div class="science-grid">
+          <article class="science-card">
+            <div class="science-visual wave-visual"><span>〰</span><span>〰</span><span>〰</span></div>
+            <div class="science-content">
+              <span class="card-label">FÍSICA</span>
+              <h3>Ondas eletromagnéticas</h3>
+              <p>São ondas que transportam energia e não precisam de um meio material para se propagar. A luz solar é um exemplo.</p>
+              <a href="#espectro" class="text-link">Explorar o espectro <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="science-card">
+            <div class="science-visual heat-visual"><span>♨</span></div>
+            <div class="science-content">
+              <span class="card-label">TERMOLOGIA</span>
+              <h3>Radiação do corpo negro</h3>
+              <p>Todo corpo com temperatura acima do zero absoluto emite radiação térmica. A distribuição dessa radiação depende da temperatura.</p>
+              <a href="#projeto" class="text-link">Ver aplicação no projeto <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="science-card">
+            <div class="science-visual photo-visual"><span>⚡</span></div>
+            <div class="science-content">
+              <span class="card-label">FÍSICA MODERNA</span>
+              <h3>Efeito fotoelétrico</h3>
+              <p>Explica como a luz pode transferir energia aos elétrons. Esse conceito ajuda a compreender a interação entre luz e materiais.</p>
+              <a href="#efeito" class="text-link">Entender o efeito <span>→</span></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="spectrum-box" id="espectro">
+          <div class="spectrum-copy">
+            <span class="section-tag">INTERAÇÃO</span>
+            <h3>Explore as ondas eletromagnéticas</h3>
+            <p>Selecione uma faixa do espectro para conhecer suas características.</p>
+            <div class="spectrum-buttons" role="group" aria-label="Selecionar faixa do espectro">
+              <button class="spectrum-btn active" data-wave="visivel" type="button">Visível</button>
+              <button class="spectrum-btn" data-wave="infravermelho" type="button">Infravermelho</button>
+              <button class="spectrum-btn" data-wave="ultravioleta" type="button">Ultravioleta</button>
+              <button class="spectrum-btn" data-wave="raiosx" type="button">Raios X</button>
+            </div>
+            <div class="wave-result" aria-live="polite">
+              <strong id="waveTitle">Luz visível</strong>
+              <p id="waveDescription">É a faixa que nossos olhos conseguem enxergar. Faz parte da radiação emitida pelo Sol e pode ser aproveitada pelos painéis fotovoltaicos.</p>
+            </div>
+          </div>
+          <div class="spectrum-art" aria-hidden="true">
+            <div class="spectrum-bar"></div>
+            <div class="spectrum-labels"><span>Menor frequência</span><span>Maior frequência</span></div>
+            <div class="spectrum-sun">☀</div>
+          </div>
+        </div>
+
+        <div class="photoelectric-box" id="efeito">
+          <div>
+            <span class="section-tag">FÍSICA MODERNA</span>
+            <h3>O que acontece quando a luz atinge um material?</h3>
+            <p>Os fótons transportam energia. Quando essa energia é absorvida por elétrons, pode ocorrer a emissão de elétrons em determinados materiais, fenômeno conhecido como efeito fotoelétrico.</p>
+            <p>Nas células solares, o efeito fotovoltaico ocorre em semicondutores e permite gerar tensão e corrente elétrica a partir da luz.</p>
+          </div>
+          <div class="atom-art" aria-label="Representação ilustrativa da luz incidindo em um material">
+            <div class="photon photon-one"></div>
+            <div class="photon photon-two"></div>
+            <div class="material-block"><span>Material</span></div>
+            <div class="electron">−</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section simulator-section" id="simulador">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">03 / LABORATÓRIO INTERATIVO</span>
+          <h2>Experimente a energia <span>solar</span></h2>
+          <p>Altere as condições e observe como elas influenciam a estimativa de geração de energia.</p>
+        </div>
+
+        <div class="simulator">
+          <div class="sim-controls">
+            <div class="sim-heading">
+              <span class="sim-icon">☀</span>
+              <div><h3>Simulador fotovoltaico</h3><p>Configure seu sistema solar</p></div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-label"><label for="panelPower">Potência do painel</label><output id="powerValue">450 W</output></div>
+              <input id="panelPower" type="range" min="100" max="800" step="50" value="450">
+              <div class="range-ends"><span>100 W</span><span>800 W</span></div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-label"><label for="sunHours">Horas de sol equivalente por dia</label><output id="hoursValue">5 h</output></div>
+              <input id="sunHours" type="range" min="1" max="10" step="0.5" value="5">
+              <div class="range-ends"><span>1 hora</span><span>10 horas</span></div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-label"><label for="systemLoss">Perdas estimadas</label><output id="lossValue">20%</output></div>
+              <input id="systemLoss" type="range" min="0" max="40" step="5" value="20">
+              <div class="range-ends"><span>0%</span><span>40%</span></div>
+            </div>
+
+            <button class="reset-btn" id="resetSimulator" type="button">↺ Restaurar valores</button>
+          </div>
+
+          <div class="sim-results">
+            <span class="result-label">GERAÇÃO ESTIMADA</span>
+            <div class="result-number"><strong id="dailyEnergy">1,80</strong><span>kWh/dia</span></div>
+            <div class="result-divider"></div>
+            <div class="result-detail"><span>Por dia</span><strong id="dailyResult">1,80 kWh</strong></div>
+            <div class="result-detail"><span>Por mês (30 dias)</span><strong id="monthlyResult">54,00 kWh</strong></div>
+            <div class="result-detail"><span>Por ano (365 dias)</span><strong id="yearlyResult">657,00 kWh</strong></div>
+            <div class="result-note">Estimativa simplificada. A geração real depende da localização, orientação, inclinação, clima, sombreamento e eficiência do sistema.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section project-section" id="projeto">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">04 / APLICAÇÃO PRÁTICA</span>
+          <h2>O projeto <span>Solar Aqua</span></h2>
+          <p>Uma proposta que une energia solar, tecnologia e controle inteligente para melhorar o uso de uma piscina.</p>
+        </div>
+
+        <div class="project-layout">
+          <div class="project-main-card">
+            <div class="pool-illustration">
+              <div class="pool-sun">☀</div>
+              <div class="pool-panel"></div>
+              <div class="pool-water"><span></span><span></span><span></span></div>
+              <div class="pool-pipe"></div>
+            </div>
+            <div class="project-main-copy">
+              <span class="card-label">SOLUÇÃO INTEGRADA</span>
+              <h3>Uma piscina mais eficiente</h3>
+              <p>O sistema combina captação de energia solar, circulação da água e sensores para acompanhar as condições da piscina.</p>
+            </div>
+          </div>
+
+          <div class="project-features">
+            <article class="feature-item">
+              <span class="feature-icon">▦</span>
+              <div><h3>Painéis fotovoltaicos</h3><p>Transformam a luz solar em eletricidade, que pode alimentar equipamentos do sistema.</p></div>
+            </article>
+            <article class="feature-item">
+              <span class="feature-icon">♨</span>
+              <div><h3>Coletor solar térmico</h3><p>Aproveita a radiação solar para transferir calor diretamente para a água da piscina.</p></div>
+            </article>
+            <article class="feature-item">
+              <span class="feature-icon">≈</span>
+              <div><h3>Capa térmica</h3><p>Ajuda a reduzir a perda de calor da água, principalmente durante a noite.</p></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="info-banner">
+          <span class="banner-icon">🌱</span>
+          <p>O objetivo é aproveitar melhor os recursos naturais, reduzir desperdícios e utilizar a tecnologia para acompanhar o funcionamento da piscina.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sensors-section" id="sensores">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-tag">05 / ROBÓTICA</span>
+          <h2>Sensores: o controle <span>inteligente</span></h2>
+          <p>Os sensores coletam informações do ambiente e ajudam o sistema a tomar decisões.</p>
+        </div>
+
+        <div class="sensor-grid">
+          <article class="sensor-card">
+            <span class="sensor-symbol">🌡</span>
+            <h3>Temperatura</h3>
+            <p>Mede a temperatura da água e ajuda a identificar quando é necessário aquecê-la.</p>
+          </article>
+          <article class="sensor-card">
+            <span class="sensor-symbol">☀</span>
+            <h3>Luminosidade</h3>
+            <p>Detecta a intensidade da luz no ambiente e auxilia no acompanhamento da captação solar.</p>
+          </article>
+          <article class="sensor-card">
+            <span class="sensor-symbol">〰</span>
+            <h3>Nível da água</h3>
+            <p>Monitora a altura da água e pode identificar níveis abaixo do recomendado.</p>
+          </article>
+        </div>
+
+        <div class="sensor-lab">
+          <div class="sensor-lab-heading">
+            <div><span class="section-tag">TESTE PRÁTICO</span><h3>Central de monitoramento</h3><p>Altere os valores e veja a resposta do sistema.</p></div>
+            <span class="live-indicator"><i></i> SIMULAÇÃO ATIVA</span>
+          </div>
+
+          <div class="sensor-controls">
+            <div class="sensor-input">
+              <label for="waterTemp">Temperatura da água</label>
+              <output id="tempValue">26 °C</output>
+              <input id="waterTemp" type="range" min="10" max="40" value="26">
+            </div>
+            <div class="sensor-input">
+              <label for="lightLevel">Luminosidade</label>
+              <output id="lightValue">70%</output>
+              <input id="lightLevel" type="range" min="0" max="100" value="70">
+            </div>
+            <div class="sensor-input">
+              <label for="waterLevel">Nível da água</label>
+              <output id="levelValue">80%</output>
+              <input id="waterLevel" type="range" min="0" max="100" value="80">
+            </div>
+          </div>
+
+          <div class="system-status" aria-live="polite">
+            <span class="status-icon" id="statusIcon">✓</span>
+            <div><strong id="statusTitle">Sistema em condições normais</strong><p id="statusText">As condições simuladas estão dentro dos parâmetros definidos.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-section">
+      <div class="container closing-content">
+        <span class="closing-sun">☀</span>
+        <span class="section-tag">SOLAR AQUA</span>
+        <h2>Ciência que ilumina.<br><span>Tecnologia que transforma.</span></h2>
+        <p>Integrando Física, Programação e Robótica para imaginar soluções mais sustentáveis.</p>
+        <a href="#inicio" class="btn btn-primary">Voltar ao início ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <a class="logo footer-logo" href="#inicio"><span class="logo-icon">☀</span><span>solar<span class="logo-accent">aqua</span></span></a>
+      <p>Projeto educacional • Energia solar e sustentabilidade</p>
+      <span>© 2026 Solar Aqua</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+  </div>
+  <script>
+    if (window.VLibras) new window.VLibras.Widget("https://vlibras.gov.br/app");
+  </script>
+</body>
+</html>
