@@ -7,14 +7,19 @@ function fmt(n,d){return n.toLocaleString('pt-BR',{maximumFractionDigits:d==null
 // mapa do site
 $('#sm').innerHTML=pages.map(function(p){return'<li><a href="#'+p+'">'+names[p]+'</a></li>'}).join('');
 // roteamento
-function route(){
- var h=(location.hash||'#inicio').slice(1);if(pages.indexOf(h)<0)h='inicio';
+function route(h){
+ h=(typeof h==='string'?h:(location.hash||'#inicio').slice(1));if(pages.indexOf(h)<0)h='inicio';
  $$('section.pg').forEach(function(s){s.classList.toggle('on',s.dataset.p===h)});
  $$('nav a').forEach(function(a){if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
  closeMenu();document.title=names[h].split(':')[0]+' · Sol + Água';
  window.scrollTo(0,0);var t=$('#h-'+({simuladores:'sim',automacao:'aut',acessibilidade:'ac'}[h]||h));if(t){t.setAttribute('tabindex','-1');t.focus({preventScroll:true})}
 }
-addEventListener('hashchange',route);
+addEventListener('hashchange',function(){route()});
+document.addEventListener('click',function(e){
+ var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a||a.id==='skip')return;
+ var h=a.getAttribute('href').slice(1);if(pages.indexOf(h)<0)return;
+ e.preventDefault();try{if(location.hash!=='#'+h)location.hash=h}catch(x){}route(h);
+});
 $('#skip').onclick=function(e){e.preventDefault();$('#conteudo').focus()};
 // menu
 function closeMenu(){$('#menu').classList.remove('open');$('#bg').setAttribute('aria-expanded','false')}
@@ -94,5 +99,25 @@ function q(){var z=$('#qz');
  $$('[data-o]',z).forEach(function(b){b.onclick=function(){var ok=+b.dataset.o===x[2];if(ok)sc++;$$('[data-o]',z).forEach(function(k){k.disabled=true});$('#fb').innerHTML=(ok?'Correto. ':'Não foi dessa vez. ')+x[3]+' <button id="nx">'+(qi<Q.length-1?'Próxima':'Ver resultado')+'</button>';$('#nx').focus();$('#nx').onclick=function(){qi++;q();var h=$('#qz button');if(h)h.focus()}}});
 }
 q();
+// Libras: vídeos
+$$('.libras').forEach(function(f){
+ var v=document.createElement('video');v.controls=true;v.preload='metadata';v.setAttribute('playsinline','');v.setAttribute('aria-label',f.dataset.t||'Vídeo em Libras');
+ if(f.dataset.vtt){var t=document.createElement('track');t.kind='captions';t.src=f.dataset.vtt;t.srclang='pt';t.label='Português';v.appendChild(t)}
+ var ph=document.createElement('div');ph.className='lib';ph.hidden=true;ph.textContent='Vídeo em Libras em breve. Leia a transcrição abaixo.';
+ v.addEventListener('error',function(){v.hidden=true;ph.hidden=false});
+ v.src=f.dataset.src;f.insertBefore(ph,f.firstChild);f.insertBefore(v,f.firstChild);
+});
+// VLibras
+var vlOk=false;
+function vls(m){var e=$('#vls');if(e)e.textContent=m}
+function loadVL(){
+ if(vlOk){vls('VLibras ativo: clique no botão de mãos no canto da tela.');return}
+ if(!$('[vw]')){var w=document.createElement('div');w.setAttribute('vw','');w.className='enabled';w.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';document.body.appendChild(w)}
+ var s=document.createElement('script');s.src='https://vlibras.gov.br/app/vlibras-plugin.js';
+ s.onload=function(){try{new window.VLibras.Widget('https://vlibras.gov.br/app');vlOk=true;vls('VLibras ativo: clique no botão de mãos no canto da tela.')}catch(e){vls('Não foi possível iniciar o VLibras.')}};
+ s.onerror=function(){vls('VLibras indisponível nesta página ou sem internet. Os vídeos em Libras e as transcrições continuam disponíveis.')};
+ document.head.appendChild(s);
+}
+$('#vl').onclick=loadVL;loadVL();
 route();
 })();
